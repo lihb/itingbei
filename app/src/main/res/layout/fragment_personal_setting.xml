@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lihb.babyvoice.customview.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_top"
+        android:background="@color/colorPrimary"
+        app:leftDrawable="@mipmap/back"
+        app:leftText="@string/txt_personal_info_setting"
+        app:leftTextColor="@android:color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar"
+        android:layout_marginTop="5dp">
+
+        <LinearLayout
+            android:id="@+id/additional_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.lihb.babyvoice.customview.DividerLine
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_nick_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/nick_name"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_mobile_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/phone_number"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/email_address"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_birthday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/birthday_date"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_due_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/due_date"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_qq_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/qq_number"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/name"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/address"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_baby_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="宝宝信息设置"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

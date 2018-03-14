@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+    <include
+        android:id="@+id/net_error_notice_bar"
+        layout="@layout/net_error_notice_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/net_error_bar_height" />
+
+    <include
+        android:id="@+id/main_activity_draw_layout"
+        layout="@layout/main_drawable_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/net_error_notice_bar" />
+
+</RelativeLayout>

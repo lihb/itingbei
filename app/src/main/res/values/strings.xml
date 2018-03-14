@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">爱听贝</string>
+    <string name="check_followers">查看followers</string>
+
+    <string name="tab_baby_heart">听贝贝</string>
+    <string name="tab_pregnant_zone">孕婴圈</string>
+    <string name="tab_baby_assist">爱助手</string>
+    <string name="tab_baby_me">我</string>
+
+    <string name="title_left">返回</string>
+    <string name="title_Title">Title</string>
+    <string name="title_right">完成</string>
+
+    <string name="back">返回</string>
+    <string name="done">确定</string>
+
+    <string name="net_error_notice">网络连接不可用，请检查您的网络设置</string>
+
+    <string name="no_voice_record">您还有没有胎心音/肺音记录\n点击右下方按钮进行测试吧！</string>
+    <string name="voice_recording">正在录音</string>
+    <string name="voice_save">保存录音</string>
+    <string name="voice_save_title">文件名称</string>
+    <string name="cancel">取消</string>
+    <string name="save">保存</string>
+    <string name="confirm">确认</string>
+
+    <!-- 爱助手 -->
+    <string name="txt_pregnant_zone">孕婴圈</string>
+    <string name="txt_check_assist">产检助手</string>
+    <string name="txt_vaccine_assist">疫苗助手</string>
+    <string name="txt_health_protect_assist">儿保助手</string>
+    <string name="txt_growup_record">成长记录</string>
+    <string name="txt_care_mall">关爱商城</string>
+    <string name="txt_expert_online">专家在线</string>
+
+    <!-- 个人中心 -->
+    <string name="txt_me_center">个人中心</string>
+    <string name="txt_find_password">找回密码</string>
+    <string name="txt_personal_info_setting">个人信息设置</string>
+    <string name="txt_baby_info">儿童信息设置</string>
+    <string name="txt_remote_video_address">远程视频连接地址设置</string>
+    <string name="txt_country_select">选择国家</string>
+    <string name="txt_version_update">检测新版本</string>
+    <string name="checked_new_version">检测到新版本</string>
+    <string name="updatecontent">1.修复BUG\n2.优化界面</string>
+    <string name="txt_about_app">关于听贝贝</string>
+
+
+    <string name="enter_your_pregnant_date">请选择您的怀孕日期</string>
+    <string name="enter_baby_birthday">请选择宝宝的出生时间</string>
+    <string name="select_date">选择日期</string>
+
+    <string name="injected">%s已注射</string>
+    <string name="not_injected">未注射</string>
+    <string name="enter_baby_info">请填写宝宝信息</string>
+
+    <string name="show_more_item">+ 更多项目</string>
+    <string name="hide_more_item">- 更多项目</string>
+    <string name="head_height_size">头围: %1$sCm&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;身高: %2$sCm</string>
+    <string name="weight_temperature_size">体重: %1$sKg&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;温度: %2$s℃</string>
+    <string name="think_in_this_monment">这一刻我在想...</string>
+
+    <!-- cameraSurface translations -->
+    <string name="image_file_invalid_err">存储访问失败，相机无法启动</string>
+    <string name="camera_not_found">未找到摄像头，相机无法启动</string>
+    <string name="camera_start_preview_failed">相机启动失败，请重试</string>
+    <string name="access_permission_failed">请在手机【设置】中，应用权限管理，开启%s，否则会影响正常使用。</string>
+    <string name="camera_permission">相机权限</string>
+    <string name="mic_permission">麦克风权限</string>
+    <string name="picture_permission">相册权限</string>
+    <string name="from_camera">拍照</string>
+    <string name="from_gallery">从相册选择</string>
+    <string name="from_recommanded">精选头像</string>
+    <string name="back_camera_not_found">未找到后置摄像头，相机无法启动</string>
+    <string name="fail_to_connect_to_camera_service">相机无法访问</string>
+    <string name="please_keep_landscape">请保持横屏拍照</string>
+    <string name="please_keep_portrait">请保持竖屏拍照</string>
+    <string name="invalid_image">无效的图像</string>
+    <string name="take_photo_failed">拍照失败</string>
+    <string name="flash_unsupported">当前相机不支持闪光灯</string>
+    <string name="photo_save_failed">图片保存失败，请检查手机空间</string>
+    <string name="no_gallery">未检测到相册相关应用</string>
+    <string name="voice_analysis">声音分析</string>
+    <string name="ack_protocal_str">我已阅读并同意使用条款和隐私政策</string>
+    <string name="in_twenty_four_hours">24小时内</string>
+    <string name="years">%.1f岁</string>
+    <string name="month">%d个月</string>
+    <string name="play_failed">播放文件失败，请稍后重试</string>
+    <string name="plugin_headset_first">录制胎心音或肺音，您需先插入耳机！</string>
+    <string name="sms_to_your_phone">验证码正火速发往您的手机中，请及时查收！</string>
+    <string name="resend_sms_code">%d秒后可重发</string>
+    <string name="vaccine_injecte_date_dialog_title">请选择疫苗注射日期</string>
+    <string name="txt_compute_growup">计算发育指数</string>
+    <string name="required_field">头围、身高、体重、温度为必填项!</string>
+    <string name="txt_sms_login">使用短信验证码登录</string>
+    <string name="i_want_share">我要分享</string>
+    <string name="select_pass_date">请选择过去的日期</string>
+    <string name="account_and_password">设置账号密码</string>
+    <string name="please_input_account">请输入账号</string>
+    <string name="please_input_pwd">请输入密码</string>
+    <string name="account_registed">账号已经被注册了</string>
+    <string name="login_by_sms_code">使用短信验证码登录</string>
+    <string name="please_input_phone_num">请输入你的手机号码</string>
+    <string name="please_input_verify_code">请输入手机验证码</string>
+    <string name="send_verify_code">发送验证码</string>
+    <string name="login">登录</string>
+    <string name="account_login">登陆账号</string>
+    <string name="register">注册</string>
+    <string name="already_newest_version">已经是最新版</string>
+
+    <string name="nick_name">昵称</string>
+    <string name="phone_number">手机</string>
+    <string name="email_address">邮箱</string>
+    <string name="birthday_date">出生日期</string>
+    <string name="due_date">预产期</string>
+    <string name="qq_number">QQ</string>
+    <string name="name">姓名</string>
+    <string name="address">地址</string>
+
+    <string name="vaccine_remind_txt">疫苗提醒</string>
+    <string name="pregnant_check_remind_txt">产检提醒</string>
+    <string name="got_it">知道了</string>
+    <string name="my_achievement">我的成就</string>
+
+</resources>

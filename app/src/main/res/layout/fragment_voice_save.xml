@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.lihb.babyvoice.customview.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingTop="@dimen/padding_top"
+        app:leftDrawable="@mipmap/back"
+        app:leftTextColor="@android:color/white"
+        app:rightTextColor="@android:color/white"
+        app:leftText="@string/cancel"
+        app:rightText="@string/save" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:background="@color/item_group_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
+
+        <!-- <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="match_parent"
+             android:gravity="center"
+             android:text="默认名称  |"
+             android:textColor="@color/text_black"
+             android:textSize="14dp"
+             />-->
+        <EditText
+            android:id="@+id/voice_save_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00000000"
+            android:cursorVisible="true"
+            android:textCursorDrawable="@drawable/cursor_shape"
+            android:paddingLeft="4dp"
+            android:text="胎心音+xxxx"
+            android:textColor="@color/text_black"
+            android:textSize="14dp"
+            android:maxLength="60" />
+    </LinearLayout>
+
+    <com.lihb.babyvoice.customview.DividerLine
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- <TextView
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="20dp"
+         android:text="类别" />
+
+     <Spinner
+         android:id="@+id/spinner1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="20dp" />
+
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginLeft="20dp"
+         android:layout_marginTop="20dp"
+         android:orientation="horizontal">
+
+         <TextView
+             android:id="@+id/voice_save_cancel"
+             android:layout_width="80dp"
+             android:layout_height="wrap_content"
+             android:background="@color/color_999999"
+             android:gravity="center_horizontal"
+             android:text="@string/cancel" />
+
+         <TextView
+             android:id="@+id/voice_save_done"
+             android:layout_width="80dp"
+             android:layout_height="wrap_content"
+             android:background="@color/color_999999"
+             android:gravity="center_horizontal"
+             android:layout_marginLeft="5dp"
+             android:text="@string/save" />
+
+     </LinearLayout>-->
+</LinearLayout>

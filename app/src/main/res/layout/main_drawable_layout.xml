@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_draw_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/divider_line2"
+        android:layout_below="@+id/net_error_notice_bar" />
+
+    <com.lihb.babyvoice.customview.DividerLine
+        android:id="@+id/divider_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/linearLayout1"
+        android:background="@android:color/darker_gray"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/bottom_main_tab_layout"
+        layout="@layout/main_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/drawable_layout_section_1"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@color/color_f4f6f9">
+
+            <com.lihb.babyvoice.customview.CircularImageView
+                android:id="@+id/drawable_layout_user_avatar"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:src="@mipmap/logo" />
+
+            <TextView
+                android:id="@+id/drawable_layout_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/drawable_layout_user_avatar"
+                android:text="昵称"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <!--<RelativeLayout
+            android:id="@+id/drawable_layout_section_2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            >
+
+            <TextView
+                android:id="@+id/drawable_layout_achievement_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:text="@string/my_achievement"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/drawable_layout_achievement_num"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/drawable_layout_achievement_title"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="16dp"
+                android:text="健康币：58"
+                android:textSize="13sp" />
+
+            <com.lihb.babyvoice.customview.DividerLine
+                android:id="@+id/divider_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/darker_gray" />
+        </RelativeLayout>-->
+
+        <com.lihb.babyvoice.customview.base.BaseRecyclerView
+            android:id="@+id/drawable_layout_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:scrollbars="none" />
+
+        <RelativeLayout
+            android:id="@+id/drawable_layout_section_3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:id="@+id/drawable_layout_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:text="设置"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/drawable_layout_user_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/drawable_layout_setting"
+                android:layout_marginLeft="40dp"
+                android:text="用户指南"
+                android:textSize="16sp" />
+
+            <com.lihb.babyvoice.customview.DividerLine
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/darker_gray" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>

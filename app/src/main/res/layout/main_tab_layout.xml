@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:background="@color/tab_background"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <RelativeLayout
+        android:id="@+id/rl_tab_heart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:clickable="true">
+
+
+        <TextView
+            android:id="@+id/heart_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawableTop="@drawable/tab_heart_img_selector"
+
+            android:gravity="center"
+            android:text="@string/tab_baby_heart"
+            android:textColor="@color/tab_txt_color_selector"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_tab_watch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:clickable="true">
+
+
+        <TextView
+            android:id="@+id/watch_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawableTop="@drawable/tab_pregnant_zone_img_selector"
+            android:gravity="center"
+            android:text="@string/tab_pregnant_zone"
+            android:textColor="@color/tab_txt_color_selector"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_tab_assist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/assist_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawableTop="@drawable/tab_assist_img_selector"
+            android:gravity="center"
+            android:text="@string/tab_baby_assist"
+            android:textColor="@color/tab_txt_color_selector"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_tab_me"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/me_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:drawableTop="@drawable/tab_me_img_selector"
+            android:gravity="center"
+            android:text="@string/tab_baby_me"
+            android:textColor="@color/tab_txt_color_selector"
+            android:textSize="10sp" />
+
+
+    </RelativeLayout>
+</LinearLayout>

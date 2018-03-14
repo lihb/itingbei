@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lihb.babyvoice.customview.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_top"
+        android:background="@color/colorPrimary"
+        app:leftDrawable="@mipmap/back"
+        app:leftTextColor="@android:color/white"
+        app:titleTextColor="@android:color/white"
+        app:titleText="设置" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar"
+        android:layout_marginTop="15dp"
+        android:background="@color/color_f4f6f9">
+
+        <LinearLayout
+            android:id="@+id/additional_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--<com.lihb.babyvoice.customview.DividerLine
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content" />
+
+        <com.lihb.babyvoice.customview.CommonItem
+              android:id="@+id/item_me_center"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              app:commonDividerVisible="true"
+              app:commonItemName="@string/txt_find_password"
+              app:commonItemSelector="@drawable/voice_item_selector"
+              app:commonLeftIcon="@mipmap/mm"
+              app:commonRightIcon="@mipmap/next_icon" />
+
+          <com.lihb.babyvoice.customview.DividerLine
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp" />
+-->
+            <!--   <com.lihb.babyvoice.customview.CommonItem
+                   android:id="@+id/item_personal_info"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:commonDividerVisible="true"
+                   app:commonItemName="@string/txt_personal_info_setting"
+                   app:commonItemSelector="@drawable/voice_item_selector"
+                   app:commonLeftIcon="@mipmap/rq"
+                   app:commonRightIcon="@mipmap/next_icon" />
+
+               <com.lihb.babyvoice.customview.CommonItem
+                   android:id="@+id/item_baby_info"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   app:commonDividerVisible="true"
+                   app:commonItemName="@string/txt_baby_info"
+                   app:commonItemSelector="@drawable/voice_item_selector"
+                   app:commonLeftIcon="@mipmap/xx"
+                   app:commonRightIcon="@mipmap/next_icon" />-->
+
+            <!--  <com.lihb.babyvoice.customview.CommonItem
+                  android:id="@+id/item_remote_video_address"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:commonDividerVisible="true"
+                  app:commonItemName="@string/txt_remote_video_address"
+                  app:commonItemSelector="@drawable/voice_item_selector"
+                  app:commonLeftIcon="@mipmap/lj"
+                  app:commonRightIcon="@mipmap/next_icon" />
+
+
+              <com.lihb.babyvoice.customview.DividerLine
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="10dp" />
+
+
+              <com.lihb.babyvoice.customview.CommonItem
+                  android:id="@+id/item_language_select"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  app:commonDividerVisible="true"
+                  app:commonItemName="@string/txt_country_select"
+                  app:commonItemSelector="@drawable/voice_item_selector"
+                  app:commonLeftIcon="@mipmap/yy"
+                  app:commonRightIcon="@mipmap/next_icon" />
+  -->
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="扫码使用"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@mipmap/gy"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_version_update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/txt_version_update"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@mipmap/gy"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_about_app"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="false"
+                app:commonItemName="@string/txt_about_app"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@mipmap/gy"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_user_proto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                android:layout_marginTop="10dp"
+                app:commonItemName="用户协议"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@mipmap/gy"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_deposit_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="押金说明"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@mipmap/gy"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_service_card_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="false"
+                app:commonItemName="服务卡说明"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@mipmap/gy"
+                app:commonRightIcon="@mipmap/next_icon" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
