@@ -68,19 +68,6 @@ public class MessageViewHolder extends RecyclerView.ViewHolder {
 //        setCategoryImg(voice.category);
     }
 
-//    private void setCategoryImg(String category) {
-//        String[] items = itemView.getResources().getStringArray(R.array.voice_type);
-//        int[] ids = {R.mipmap.catetory_heart, R.mipmap.category_lung, R.mipmap.category_baby_voice, R.mipmap.category_other_voice};
-//        if (StringUtils.areEqual(category, items[0])) {
-//            catergoryImg.setImageResource(ids[0]);
-//        } else if (StringUtils.areEqual(category, items[1])) {
-//            catergoryImg.setImageResource(ids[1]);
-//        } else if (StringUtils.areEqual(category, items[2])) {
-//            catergoryImg.setImageResource(ids[2]);
-//        } else {
-//            catergoryImg.setImageResource(ids[3]);
-//        }
-//    }
 
 
 }

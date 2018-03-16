@@ -205,7 +205,7 @@ public class DateSelectFragment extends BaseFragment {
                 break;
             case MeFragment.ITEM_SET_BABY_BIRTHDAY:
                 mTitleBar.setLeftText("");
-                mLabelTxt.setText(R.string.enter_baby_birthday);
+//                mLabelTxt.setText("请设置宝昵称");
                 break;
             case MeFragment.ITEM_SET_PREGNANT_DATE:
                 mTitleBar.setLeftText("");

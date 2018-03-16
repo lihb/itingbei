@@ -76,6 +76,7 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
 
     private String content;
     private int currChangeItem;
+    private BabyInfoFragment mBabyInfoFragment;
 
     public static PersonalInfoFragment create() {
         return new PersonalInfoFragment();
@@ -181,7 +182,8 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
         });
 
         itemBabyInfo.setOnClickListener(v -> {
-            gotoDateSelectFragment(MeFragment.ITEM_SET_BABY_BIRTHDAY);
+//            gotoDateSelectFragment(MeFragment.ITEM_SET_BABY_BIRTHDAY);
+            gotoBabyInfoFragment();
         });
 
     }
@@ -299,17 +301,16 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
                 .commit();
     }
 
-    private void gotoDateSelectFragment(int type) {
-        if (null == mDateSelectFragment) {
-            mDateSelectFragment = DateSelectFragment.create();
+
+    private void gotoBabyInfoFragment() {
+        if (null == mBabyInfoFragment) {
+            mBabyInfoFragment = BabyInfoFragment.create();
         }
-        Bundle bundle = new Bundle();
-        bundle.putInt("itemType", type);
-        mDateSelectFragment.setArguments(bundle);
+
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.hide(this);
-        transaction.add(R.id.main_layout, mDateSelectFragment, "DateSelectFragment")
-                .show(mDateSelectFragment)
+        transaction.add(R.id.main_layout, mBabyInfoFragment, "BabyInfoFragment")
+                .show(mBabyInfoFragment)
                 .addToBackStack(null)
                 .commit();
 

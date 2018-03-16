@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:background="@drawable/voice_item_selector">
+
+
+    <ImageView
+        android:id="@+id/baby_avatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="5dp"
+        android:src="@mipmap/catetory_heart" />
+
+    <TextView
+        android:id="@+id/baby_nick_name_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/baby_avatar"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="标题"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/baby_date_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/baby_nick_name_txt"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/baby_avatar"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="xxxx"
+        android:textSize="14dp" />
+
+    <ImageView
+        android:id="@+id/baby_select_img"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/selected" />
+
+
+    <com.lihb.babyvoice.customview.DividerLine
+        android:id="@+id/split_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/voice_title_txt"
+        android:layout_alignParentBottom="true"
+        app:lineColor="@color/voice_line_color" />
+
+
+</RelativeLayout>

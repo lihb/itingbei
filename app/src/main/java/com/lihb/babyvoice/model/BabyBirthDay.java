@@ -16,11 +16,27 @@ public class BabyBirthDay {
      */
     public String birthday;
 
+
+    /**
+     * 是否当前选择
+     *
+     * @return
+     */
+
+    public boolean isSelected;
+
+    /**
+     * 宝贝头像
+     */
+    public String babyAvatar;
+
     @Override
     public String toString() {
         return "BabyBirthDay{" +
                 "username='" + username + '\'' +
                 ", birthday='" + birthday + '\'' +
+                ", isSelected=" + isSelected +
+                ", babyAvatar='" + babyAvatar + '\'' +
                 '}';
     }
 }
