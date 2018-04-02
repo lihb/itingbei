@@ -41,7 +41,7 @@ public class CommonItem extends RelativeLayout {
 
     private ImageView mRightImg = null;
 
-    private ImageView mLeftImg = null;
+    private IconFontTextView mLeftImg = null;
 
     private TextView mNameTv = null;
 
@@ -76,7 +76,7 @@ public class CommonItem extends RelativeLayout {
         inflate(context, R.layout.common_item, this);
 
         mContainer = (RelativeLayout) findViewById(R.id.common_item_group);
-        mLeftImg = (ImageView) findViewById(R.id.item_icon_left);
+        mLeftImg = (IconFontTextView) findViewById(R.id.item_icon_left);
         mRightImg = (ImageView) findViewById(R.id.item_icon_right);
         mNameTv = (TextView) findViewById(R.id.item_name);
         mItemValueTv = (TextView) findViewById(R.id.item_value);
@@ -89,9 +89,9 @@ public class CommonItem extends RelativeLayout {
         }
 
         if (mLeftIconRes != 0) {
-            mLeftImg.setImageResource(mLeftIconRes);
+            mLeftImg.setText(mLeftIconRes);
         } else {
-            mLeftImg.setImageDrawable(null);
+            mLeftImg.setText("");
         }
 
         if (mRightIconRes != 0) {

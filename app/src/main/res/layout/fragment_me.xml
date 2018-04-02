@@ -102,7 +102,7 @@
                 app:commonDividerVisible="true"
                 app:commonItemName="扫码使用"
                 app:commonItemSelector="@drawable/voice_item_selector"
-                app:commonLeftIcon="@mipmap/gy"
+                app:commonLeftIcon="@string/icon_scan"
                 app:commonRightIcon="@mipmap/next_icon" />
 
             <com.lihb.babyvoice.customview.CommonItem
@@ -112,7 +112,7 @@
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/txt_version_update"
                 app:commonItemSelector="@drawable/voice_item_selector"
-                app:commonLeftIcon="@mipmap/gy"
+                app:commonLeftIcon="@string/check_new_version"
                 app:commonRightIcon="@mipmap/next_icon" />
 
             <com.lihb.babyvoice.customview.CommonItem
@@ -122,7 +122,7 @@
                 app:commonDividerVisible="false"
                 app:commonItemName="@string/txt_about_app"
                 app:commonItemSelector="@drawable/voice_item_selector"
-                app:commonLeftIcon="@mipmap/gy"
+                app:commonLeftIcon="@string/about_us"
                 app:commonRightIcon="@mipmap/next_icon" />
 
 
@@ -134,7 +134,7 @@
                 android:layout_marginTop="10dp"
                 app:commonItemName="用户协议"
                 app:commonItemSelector="@drawable/voice_item_selector"
-                app:commonLeftIcon="@mipmap/gy"
+                app:commonLeftIcon="@string/user_agreenment"
                 app:commonRightIcon="@mipmap/next_icon" />
 
             <com.lihb.babyvoice.customview.CommonItem
@@ -144,7 +144,7 @@
                 app:commonDividerVisible="true"
                 app:commonItemName="押金说明"
                 app:commonItemSelector="@drawable/voice_item_selector"
-                app:commonLeftIcon="@mipmap/gy"
+                app:commonLeftIcon="@string/deposit_explain"
                 app:commonRightIcon="@mipmap/next_icon" />
 
             <com.lihb.babyvoice.customview.CommonItem
@@ -154,7 +154,7 @@
                 app:commonDividerVisible="false"
                 app:commonItemName="服务卡说明"
                 app:commonItemSelector="@drawable/voice_item_selector"
-                app:commonLeftIcon="@mipmap/gy"
+                app:commonLeftIcon="@string/my_card"
                 app:commonRightIcon="@mipmap/next_icon" />
         </LinearLayout>
     </ScrollView>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="icon_scan"></string>
+    <string name="user_agreenment"></string>
+    <string name="deposit_explain"></string>
+    <string name="service_card_explain"></string>
+    <string name="check_new_version"></string>
+    <string name="about_us"></string>
+    <string name="my_card"></string>
+    <string name="my_devices"></string>
+    <string name="share_friends"></string>
+
+
+</resources>

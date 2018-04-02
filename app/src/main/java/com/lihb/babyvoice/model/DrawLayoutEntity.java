@@ -9,4 +9,5 @@ public class DrawLayoutEntity {
     public String itemUrl;
     public String title;
     public String detail;
+    public String icon;
 }

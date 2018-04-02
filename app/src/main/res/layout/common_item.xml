@@ -6,7 +6,7 @@
     android:layout_height="47dp"
     android:clickable="true">
 
-    <ImageView
+    <com.lihb.babyvoice.customview.IconFontTextView
         android:id="@+id/item_icon_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

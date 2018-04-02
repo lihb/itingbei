@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.customview.DividerLine;
+import com.lihb.babyvoice.customview.IconFontTextView;
 import com.lihb.babyvoice.model.DrawLayoutEntity;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.view.WebViewActivity;
@@ -62,7 +62,7 @@ public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     class DrawLayoutViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.item_icon_left)
-        ImageView itemIconLeft;
+        IconFontTextView itemIconLeft;
         @BindView(R.id.item_name)
         TextView itemName;
         @BindView(R.id.item_icon_right)
@@ -95,11 +95,7 @@ public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemName.setText(entity.title);
 //            itemName.setTextSize(DimensionUtil.spToPx(mContext, 5.5f));
             itemValue.setText(entity.detail);
-            Glide.with(mContext)
-                    .load(entity.itemUrl)
-                    .centerCrop()
-                    .override(10, 10)
-                    .into(itemIconLeft);
+            itemIconLeft.setText(entity.icon);
         }
     }
 }

@@ -297,15 +297,21 @@ public class NewMainActivity extends BaseFragmentActivity {
             entity.itemUrl = "";
             mData.add(entity);
         }
-        mData.get(0).title = "我的钱包";
-        mData.get(0).detail = "0元";
+//        mData.get(0).title = "我的钱包";
+//        mData.get(0).detail = "0元";
 
-        mData.get(1).title = "我的卡券";
+        mData.get(0).title = "我的卡券";
+        mData.get(0).icon = getString(R.string.my_card);
 //        mData.get(2).title = "用户协议";
 //        mData.get(2).itemUrl = Constant.USER_AGREEMENT;
-        mData.get(2).title = "我的设备";
-        mData.get(2).itemUrl = Constant.MY_DEVICE_LIST;
-        mData.get(3).title = "分享";
+        mData.get(1).title = "我的设备";
+        mData.get(1).itemUrl = Constant.MY_DEVICE_LIST;
+        mData.get(1).icon = getString(R.string.my_devices);
+
+        mData.get(2).title = "分享";
+        mData.get(2).icon = getString(R.string.share_friends);
+
+
 //        mData.get(3).itemUrl = Constant.MY_CARD_INFO;
 
     }

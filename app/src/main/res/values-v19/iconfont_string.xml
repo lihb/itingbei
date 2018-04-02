@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- iconfont -->
+    <string name="live_head_exit"></string>
+    <string name="live_head_exit2"></string>
+    <string name="live_head_share"></string>
+    <string name="player_play_15_rwd"></string>
+    <string name="player_play_15_fwd"></string>
+    <string name="player_play_pre"></string>
+    <string name="player_play_next"></string>
+    <string name="player_order"></string>
+    <string name="player_repeat"></string>
+    <string name="player_reverse"></string>
+    <string name="player_timer"></string>
+    <string name="player_speed_0_5"></string>
+    <string name="player_speed_1_0"></string>
+    <string name="player_speed_1_5"></string>
+    <string name="player_speed_2_0"></string>
+    <string name="ic_download_online_music"></string>
+    <string name="ic_up"></string>
+    <string name="ic_down"></string>
+    <string name="player_play_mode"></string>
+    <string name="player_quality_lq"></string>
+    <string name="player_quality_hq"></string>
+    <string name="player_quality_sq"></string>
+    <string name="player_ic_more"></string>
+    <string name="ic_ok"></string>
+    <string name="ic_play_setting"></string>
+    <string name="ic_profile"></string>
+    <string name="ic_cancel_a"></string>
+    <string name="ic_setting"></string>
+    <string name="ic_location"></string>
+    <string name="ic_add_friend"></string>
+    <string name="ic_comment"></string>
+    <string name="ic_display_password"></string>
+    <string name="ic_hide_password"></string>
+    <string name="ic_draft"></string>
+    <string name="ic_edit"></string>
+    <string name="ic_email_message"></string>
+    <string name="ic_info"></string>
+    <string name="ic_search"></string>
+    <string name="ic_moment"></string>
+    <string name="ic_back_android"></string>
+    <string name="ic_intro_header"></string>
+    <string name="ic_time"></string>
+    <string name="ic_unlaud"></string>
+    <string name="ic_laud"></string>
+    <string name="ic_my_friend"></string>
+    <string name="ic_s_finish"></string>
+    <string name="ic_rotate"></string>
+    <string name="ic_chat"></string>
+    <string name="ic_password"></string>
+    <string name="ic_downloading"></string>
+    <string name="ic_phone"></string>
+    <string name="ic_empty"></string>
+    <string name="ic_select_check_box"></string>
+    <string name="ic_black_point"></string>
+    <string name="ic_unselected_check_box"></string>
+    <string name="ic_right_arrows"></string>
+    <string name="ic_wifi"></string>
+    <string name="ic_barrage_skin_all_skins"></string>
+    <string name="ic_barrage_skin_manage"></string>
+    <string name="ic_barrage_skin_select"></string><!-- 输入框 选择皮肤icon -->
+    <string name="ic_we_chat_pay"></string>
+    <string name="ic_zhifubao_pay"></string>
+    <string name="ic_document"></string>
+    <string name="ic_emoji"></string><!-- 键盘的emoji -->
+    <string name="ic_my_subscribe_unlogin"></string>
+    <string name="ic_refresh"></string>
+    <string name="ic_plus"></string>
+    <string name="ic_scan"></string>
+    <string name="ic_close"></string>
+    <string name="ic_reverse"></string>
+    <string name="ic_play_counts"></string> <!-- 实心 -->
+    <string name="ic_pause"></string> <!-- 实心 -->
+    <string name="ic_s_listen"></string> <!-- 空心 -->
+    <string name="ic_rect_unselected"></string> <!-- 空心 -->
+    <string name="ic_rect_selected"></string> <!-- 空心 -->
+    <string name="ic_new_flag"></string>
+    <string name="ic_expense"></string><!-- 展开向下的箭头 -->
+    <string name="ic_download_done"></string>
+    <string name="ic_download_none"></string>
+    <string name="ic_barrage_on"></string><!-- 表示目前是开着的 -->
+    <string name="ic_barrage_off"></string><!-- 表示目前是关着的 -->
+    <string name="ic_home"></string>
+    <string name="ic_sort_up"></string>
+    <string name="ic_recharge_center"></string>
+    <string name="ic_entry_search"></string>
+    <string name="ic_rank_down"></string>
+    <string name="ic_rank_up"></string>
+    <string name="ic_rank_same"></string>
+    <string name="ic_select_no"></string>
+    <string name="ic_select_yes"></string>
+    <string name="ic_spinner"></string>
+    <string name="ic_alarm">a</string>
+    <string name="ic_weibo"></string>
+    <string name="ic_coin"></string>
+    <string name="ic_qq"></string>
+    <string name="ic_wechat"></string>
+    <string name="ic_circle_close"></string> <!--带圆圈的叉叉 -->
+    <string name="ic_download_edit"></string> <!--下载编辑 -->
+    <string name="ic_download_edit_delete"></string> <!--下载编辑 -->
+    <string name="ic_download_start_all"></string>
+    <string name="ic_download_pause_all"></string>
+    <string name="ic_popular_music"></string>
+    <string name="ic_gear"></string>
+    <string name="ic_checkbox_selected"></string>
+    <string name="ic_checkbox_no_selected"></string>
+    <string name="ic_tag_add"></string>
+    <string name="ic_gold"></string>
+    <string name="ic_lizhi"></string>
+    <string name="ic_diamond"></string>
+    <string name="ic_nav_right"></string>
+
+    <string name="ic_interest_0"></string>
+    <string name="ic_interest_1"></string>
+    <string name="ic_interest_2"></string>
+    <string name="ic_interest_3"></string>
+    <string name="ic_interest_4"></string>
+    <string name="ic_interest_5"></string>
+    <string name="ic_interest_6"></string>
+    <string name="ic_interest_7"></string>
+    <string name="ic_interest_8"></string>
+    <string name="ic_interest_9"></string>
+    <string name="ic_interest_10"></string>
+    <string name="ic_interest_11"></string>
+
+    <string name="ic_new_message"></string>
+    <string name="ic_stranger_msg"></string>
+
+    <!-- 弹窗 -->
+    <string name="ic_dialog_goto_podcast"></string>
+    <string name="ic_dialog_goto_program"></string>
+    <string name="ic_dialog_goto_comments"></string>
+    <string name="ic_dialog_goto_play_history"></string>
+    <string name="ic_dialog_praise"></string>
+    <string name="ic_dialog_download"></string>
+    <string name="ic_dialog_share"></string>
+    <string name="ic_dialog_collect"></string>
+    <string name="ic_dialog_uncollect"></string>
+    <string name="ic_dialog_chat"></string>
+    <string name="ic_dialog_contribute"></string>
+    <string name="ic_dialog_feed"></string>
+    <string name="ic_dialog_report"></string>
+    <string name="ic_dialog_copy_url"></string>
+    <string name="ic_dialog_download_finish"></string>
+    <string name="ic_dialog_volume_setting"></string>
+    <string name="ic_dialog_volume_right"></string>
+
+    <string name="ic_dialog_wechat"></string>
+    <string name="ic_dialog_wechat_moment"></string>
+    <string name="ic_dialog_qq"></string>
+    <string name="ic_dialog_qzone"></string>
+    <string name="ic_dialog_sinaweibo"></string>
+    <string name="ic_dialog_douban"></string>
+    <string name="ic_add"></string>
+    <string name="ic_star"></string>
+    <string name="ic_unstar"></string>
+    <string name="ic_canvassing"></string><!-- 拉票 -->
+    <string name="ic_rank"></string>
+    <string name="ic_cast"></string><!-- 广播 -->
+    <string name="ic_people_num"></string>
+    <string name="ic_send_msg_error"></string>
+    <string name="ic_send_msg_ing"></string>
+    <string name="ic_send_msg_ing2"></string>
+    <string name="ic_chat_msg_tag"></string>
+    <string name="ic_bottom_close"></string>
+    <string name="ic_gift"></string>
+    <string name="ic_system_notification"></string>
+    <string name="ic_comment_message"></string>
+    <string name="ic_stranger_message"></string>
+    <string name="ic_no_money_error"></string>
+    <string name="song_lrc_tag"></string>
+
+    <string name="ic_podcast_tag_add"></string>
+    <string name="ic_podcast_tag_hook"></string>
+    <string name="ic_podcast_tag_remove"></string>
+    <string name="ic_podcast_tag_reset"></string>
+    <!-- 暂未使用 -->
+    <!--    <string name="ic_post"></string>
+        <string name="ic_cancel_i"></string>
+        <string name="ic_record"></string>
+        <string name="ic_sequence"></string>
+        <string name="ic_upload_pic"></string>
+        <string name="ic_account_profile"></string>
+        <string name="ic_city"></string>
+        <string name="ic_contribute"></string>
+        <string name="ic_delete"></string>
+        <string name="ic_download"></string>
+        <string name="ic_female"></string>
+        <string name="ic_male"></string>
+        <string name="ic_more_h"></string>
+        <string name="ic_qq"></string>
+        <string name="ic_wechat"></string>
+        <string name="ic_s_finish"></string>
+        <string name="ic_reverse"></string>
+
+
+        <string name="ic_wechat_moments"></string>
+        <string name="ic_qzone"></string>
+        <string name="ic_renren"></string>
+        <string name="ic_sina"></string>
+        <string name="ic_douban"></string>
+        <string name="ic_new_pw"></string>
+        <string name="ic_old_password"></string>
+        -->
+    <string name="ic_newy"></string>
+
+
+    <!-- 录音界面 -->
+    <string name="ic_cut"></string>
+    <string name="ic_mic"></string>
+    <string name="ic_music"></string>
+    <string name="ic_play_order_repeat"></string>
+    <string name="ic_play_order_once"></string>
+    <string name="ic_play_order_squence"></string>
+    <string name="ic_volume_min"></string>
+    <string name="ic_volume_mid"></string>
+    <string name="ic_volume_max"></string>
+    <string name="ic_audio_effect"></string>
+    <string name="ic_add_material"></string>
+    <string name="ic_mask_play"></string>
+    <string name="ic_mask_pause"></string>
+    <string name="ic_list_item_drag"></string>
+    <string name="ic_list_item_delete"></string>
+    <string name="ic_show_effect"></string>
+    <string name="ic_get_verify_code"></string>
+    <!-- 试听 -->
+    <string name="ic_record_audition"></string>
+    <string name="ic_record_again"></string>
+    <!-- 保存 -->
+    <string name="ic_record_save"></string>
+    <!-- 裁剪 -->
+    <string name="ic_record_crop"></string>
+    <string name="ic_record_return"></string>
+    <string name="ic_record_common_pause"></string>
+    <string name="ic_record_common_play"></string>
+
+    <!--直播-->
+    <string name="ic_live_status_light"></string>
+    <string name="ic_image_dialog_close"></string>
+    <string name="ic_unicom_traffic_pkg"></string>
+    <string name="ic_live_common_nothing"></string>
+    <string name="ic_sound_effct_play"></string>
+    <string name="ic_entmode_a_choose_b"></string>
+    <string name="ic_entmode_a_and_b"></string>
+    <string name="ic_live_bottom_share"></string>
+    <string name="ic_fun_mode_like_tip"></string>
+    <string name="ic_entmode_open_mic"></string>
+    <string name="ic_entmode_close_mic"></string>
+
+    <!-- 音效新图标 -->
+    <string name="ic_sound_effct_play1"></string>
+    <string name="ic_sound_effct_play2"></string>
+    <string name="ic_sound_effct_play3"></string>
+    <string name="ic_sound_effct_play4"></string>
+    <string name="ic_sound_effct_play5"></string>
+    <string name="ic_sound_effct_play6"></string>
+    <string name="ic_sound_effct_play7"></string>
+    <string name="ic_sound_effct_play8"></string>
+
+    <!-- 语音连线-->
+    <string name="ic_live_talk_hangup"></string>
+    <string name="ic_live_talk_chat_icon"></string>
+    <string name="ic_live_talk_chating_icon"></string>
+    <string name="ic_live_talk_packup"></string>
+    <string name="ic_live_talk_loudspeaker"></string>
+    <string name="ic_live_talk_turn_off"></string>
+    <string name="ic_live_talk_recall"></string>
+    <string name="ic_live_talk_small_call_icon"></string>
+
+    <!-- 主播直播界面 -->
+    <string name="ic_live_talk_jockey_microphone_off"></string>
+    <string name="ic_live_talk_jockey_microphone_exception"></string>
+    <string name="ic_live_talk_jockey_microphone_exclamation"></string>
+    <string name="ic_live_music"></string>
+    <string name="ic_live_sound_effect"></string>
+    <string name="ic_live_sound_console"></string>
+    <string name="ic_live_link_line"></string>
+    <string name="ic_live_sound_effect_close"></string>
+    <string name="ic_live_sound_effect_edit"></string>
+    <string name="ic_live_sound_console_close"></string>
+    <string name="ic_live_lucky_money"></string>
+    <string name="ic_live_fun_like"></string>
+    <string name="ic_live_ent_mode"></string>
+    <string name="ic_live_asmr_mode_off"></string>
+    <string name="ic_live_asmr_mode_on"></string>
+
+    <!-- 直播编辑与查看界面 -->
+    <string name="ic_read_or_write_info_camera"></string>
+    <string name="re_listen"></string>
+    <string name="template_share_icon"></string>
+    <string name="template_parise_icon"></string>
+    <string name="template_parise_press_icon"></string>
+
+    <string name="ic_take_photo"></string>
+    <string name="ic_select_camera"></string>
+
+    <string name="ic_male"></string>
+    <string name="ic_female"></string>
+
+    <!-- 群列表 -->
+    <string name="ic_qun_msg_free"></string>
+    <string name="ic_keyboard"></string>
+
+    <string name="ic_picture"></string>
+
+    <string name="ic_question"></string>
+
+    <string name="ic_emoji_1"></string>
+
+    <string name="ic_circle"></string>
+
+    <string name="ic_double_two_up_arrow"></string>
+    <string name="ic_speaker"></string>
+    <string name="ic_speaker_2"></string>
+    <string name="ic_heraldry"></string>
+    <string name="ic_lock"></string>
+    <string name="ic_user"></string>
+    <string name="ic_live_control_pk"></string>
+    <string name="ic_voice_gift"></string>
+    <string name="ic_live_control_effect"></string>
+    <string name="ic_live_control_music"></string>
+    <string name="ic_live_control_line"></string>
+    <string name="ic_live_control_more"></string>
+    <string name="ic_live_control_mixer"></string>
+    <string name="ic_live_control_send_image"></string>
+    <string name="ic_live_control_send_text"></string>
+    <string name="ic_live_control_silence"></string>
+    <string name="ic_question_mark">？</string>
+    <string name="ic_voice_label_tips"></string>
+
+    <string name="ic_my_live_send_status_fail"></string>
+
+    <string name="ic_kick_off"></string>
+    <string name="ic_trend_comment"></string>
+    <string name="ic_trend_forward"></string>
+    <string name="ic_question_o"></string>
+    <string name="ic_setting_star"></string>
+    <string name="ic_voice"></string>
+    <string name="ic_group"></string>
+    <string name="ic_favorite"></string>
+    <string name="ic_clock"></string>
+    <string name="ic_voice_card"></string>
+    <string name="ic_followed"></string>
+    <string name="ic_camera"></string>
+    <string name="ic_trash_bin"></string>
+    <string name="ic_resume"></string>
+    <string name="ic_trend_add"></string>
+    <string name="ic_rocket"></string>
+    <string name="ic_history"></string>
+    <string name="ic_id"></string>
+    
+
+
+    <string name="ic_fans_add_friend"></string>
+    <string name="ic_live_delete_comment"></string>
+    <string name="ic_down_allow"></string>
+    <string name="ic_shopping_cart"></string>
+
+    <!--首页搜索图-->
+    <string name="ic_nav_bar_search"></string>
+    <string name="ic_nav_bar_new_search"></string>
+    <string name="ic_ban_open"></string>
+    <string name="ic_home_add"></string>
+    <string name="ic_seat"></string>
+
+    <!--直播结束页-->
+    <string name="ic_right_arr"></string>
+    <string name="ic_liveend_close"></string>
+    <string name="ic_item_white_lizhi"></string>
+    <string name="ic_seat_slim"></string>
+
+
+    <string name="ic_micro_phone"></string>
+    // 话筒
+
+    <!--声音页新用户推荐标签-->
+    <string name="ic_interest_label_add"></string>
+
+    <string name="icon_font_pause"></string>
+    <string name="icon_font_play"></string>
+
+    <!-- ASMR 音效包 -->
+    <string name="ic_asmr_effect_1"></string>
+    <string name="ic_asmr_effect_2"></string>
+    <string name="ic_asmr_effect_3"></string>
+    <string name="ic_asmr_effect_4"></string>
+    <string name="ic_asmr_effect_5"></string>
+    <string name="ic_asmr_effect_6"></string>
+    <string name="ic_asmr_effect_7"></string>
+    <string name="ic_asmr_effect_8"></string>
+
+    <!--网络-->
+    <string name="ic_net_conn_fail"></string>
+    <string name="ic_unfold"></string>
+
+    <!--歌词面板控制按钮-->
+    <string name="ic_lyric_control_back"></string>
+    <string name="ic_lyric_control_forward"></string>
+    <string name="ic_lyric_control_refresh"></string>
+    <string name="ic_lyric_control_close"></string>
+    <string name="ic_lyric_control_more_options"></string>
+
+    <!--多数量礼物-->
+    <string name="live_multiple_gift_btn_icon_up"></string>
+    <string name="live_multiple_gift_btn_icon_down"></string>
+    <string name="ic_check_circle_o"></string>
+    <string name="mylive_edmtfun_right_icon"></string>
+    <!--直播间引导用户操作资源文件-->
+    <string name="live_follow_item_left_icon"></string>
+    <string name="live_guard_item_left_icon"></string>
+    <string name="live_guard_item_right_icon"></string>
+    <string name="live_follow_item_right_icon"></string>
+    <!-- 声音广场-->
+    <string name="template_detail_back"></string>
+    <string name="template_detail_top"></string>
+    <string name="template_detail_start"></string>
+    <string name="template_play_close"></string>
+    <string name="template_bottom_close"></string>
+    <string name="template_full_screen"></string>
+    <string name="template_full_screen_exit"></string>
+    <string name="record_music_icon"></string>
+    <string name="record_template_item_play"></string>
+    <string name="template_prelisten"></string>
+    <!--<string name="template_my_fragment_icon"></string>-->
+    <string name="template_my_fragment_icon"></string>
+
+
+    <string name="mini_prok_right_icon"></string>
+
+
+    <!--动态-->
+    <string name="ic_album_name_tag"></string>
+    <string name="ic_album_camera"></string>
+
+    <!--短视频-->
+    <string name="ic_delete"></string>
+    <string name="ic_add_circle"></string>
+    <string name="ic_copy"></string>
+    <string name="ic_crop"></string>
+    <string name="ic_close_composited"></string>
+    <string name="ic_send"></string>
+    <string name="ic_go_to_album"></string>
+    <string name="ic_image_voice_share"></string>
+    <string name="ic_image_voice_no_content"></string>
+    <string name="ic_voice_image_refreshd"></string>
+
+
+    <string name="ic_down_mic"></string>
+    <string name="ic_no_lyric_tag"></string>
+    <string name="ic_end_game"></string>
+
+</resources>
