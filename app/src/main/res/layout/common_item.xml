@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/common_item_group"
     android:layout_width="match_parent"
-    android:layout_height="47dp"
+    android:layout_height="wrap_content"
+    android:minHeight="50dp"
     android:clickable="true">
 
     <com.lihb.babyvoice.customview.IconFontTextView
         android:id="@+id/item_icon_left"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp" />
 
@@ -19,6 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/item_value"
         android:layout_toRightOf="@+id/item_icon_left"
         android:gravity="center_vertical"
@@ -42,8 +44,19 @@
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@+id/item_icon_right"
         android:gravity="center_vertical"
+        android:layout_centerVertical="true"
         android:textColor="@color/coler_55555"
         tools:text="sdfsdgd" />
+
+    <com.lihb.babyvoice.customview.CircularImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/item_icon_right"
+        android:layout_marginBottom="10dp"
+        android:src="@mipmap/logo" />
 
     <com.lihb.babyvoice.customview.DividerLine
         android:id="@+id/item_divider"

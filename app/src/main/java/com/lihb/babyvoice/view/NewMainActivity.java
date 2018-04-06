@@ -2,6 +2,7 @@ package com.lihb.babyvoice.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -38,6 +39,7 @@ import com.lihb.babyvoice.utils.NetworkHelper;
 import com.lihb.babyvoice.utils.RecorderHelper;
 import com.lihb.babyvoice.utils.RxBus;
 import com.lihb.babyvoice.utils.StringUtils;
+import com.lihb.babyvoice.utils.camera.PhotoHelper;
 import com.orhanobut.logger.Logger;
 import com.umeng.analytics.MobclickAgent;
 
@@ -292,7 +294,7 @@ public class NewMainActivity extends BaseFragmentActivity {
     }
 
     private void initDrawLayoutData() {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             DrawLayoutEntity entity = new DrawLayoutEntity();
             entity.itemUrl = "";
             mData.add(entity);
@@ -508,5 +510,15 @@ public class NewMainActivity extends BaseFragmentActivity {
         MobclickAgent.onPause(this);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PhotoHelper.REQUEST_TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
+            String picturePath = data.getStringExtra(PhotoHelper.OUTPUT_PATH);
+            if (mPersonalInfoFragment != null && mPersonalInfoFragment.isVisible()) {
+                mPersonalInfoFragment.updatePhoto(picturePath);
+            }
+        }
+    }
 
 }

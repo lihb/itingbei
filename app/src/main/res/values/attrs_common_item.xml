@@ -11,5 +11,19 @@
         <attr name="commonRightIcon" format="reference" />
         <!-- 分隔线是否可见 -->
         <attr name="commonDividerVisible" format="boolean" />
+
+        <!-- item内容是否可见 -->
+        <attr name="itemValueVisible">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="4" />
+            <enum name="gone" value="8" />
+        </attr>
+
+        <!-- 右侧图片是否可见 -->
+        <attr name="rightImgVisible">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="4" />
+            <enum name="gone" value="8" />
+        </attr>
     </declare-styleable>
 </resources>

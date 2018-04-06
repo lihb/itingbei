@@ -3,6 +3,7 @@ package com.lihb.babyvoice.view;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.lihb.babyvoice.presenter.profile.PersonalInfoPresenter;
 import com.lihb.babyvoice.utils.CommonDialog;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.SimpleDatePickerDialog;
+import com.lihb.babyvoice.utils.camera.PhotoHelper;
 import com.lihb.babyvoice.view.profile.PersonalInfoMvpView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -33,6 +35,8 @@ import butterknife.Unbinder;
 public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMvpView {
 
     private static final String TAG = "PersonalInfoFragment";
+
+    private static final int AVATAR_WIDTH_HEIGHT = 480;
 
     public static final int ITEM_NICK_NAME = 1;
     public static final int ITEM_PHONE = 2;
@@ -65,6 +69,8 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
     Unbinder unbinder;
     @BindView(R.id.item_baby_info)
     CommonItem itemBabyInfo;
+    @BindView(R.id.item_user_Avatar)
+    CommonItem itemUserAvatar;
 
     private PersonalInfoChangeFragment mPersonalInfoChangeFragment;
 
@@ -186,6 +192,25 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
             gotoBabyInfoFragment();
         });
 
+        itemUserAvatar.setOnClickListener(v -> {
+            selectImageFromAlbum();
+        });
+
+    }
+
+    private void selectImageFromAlbum() {
+        PhotoHelper.create(getActivity())
+//                .setSourceGallery()
+                .setPreferredSize(AVATAR_WIDTH_HEIGHT, AVATAR_WIDTH_HEIGHT)
+                .start();
+    }
+
+
+    public void updatePhoto(String picturePath) {
+        if (TextUtils.isEmpty(picturePath)) {
+            return;
+        }
+        itemUserAvatar.setUserAvatar(picturePath);
     }
 
 

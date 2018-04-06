@@ -1,6 +1,7 @@
 package com.lihb.babyvoice.view;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.graphics.PixelFormat;
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -10,6 +11,7 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -135,10 +137,14 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
 
     private void record() {
         // 权限检测
-        if (PermissionCheckUtil.checkHasPermission(getActivity(), Manifest.permission.RECORD_AUDIO)) {
+        String permissions[] = new String[]{Manifest.permission.RECORD_AUDIO,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (PermissionCheckUtil.checkPermissionAllGranted(getActivity(), permissions)) {
             initAudio();
         } else {
-            PermissionCheckUtil.showGrantFailDialog(getActivity(), getString(R.string.grant_audio_record_permission));
+            requestPermissions(permissions, PermissionCheckUtil.REQUEST_PERMISSION);
+//            PermissionCheckUtil.showGrantFailDialog(getActivity(), getString(R.string.grant_audio_record_permission));
         }
     }
 
@@ -160,7 +166,11 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
             public void onClick(View view) {
                 if (recordText.getText().toString().equals("录制")) {
                     recordText.setText("完成");
-                    waveCanvas.startWriteFile();
+                    if (waveCanvas != null) {
+                        waveCanvas.startWriteFile();
+                    } else {
+                        CommonToast.showShortToast("发生错误，请重新打开该页面");
+                    }
                 } else if (recordText.getText().toString().equals("完成")) {
                     recordText.setText("录制");
                     waveCanvas.stop();
@@ -325,6 +335,31 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd(TAG);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PermissionCheckUtil.REQUEST_PERMISSION) {
+            boolean isAllGranted = true;
+
+            // 判断是否所有的权限都已经授予了
+            for (int grant : grantResults) {
+                if (grant != PackageManager.PERMISSION_GRANTED) {
+                    isAllGranted = false;
+                    break;
+                }
+            }
+
+            if (isAllGranted) {
+                initAudio();
+
+            } else {
+                // 弹出对话框告诉用户需要权限的原因, 并引导用户去应用权限管理中手动打开权限按钮
+                PermissionCheckUtil.showGrantFailDialog(getActivity(), getString(R.string.grant_audio_record_permission));
+            }
+        }
     }
 
 

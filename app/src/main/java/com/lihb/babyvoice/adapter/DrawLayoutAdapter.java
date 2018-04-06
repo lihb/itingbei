@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.customview.CircularImageView;
 import com.lihb.babyvoice.customview.DividerLine;
 import com.lihb.babyvoice.customview.IconFontTextView;
 import com.lihb.babyvoice.model.DrawLayoutEntity;
@@ -28,6 +29,7 @@ import butterknife.ButterKnife;
  */
 
 public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
 
     private Context mContext;
     private List<DrawLayoutEntity> mData;
@@ -73,6 +75,9 @@ public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         DividerLine itemDivider;
         @BindView(R.id.common_item_group)
         RelativeLayout commonItemGroup;
+        @BindView(R.id.user_avatar)
+        CircularImageView userAvatar;
+
         private DrawLayoutEntity mEntity;
 
         public DrawLayoutViewHolder(View itemView) {
@@ -90,9 +95,10 @@ public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public void bindData(DrawLayoutEntity entity) {
             mEntity = entity;
-            itemDivider.setVisibility(View.INVISIBLE);
+            itemDivider.setVisibility(View.VISIBLE);
             itemIconRight.setVisibility(View.INVISIBLE);
             itemName.setText(entity.title);
+            userAvatar.setVisibility(View.GONE);
 //            itemName.setTextSize(DimensionUtil.spToPx(mContext, 5.5f));
             itemValue.setText(entity.detail);
             itemIconLeft.setText(entity.icon);

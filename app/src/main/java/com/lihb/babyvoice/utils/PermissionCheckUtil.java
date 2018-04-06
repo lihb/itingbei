@@ -1,6 +1,5 @@
 package com.lihb.babyvoice.utils;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -12,7 +11,7 @@ import android.support.v4.content.ContextCompat;
  */
 public class PermissionCheckUtil {
 
-    public static final int REQUEST_CODE_SD_PERMISSION = 10087;
+    public static final int REQUEST_PERMISSION = 10087;
 
     public static boolean checkHasPermission(Activity activity, String permission) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
@@ -22,18 +21,6 @@ public class PermissionCheckUtil {
         }
     }
 
-    public static boolean checkSdPermission(Activity activity, int requestCode) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    public static boolean sdPermissionGranted(boolean requestCodeMatch, String[] permissions, int[] grantResults) {
-        return requestCodeMatch && grantResults != null && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED;
-    }
 
     public static void showGrantFailDialog(final Activity activity) {
         //权限申请失败
@@ -53,4 +40,30 @@ public class PermissionCheckUtil {
         }
 
     }
+
+
+    /**
+     * 检查是否拥有指定的所有权限
+     */
+    public static boolean checkPermissionAllGranted(Activity activity, String[] permissions) {
+        for (String permission : permissions) {
+            if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
+                // 只要有一个权限没有被授予, 则直接返回 false
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 请求权限
+     */
+    public static void requestPermission(Activity activity, String[] permissions) {
+        ActivityCompat.requestPermissions(
+                activity,
+                permissions,
+                REQUEST_PERMISSION
+        );
+    }
+
 }

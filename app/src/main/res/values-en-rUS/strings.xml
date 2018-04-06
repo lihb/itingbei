@@ -122,5 +122,6 @@
     <string name="pregnant_check_remind_txt">Pregnant Check Remind</string>
     <string name="got_it">Got It</string>
     <string name="my_achievement">My Achievement</string>
+    <string name="user_avatar">avatar</string>
 
 </resources>

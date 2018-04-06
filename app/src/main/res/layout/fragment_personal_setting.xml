@@ -27,9 +27,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <com.lihb.babyvoice.customview.DividerLine
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_user_Avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="@string/user_avatar"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:rightImgVisible="visible"
+                app:itemValueVisible="gone"
+                app:commonRightIcon="@mipmap/next_icon" />
 
             <com.lihb.babyvoice.customview.CommonItem
                 android:id="@+id/item_nick_name"

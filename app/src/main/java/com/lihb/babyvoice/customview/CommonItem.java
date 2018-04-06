@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.lihb.babyvoice.R;
 
 /**
@@ -33,6 +34,10 @@ public class CommonItem extends RelativeLayout {
 
     private int mRightIconRes = 0;
 
+    private int mItemValueVisibility;
+
+    private int mRightImgVisibility;
+
     private String mNameString;
 
     private boolean mDividerVisible = true;
@@ -48,6 +53,8 @@ public class CommonItem extends RelativeLayout {
     private TextView mItemValueTv = null;
 
     private DividerLine mDividerLine = null;
+
+    private CircularImageView mUserAvatar;
 
     public CommonItem(Context context) {
         this(context, null);
@@ -70,6 +77,8 @@ public class CommonItem extends RelativeLayout {
             mRightIconRes = typedArray.getResourceId(R.styleable.CommonItem_commonRightIcon, 0);
             mNameString = typedArray.getText(R.styleable.CommonItem_commonItemName).toString();
             mDividerVisible = typedArray.getBoolean(R.styleable.CommonItem_commonDividerVisible, true);
+            mItemValueVisibility = typedArray.getInt(R.styleable.CommonItem_itemValueVisible, View.GONE);
+            mRightImgVisibility = typedArray.getInt(R.styleable.CommonItem_rightImgVisible, View.GONE);
             typedArray.recycle();
         }
 
@@ -81,6 +90,8 @@ public class CommonItem extends RelativeLayout {
         mNameTv = (TextView) findViewById(R.id.item_name);
         mItemValueTv = (TextView) findViewById(R.id.item_value);
         mDividerLine = (DividerLine) findViewById(R.id.item_divider);
+
+        mUserAvatar = (CircularImageView) findViewById(R.id.user_avatar);
 
         if (mSelectorRes != 0) {
             mContainer.setBackgroundResource(mSelectorRes);
@@ -107,6 +118,10 @@ public class CommonItem extends RelativeLayout {
         } else {
             mDividerLine.setVisibility(View.GONE);
         }
+
+        mItemValueTv.setVisibility(mItemValueVisibility);
+
+        mUserAvatar.setVisibility(mRightImgVisibility);
     }
 
     public void setItemValue(String value) {
@@ -121,6 +136,12 @@ public class CommonItem extends RelativeLayout {
         if (mContainer != null) {
             mContainer.setOnClickListener(listener);
         }
+    }
+
+    public void setUserAvatar(String avatarUrl) {
+        Glide.with(getContext())
+                .load(avatarUrl)
+                .into(mUserAvatar);
     }
 
 

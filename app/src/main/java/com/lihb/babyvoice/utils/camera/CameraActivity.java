@@ -1,8 +1,10 @@
 package com.lihb.babyvoice.utils.camera;
 
+import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -10,6 +12,7 @@ import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Surface;
@@ -27,6 +30,7 @@ import com.lihb.babyvoice.customview.base.BaseActivity;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.DimensionUtil;
 import com.lihb.babyvoice.utils.FileUtils;
+import com.lihb.babyvoice.utils.PermissionCheckUtil;
 import com.lihb.babyvoice.view.cropper.CropImageView;
 
 import java.io.File;
@@ -69,6 +73,7 @@ public class CameraActivity extends BaseActivity {
     private int mPreferableHeight = 9999;
     private File mSourceFile = null;
     private File mOutputFile = null;
+    private int MY_PERMISSION_REQUEST_CODE = 100000;
 
     private static File getFromMediaUri(ContentResolver resolver, Uri uri) {
         if (uri == null) return null;
@@ -181,7 +186,40 @@ public class CameraActivity extends BaseActivity {
 //        } else {
 //            setContentView(mPortrait ? R.layout.camera_activity_pad_portrait : R.layout.camera_activity_pad_landscape);
 //        }
+        // 权限检查
+        checkHasPermission();
 
+    }
+
+    private void checkHasPermission() {
+        /**
+         * 第 1 步: 检查是否有相应的权限
+         */
+        boolean isAllGranted = PermissionCheckUtil.checkPermissionAllGranted(this,
+                new String[]{
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }
+        );
+        // 如果这3个权限全都拥有, 则直接执行备份代码
+        if (isAllGranted) {
+            openDelayed();
+            return;
+        }
+
+        /**
+         * 第 2 步: 请求权限
+         */
+        // 一次请求多个权限, 如果其他有权限是已经授予的将会自动忽略掉
+        PermissionCheckUtil.requestPermission(this, new String[]{
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+        });
+    }
+
+    private void openDelayed() {
         initViews();
 
         if (mSourceMode == SourceMode.CropOnly) {
@@ -191,10 +229,7 @@ public class CameraActivity extends BaseActivity {
         } else if (mSourceMode == SourceMode.CameraGallery) {
             switchToCameraMode();
         }
-        openDelayed();
-    }
 
-    private void openDelayed() {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -563,5 +598,34 @@ public class CameraActivity extends BaseActivity {
         CropOnly,
         Gallery,
         CameraGallery
+    }
+
+    /**
+     * 第 3 步: 申请权限结果返回处理
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PermissionCheckUtil.REQUEST_PERMISSION) {
+            boolean isAllGranted = true;
+
+            // 判断是否所有的权限都已经授予了
+            for (int grant : grantResults) {
+                if (grant != PackageManager.PERMISSION_GRANTED) {
+                    isAllGranted = false;
+                    break;
+                }
+            }
+
+            if (isAllGranted) {
+                // 如果所有的权限都授予了, 则执行备份代码
+                openDelayed();
+
+            } else {
+                // 弹出对话框告诉用户需要权限的原因, 并引导用户去应用权限管理中手动打开权限按钮
+                PermissionCheckUtil.showGrantFailDialog(this);
+            }
+        }
     }
 }

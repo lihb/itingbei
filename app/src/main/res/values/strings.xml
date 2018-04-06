@@ -121,5 +121,6 @@
     <string name="pregnant_check_remind_txt">产检提醒</string>
     <string name="got_it">知道了</string>
     <string name="my_achievement">我的成就</string>
+    <string name="user_avatar">头像</string>
 
 </resources>

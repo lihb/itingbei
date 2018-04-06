@@ -120,6 +120,9 @@ public class BabyInfoFragment extends BaseFragment {
 
     private void getData(final boolean refresh) {
         //测试数据
+        if (refresh) {
+            mData.clear();
+        }
         for (int i = 0; i < 3; i++) {
             BabyBirthDay birthday = new BabyBirthDay();
             birthday.username = "昵称 " + i;
