@@ -23,6 +23,7 @@ import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
 import com.lihb.babyvoice.model.HttpResponse;
+import com.lihb.babyvoice.model.HttpResponseV2;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.SharedPreferencesUtil;
@@ -274,11 +275,11 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                 .loginBySmsCode(loginAccount, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<HttpResponse<Void>>() {
+                .subscribe(new Action1<HttpResponseV2>() {
                     @Override
-                    public void call(HttpResponse<Void> httpResponse) {
+                    public void call(HttpResponseV2 httpResponse) {
                         Log.i("lihb", httpResponse.toString());
-                        if (httpResponse.code == 0) {
+                        if (httpResponse.msginfo.code == 0) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
                             // 插入产检、疫苗数据到数据库，只插入一次
@@ -291,9 +292,10 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                             }
 
                             SharedPreferencesUtil.setFirstLaunch(SMSLoginActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, loginAccount, password);
+                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, loginAccount, password, httpResponse.user.getUuid());
                             BabyVoiceApp.getInstance().setLogin(true);
                             BabyVoiceApp.currUserName = loginAccount;
+                            BabyVoiceApp.uuid = httpResponse.user.getUuid();
                             Intent intent = new Intent(SMSLoginActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();

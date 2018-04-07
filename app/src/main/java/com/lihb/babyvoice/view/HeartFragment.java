@@ -134,8 +134,8 @@ public class HeartFragment extends BaseFragment {
         mImgGoToRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                gotoVoiceRecordFragment();
-                showPickCategoryDialog();
+                gotoVoiceRecordFragmentV2();
+//                showPickCategoryDialog();
             }
         });
         mImgGoToRecord.setOnLongClickListener(v -> {

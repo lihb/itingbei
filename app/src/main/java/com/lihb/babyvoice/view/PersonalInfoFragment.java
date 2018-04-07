@@ -9,24 +9,39 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.CommonItem;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragment;
+import com.lihb.babyvoice.model.HttpResponse;
 import com.lihb.babyvoice.presenter.profile.PersonalInfoPresenter;
 import com.lihb.babyvoice.utils.CommonDialog;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.SimpleDatePickerDialog;
+import com.lihb.babyvoice.utils.StringUtils;
 import com.lihb.babyvoice.utils.camera.PhotoHelper;
 import com.lihb.babyvoice.view.profile.PersonalInfoMvpView;
+import com.orhanobut.logger.Logger;
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by lhb on 2017/2/8.
@@ -211,6 +226,60 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
             return;
         }
         itemUserAvatar.setUserAvatar(picturePath);
+        // 更新头像到服务器
+        uploadPicToServer(picturePath);
+
+    }
+
+    /**
+     * 上传图片到服务器
+     */
+    private void uploadPicToServer(String filePath) {
+        List<File> fileList = new ArrayList<>();
+        File file = null;
+        if (!StringUtils.isBlank(filePath)) {
+            file = new File(filePath);
+        }
+
+        if (file == null || !file.exists()) {
+            Logger.i("no pic to upload!!");
+            return;
+        }
+        fileList.add(file);
+        MultipartBody body = filesToMultipartBody(fileList);
+        ServiceGenerator.createService(ApiManager.class)
+                .uploadPicFile(BabyVoiceApp.uuid, body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<HttpResponse<Void>>() {
+                    @Override
+                    public void call(HttpResponse<Void> stringBaseResponse) {
+                        Logger.i(stringBaseResponse.msg);
+                        if (stringBaseResponse.code == 200) {
+                            Logger.i("upload pic success.");
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Logger.e(throwable.getMessage());
+                    }
+                });
+    }
+
+
+    public static MultipartBody filesToMultipartBody(List<File> files) {
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+
+        for (File file : files) {
+            RequestBody requestBody = RequestBody.create(MediaType.parse(""), file);
+            builder.addFormDataPart("picfile", file.getName(), requestBody);
+//            builder.addFormDataPart("fileName", file.getName());
+        }
+        builder.setType(MultipartBody.FORM);
+        MultipartBody multipartBody = builder.build();
+        return multipartBody;
+
     }
 
 

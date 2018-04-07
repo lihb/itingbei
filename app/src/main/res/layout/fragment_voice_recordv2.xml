@@ -44,7 +44,7 @@
             android:layout_below="@+id/chronometer"
             android:layout_alignLeft="@+id/chronometer"
             android:layout_alignRight="@+id/chronometer"
-            android:text=" 时     分      秒"
+            android:text=" 时     分    秒"
             android:textColor="@android:color/white"
             android:textSize="25sp" />
     </RelativeLayout>

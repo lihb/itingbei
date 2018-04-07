@@ -6,6 +6,7 @@ import com.lihb.babyvoice.model.Contributor;
 import com.lihb.babyvoice.model.GrowUpRecord;
 import com.lihb.babyvoice.model.HttpResList;
 import com.lihb.babyvoice.model.HttpResponse;
+import com.lihb.babyvoice.model.HttpResponseV2;
 import com.lihb.babyvoice.model.ITingBeiResponse;
 import com.lihb.babyvoice.model.Message;
 import com.lihb.babyvoice.model.ProductionInspection;
@@ -133,7 +134,7 @@ public interface ApiManager {
      * @return
      */
     @GET("web/applogin.do")
-    Observable<HttpResponse<Void>> loginBySmsCode(
+    Observable<HttpResponseV2> loginBySmsCode(
             @Query("mobilenumber") String mobileNumber,
             @Query("smscode") String smsCode);
 
@@ -146,7 +147,7 @@ public interface ApiManager {
      * @return
      */
     @GET("mobile/login.do")
-    Observable<HttpResponse<Void>> loginByPassword(
+    Observable<HttpResponseV2> loginByPassword(
             @Query("username") String userName,
             @Query("password") String passWord);
 
@@ -160,7 +161,7 @@ public interface ApiManager {
      * @return
      */
     @GET("mobile/user/registerUser.do")
-    Observable<HttpResponse<Void>> register(
+    Observable<HttpResponseV2> register(
             @Query("username") String userName,
             @Query("password") String passWord,
             @Query("realname") String realName);
@@ -241,15 +242,15 @@ public interface ApiManager {
     /*-----------------------------------------------孕婴圈---------------------------------------*/
 
     /**
-     * 上传一张图片到服务器
-     *
-     * @param files
+     * 更新头像
+     *http://www.itingbaby.com/web/pictures/doWebUploadHeadIcon.do
+     * @param picfile
      * @return
      */
-    @POST("web/picture/doUploadPiture.do")
-    Observable<HttpResponse<Void>> uploadPicFiles(
-            @Query("username") String userName,
-            @Body MultipartBody files);
+    @POST("web/pictures/doWebUploadHeadIcon.do")
+    Observable<HttpResponse<Void>> uploadPicFile(
+            @Query("uuid") String uuid,
+            @Body MultipartBody picfile);
 
     /**
      * 批量上传图片到服务器

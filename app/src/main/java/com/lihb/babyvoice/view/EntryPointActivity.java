@@ -37,6 +37,7 @@ public class EntryPointActivity extends BaseFragmentActivity {
                     SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
 
                     BabyVoiceApp.currUserName = sharedPreferences.getString("username", "");
+                    BabyVoiceApp.uuid = sharedPreferences.getString("uuid", "");
                     Intent intent = new Intent(EntryPointActivity.this, NewMainActivity.class);
                     startActivity(intent);
                     finish();

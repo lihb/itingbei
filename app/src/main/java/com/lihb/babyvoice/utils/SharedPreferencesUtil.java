@@ -81,7 +81,7 @@ public class SharedPreferencesUtil {
      * @param username
      * @param password
      */
-    public static void saveToPreferences(Context context, String username, String password) {
+    public static void saveToPreferences(Context context, String username, String password, String uuid) {
         //创建sharedPreference对象，info表示文件名，MODE_PRIVATE表示访问权限为私有的
         SharedPreferences sp = context.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
 
@@ -91,6 +91,7 @@ public class SharedPreferencesUtil {
         //以键值对的显示将用户名和密码保存到sp中
         ed.putString("username", username);
         ed.putString("password", password);
+        ed.putString("uuid", uuid);
 
         //提交用户名和密码
         ed.apply();

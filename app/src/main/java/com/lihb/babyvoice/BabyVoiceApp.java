@@ -30,6 +30,8 @@ public class BabyVoiceApp extends Application {
 
     public static String currUserName;
 
+    public static String uuid;
+
     private static BabyVoiceApp instance = null;
 
     private static String cachePath;

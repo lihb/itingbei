@@ -23,7 +23,7 @@ import com.lihb.babyvoice.action.ApiManager;
 import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
-import com.lihb.babyvoice.model.HttpResponse;
+import com.lihb.babyvoice.model.HttpResponseV2;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.SharedPreferencesUtil;
@@ -238,10 +238,10 @@ public class RegisterActivity extends BaseFragmentActivity {
                 .register(userAccount, password, userAccount)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<HttpResponse<Void>>() {
+                .subscribe(new Action1<HttpResponseV2>() {
                     @Override
-                    public void call(HttpResponse<Void> voidHttpResponse) {
-                        if (voidHttpResponse.code == 0) {
+                    public void call(HttpResponseV2 httpResponse) {
+                        if (httpResponse.msginfo.code == 0) {
                             dismissLoginDialog();
                             CommonToast.showShortToast("注册成功");
                             // 插入产检、疫苗数据到数据库，只插入一次
@@ -254,9 +254,10 @@ public class RegisterActivity extends BaseFragmentActivity {
                             }
 
                             SharedPreferencesUtil.setFirstLaunch(RegisterActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(RegisterActivity.this, userAccount, password);
+                            SharedPreferencesUtil.saveToPreferences(RegisterActivity.this, userAccount, password, httpResponse.user.getUuid());
                             BabyVoiceApp.getInstance().setLogin(true);
                             BabyVoiceApp.currUserName = userAccount;
+                            BabyVoiceApp.uuid = httpResponse.user.getUuid();
                             Intent intent = new Intent(RegisterActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();

@@ -78,6 +78,7 @@ public class StartupActivity extends BaseFragmentActivity {
             SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
 
             BabyVoiceApp.currUserName = sharedPreferences.getString("username", "");
+            BabyVoiceApp.uuid = sharedPreferences.getString("uuid", "");
             Intent intent = new Intent(StartupActivity.this, NewMainActivity.class);
             startActivity(intent);
             finish();
