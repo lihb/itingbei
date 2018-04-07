@@ -12,7 +12,9 @@ import android.widget.LinearLayout;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
+import com.lihb.babyvoice.command.UpdateUserInfoItemCommand;
 import com.lihb.babyvoice.customview.CommonItem;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragment;
@@ -20,6 +22,7 @@ import com.lihb.babyvoice.model.HttpResponse;
 import com.lihb.babyvoice.presenter.profile.PersonalInfoPresenter;
 import com.lihb.babyvoice.utils.CommonDialog;
 import com.lihb.babyvoice.utils.CommonToast;
+import com.lihb.babyvoice.utils.RxBus;
 import com.lihb.babyvoice.utils.SimpleDatePickerDialog;
 import com.lihb.babyvoice.utils.StringUtils;
 import com.lihb.babyvoice.utils.camera.PhotoHelper;
@@ -117,21 +120,22 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
         View view = inflater.inflate(R.layout.fragment_personal_setting, container, false);
         unbinder = ButterKnife.bind(this, view);
         testUpdateContent();
+        receiveUpdateEvent();
         return view;
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden) {
-            Bundle b = getArguments();
-            if (null != b) {
-                content = b.getString("content");
-                currChangeItem = b.getInt("itemIndex");
-            }
-            testUpdateContent();
-        }
-    }
+//    @Override
+//    public void onHiddenChanged(boolean hidden) {
+//        super.onHiddenChanged(hidden);
+//        if (!hidden) {
+//            Bundle b = getArguments();
+//            if (null != b) {
+//                content = b.getString("content");
+//                currChangeItem = b.getInt("itemIndex");
+//            }
+//            testUpdateContent();
+//        }
+//    }
 
     private void testUpdateContent() {
         switch (currChangeItem) {
@@ -255,7 +259,7 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
                     @Override
                     public void call(HttpResponse<Void> stringBaseResponse) {
                         Logger.i(stringBaseResponse.msg);
-                        if (stringBaseResponse.code == 200) {
+                        if (stringBaseResponse.code == ResponseCode.RESPONSE_OK) {
                             Logger.i("upload pic success.");
                         }
                     }
@@ -332,18 +336,8 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
     }
 
     @Override
-    public void onUpdateBirthday(String birthday) {
-        itemBirthday.setItemValue(birthday);
-    }
-
-    @Override
     public void onUpdatePhoneNum(String phoneNum) {
         itemMobilePhone.setItemValue(phoneNum);
-    }
-
-    @Override
-    public void onUpdateDueDate(String dueDate) {
-        itemDueDate.setItemValue(dueDate);
     }
 
     @Override
@@ -365,13 +359,12 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
                 .setConfirmListener(new CommonDialog.OnActionListener() {
                     @Override
                     public void onAction(int which) {
-                        String date = datePickerDialog.getYYYYMMDD();
+                        String date = datePickerDialog.getYYYYMMDD("%04d-%02d-%02d");
                         if (currItem == ITEM_BIRTHDAY) {
                             itemBirthday.setItemValue(date);
                         } else if (currItem == ITEM_DUE_DATE) {
                             itemDueDate.setItemValue(date);
                         }
-                        // FIXME: 2017/9/17 同步服务器接口
 
                     }
                 })
@@ -408,6 +401,27 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
                 .addToBackStack(null)
                 .commit();
 
+    }
+
+    private void receiveUpdateEvent() {
+
+        RxBus.getDefault().registerOnFragment(UpdateUserInfoItemCommand.class, this)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<UpdateUserInfoItemCommand>() {
+                    @Override
+                    public void call(UpdateUserInfoItemCommand command) {
+                        currChangeItem = command.itemIndex;
+                        content = command.content;
+                        Logger.i("index is %d, content is %s", currChangeItem, content);
+                        testUpdateContent();
+
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Logger.e(throwable, "error");
+                    }
+                });
     }
 
 }

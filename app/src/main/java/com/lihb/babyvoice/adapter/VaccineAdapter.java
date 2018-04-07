@@ -127,7 +127,7 @@ public class VaccineAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                                 .setConfirmListener(new CommonDialog.OnActionListener() {
                                     @Override
                                     public void onAction(int which) {
-                                        String injectDate = datePickerDialog.getYYYYMMDD();
+                                        String injectDate = datePickerDialog.getYYYYMMDD("%04d%02d%02d");
                                         if (injectDate.compareTo(now) > 0) {
                                             // 选择了一个非法日期，不改变状态
                                             CommonToast.showShortToast(R.string.select_pass_date);

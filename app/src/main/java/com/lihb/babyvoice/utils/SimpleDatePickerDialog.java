@@ -74,8 +74,8 @@ public class SimpleDatePickerDialog {
         return datePicker.getDayOfMonth();
     }
 
-    public String getYYYYMMDD() {
-        return String.format("%04d%02d%02d", datePicker.getYear(),
+    public String getYYYYMMDD(String format) {
+        return String.format(format, datePicker.getYear(),
                 datePicker.getMonth() + 1, datePicker.getDayOfMonth());
     }
 

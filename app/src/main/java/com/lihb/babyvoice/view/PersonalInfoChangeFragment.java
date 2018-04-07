@@ -2,7 +2,6 @@ package com.lihb.babyvoice.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.command.UpdateUserInfoItemCommand;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragment;
+import com.lihb.babyvoice.utils.RxBus;
+import com.lihb.babyvoice.utils.SoftInputUtil;
 import com.umeng.analytics.MobclickAgent;
 
 import butterknife.BindView;
@@ -86,11 +88,16 @@ public class PersonalInfoChangeFragment extends BaseFragment {
         });
 
         titleBar.setRightOnClickListener(v -> {
-            // FIXME: 2017/9/17 服务器更新数据
-            gotoPersonalInfoFragment();
-//            getActivity().onBackPressed();
+            SoftInputUtil.hideSoftInput(getActivity());
+            content = personalInfoChangeContentEdit.getText().toString();
+            RxBus.getDefault().post(new UpdateUserInfoItemCommand(content, currChangeItem));
+            getActivity().onBackPressed();
         });
-        titleBar.setLeftOnClickListener(v -> getActivity().onBackPressed());
+
+        titleBar.setLeftOnClickListener(v -> {
+            SoftInputUtil.hideSoftInput(getActivity());
+            getActivity().onBackPressed();
+        });
     }
 
 
@@ -116,24 +123,24 @@ public class PersonalInfoChangeFragment extends BaseFragment {
         personalInfoChangeContentEdit.setText("");
     }
 
-    private void gotoPersonalInfoFragment() {
-        if (null == mPersonalInfoFragment) {
-            mPersonalInfoFragment = PersonalInfoFragment.create();
-        }
-
-        Bundle bundle = new Bundle();
-        content = personalInfoChangeContentEdit.getText().toString();
-        bundle.putString("content", content);
-        bundle.putInt("itemIndex", currChangeItem);
-        mPersonalInfoFragment.setArguments(bundle);
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.hide(this);
-        transaction.add(R.id.main_layout, mPersonalInfoFragment, "PersonalInfoFragment")
-                .show(mPersonalInfoFragment)
-                .addToBackStack(null)
-                .commit();
-
-
-    }
+//    private void gotoPersonalInfoFragment() {
+//        if (null == mPersonalInfoFragment) {
+//            mPersonalInfoFragment = PersonalInfoFragment.create();
+//        }
+//
+//        Bundle bundle = new Bundle();
+//        content = personalInfoChangeContentEdit.getText().toString();
+//        bundle.putString("content", content);
+//        bundle.putInt("itemIndex", currChangeItem);
+//        mPersonalInfoFragment.setArguments(bundle);
+//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+//        transaction.hide(this);
+//        transaction.add(R.id.main_layout, mPersonalInfoFragment, "PersonalInfoFragment")
+//                .show(mPersonalInfoFragment)
+//                .addToBackStack(null)
+//                .commit();
+//
+//
+//    }
 
 }

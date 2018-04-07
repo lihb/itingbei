@@ -330,7 +330,7 @@ public class LoginActivity extends BaseFragmentActivity {
                                 FileUtils.insertVaccineRemindData(FileUtils.getVaccineRemindData(LoginActivity.this));
 
                             }
-                            final UserInfo data = (UserInfo) httpResponse.data;
+                            final UserInfo data = (UserInfo) httpResponse.user;
 
                             SharedPreferencesUtil.setFirstLaunch(LoginActivity.this, false);
                             SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userAccount, password, data.getUuid());

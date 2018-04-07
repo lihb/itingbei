@@ -14,6 +14,7 @@
         app:leftDrawable="@mipmap/back"
         app:leftText="@string/txt_personal_info_setting"
         app:leftTextColor="@android:color/white"
+        app:rightTextColor="@android:color/white"
         app:rightText="@string/save" />
 
     <ScrollView
@@ -45,6 +46,8 @@
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/nick_name"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
 
@@ -54,6 +57,8 @@
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/phone_number"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
 
@@ -63,6 +68,8 @@
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/email_address"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
 
@@ -72,6 +79,8 @@
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/birthday_date"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
 
@@ -80,6 +89,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemName="@string/due_date"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
@@ -90,6 +101,8 @@
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/qq_number"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
 
@@ -99,6 +112,8 @@
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/name"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
 
@@ -108,6 +123,8 @@
                 android:layout_height="wrap_content"
                 app:commonDividerVisible="true"
                 app:commonItemName="@string/address"
+                app:itemValueVisible="visible"
+                app:rightImgVisible="gone"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonRightIcon="@mipmap/next_icon" />
 

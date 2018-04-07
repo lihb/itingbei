@@ -17,9 +17,6 @@ public interface PersonalInfoMvpView extends IView {
 
     void onUpdateQQ(String qq);
 
-    void onUpdateBirthday(String birthday);
-
     void onUpdatePhoneNum(String phoneNum);
 
-    void onUpdateDueDate(String dueDate);
 }

@@ -15,7 +15,7 @@
         app:leftText="@string/txt_personal_info_setting"
         app:leftTextColor="@android:color/white"
         app:rightText="@string/save"
-        app:rightTextColor="@color/base_color" />
+        app:rightTextColor="@android:color/white" />
 
     <RelativeLayout
         android:id="@+id/personal_info_change_content_rl"

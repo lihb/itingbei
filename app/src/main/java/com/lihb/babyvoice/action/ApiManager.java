@@ -273,31 +273,31 @@ public interface ApiManager {
     @POST("/mobile/updateuserinfo.do")
     Observable<HttpResponse<Void>> updateUserInfo(
 
-            @Query("username") String username,
-            @Query("password") String password,
-            @Query("realname") String realname,
-            @Query("telephone") String telephone,
+//            @Query("username") String username,
+//            @Query("password") String password,
+//            @Query("realname") String realname,
+//            @Query("telephone") String telephone,
             @Query("mobile") String mobile,
-            @Query("userSex") String userSex,
-            @Query("province") String province,
-            @Query("city") String city,
-            @Query("county") String county,
-            @Query("gdcode") String gdcode,
+//            @Query("userSex") String userSex,
+//            @Query("province") String province,
+//            @Query("city") String city,
+//            @Query("county") String county,
+//            @Query("gdcode") String gdcode,
             @Query("email") String email,
-            @Query("cardID") String cardID,
-            @Query("departmentID") int departmentID,
-            @Query("userstatus") int userstatus,
-            @Query("regDate") String regDate,
+//            @Query("cardID") String cardID,
+//            @Query("departmentID") int departmentID,
+//            @Query("userstatus") int userstatus,
+//            @Query("regDate") String regDate,
             @Query("address") String address,
-            @Query("lastDate") String lastDate,
-            @Query("ipaddress") String ipaddress,
+//            @Query("lastDate") String lastDate,
+//            @Query("ipaddress") String ipaddress,
             @Query("uuid") String uuid,
             @Query("nickname") String nickname,
             @Query("birthday") String birthday,
             @Query("duedate") String duedate,
-            @Query("qq") String qq,
-            @Query("headicon") String headicon,
-            @Query("money") float money
+            @Query("qq") String qq
+//            @Query("headicon") String headicon,
+//            @Query("money") float money
     );
 
 }

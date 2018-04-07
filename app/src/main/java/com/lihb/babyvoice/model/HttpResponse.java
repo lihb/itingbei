@@ -7,7 +7,7 @@ package com.lihb.babyvoice.model;
 public class HttpResponse<T> {
     public int code;
     public String msg;
-    public T data;
+    public T user;
 
     public int getCode() {
         return code;
@@ -26,11 +26,11 @@ public class HttpResponse<T> {
     }
 
     public T getData() {
-        return data;
+        return user;
     }
 
     public void setData(T data) {
-        this.data = data;
+        this.user = data;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class HttpResponse<T> {
         return "HttpResponse{" +
                 "code=" + code +
                 ", msg='" + msg + '\'' +
-                ", data=" + data +
+                ", data=" + user +
                 '}';
     }
 }

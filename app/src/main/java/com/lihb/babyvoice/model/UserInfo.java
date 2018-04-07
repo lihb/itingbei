@@ -23,7 +23,7 @@ public class UserInfo {
     public String username;
     public String password;
     public String realname;
-    public String telephon;
+    public String telephone;
     public String mobile;
     public String userSex;
     public String province;
@@ -33,7 +33,7 @@ public class UserInfo {
     public String email;
     public String cardID;
     public int department;
-    public int userstatus;
+    public boolean userstatus;
     public String regDate;
     public String address;
     public String lastDate;
@@ -70,12 +70,12 @@ public class UserInfo {
         this.realname = realname;
     }
 
-    public String getTelephon() {
-        return telephon;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public void setTelephon(String telephon) {
-        this.telephon = telephon;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
     public String getMobile() {
@@ -150,11 +150,11 @@ public class UserInfo {
         this.department = department;
     }
 
-    public int getUserstatus() {
+    public boolean getUserstatus() {
         return userstatus;
     }
 
-    public void setUserstatus(int userstatus) {
+    public void setUserstatus(boolean userstatus) {
         this.userstatus = userstatus;
     }
 
@@ -244,5 +244,37 @@ public class UserInfo {
 
     public void setMoney(float money) {
         this.money = money;
+    }
+
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", realname='" + realname + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", userSex='" + userSex + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", county='" + county + '\'' +
+                ", gdcode='" + gdcode + '\'' +
+                ", email='" + email + '\'' +
+                ", cardID='" + cardID + '\'' +
+                ", department=" + department +
+                ", userstatus=" + userstatus +
+                ", regDate='" + regDate + '\'' +
+                ", address='" + address + '\'' +
+                ", lastDate='" + lastDate + '\'' +
+                ", ipaddres='" + ipaddres + '\'' +
+                ", uuid='" + uuid + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", duedate='" + duedate + '\'' +
+                ", qq='" + qq + '\'' +
+                ", headicon='" + headicon + '\'' +
+                ", money=" + money +
+                '}';
     }
 }
