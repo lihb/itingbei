@@ -19,10 +19,12 @@ import com.lihb.babyvoice.customview.CommonItem;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragment;
 import com.lihb.babyvoice.model.HttpResponse;
+import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.presenter.profile.PersonalInfoPresenter;
 import com.lihb.babyvoice.utils.CommonDialog;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.RxBus;
+import com.lihb.babyvoice.utils.SharedPreferencesUtil;
 import com.lihb.babyvoice.utils.SimpleDatePickerDialog;
 import com.lihb.babyvoice.utils.StringUtils;
 import com.lihb.babyvoice.utils.camera.PhotoHelper;
@@ -173,6 +175,25 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
 
         titleBar.setLeftOnClickListener(v -> getActivity().onBackPressed());
 
+        final UserInfo userInfo = BabyVoiceApp.mUserInfo;
+        if (userInfo != null) {
+            if (userInfo.headicon.startsWith("/upload")) {
+                itemUserAvatar.setUserAvatar(ServiceGenerator.API_BASE_URL + userInfo.headicon);
+            } else {
+                itemUserAvatar.setUserAvatar(userInfo.headicon);
+
+            }
+
+            onUpdateNickName(userInfo.nickname);
+            onUpdatePhoneNum(userInfo.telephone);
+            onUpdateEmail(userInfo.email);
+            onUpdateBirthday(userInfo.birthday);
+            onUpdateDueDate(userInfo.duedate);
+            onUpdateQQ(userInfo.qq);
+            onUpdateName(userInfo.realname);
+            onUpdateAddress(userInfo.address);
+        }
+
         itemNickName.setOnClickListener(v -> {
             currItem = ITEM_NICK_NAME;
             gotoPersonalInfoChangeFragment(itemNickName.getItemValue());
@@ -261,6 +282,8 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
                         Logger.i(stringBaseResponse.msg);
                         if (stringBaseResponse.code == ResponseCode.RESPONSE_OK) {
                             Logger.i("upload pic success.");
+                            BabyVoiceApp.mUserInfo.headicon = filePath;
+                            SharedPreferencesUtil.saveToPreferences(getContext(), BabyVoiceApp.mUserInfo);
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -336,8 +359,18 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
     }
 
     @Override
+    public void onUpdateBirthday(String birthday) {
+        itemBirthday.setItemValue(birthday);
+    }
+
+    @Override
     public void onUpdatePhoneNum(String phoneNum) {
         itemMobilePhone.setItemValue(phoneNum);
+    }
+
+    @Override
+    public void onUpdateDueDate(String dueDate) {
+        itemDueDate.setItemValue(dueDate);
     }
 
     @Override

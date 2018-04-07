@@ -333,7 +333,7 @@ public class LoginActivity extends BaseFragmentActivity {
                             final UserInfo userInfo = (UserInfo) httpResponse.user;
 
                             SharedPreferencesUtil.setFirstLaunch(LoginActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userAccount, password, userInfo);
+                            SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userInfo);
                             BabyVoiceApp.getInstance().setLogin(true);
                             BabyVoiceApp.mUserInfo = userInfo;
                             Intent intent = new Intent(LoginActivity.this, NewMainActivity.class);

@@ -80,10 +80,8 @@ public class SharedPreferencesUtil {
     /**
      * 简单保存到SharedPreferences中
      *
-     * @param username
-     * @param password
      */
-    public static void saveToPreferences(Context context, String username, String password, UserInfo userInfo) {
+    public static void saveToPreferences(Context context, UserInfo userInfo) {
         //创建sharedPreference对象，info表示文件名，MODE_PRIVATE表示访问权限为私有的
         SharedPreferences sp = context.getSharedPreferences("userinfo", Context.MODE_PRIVATE);
 

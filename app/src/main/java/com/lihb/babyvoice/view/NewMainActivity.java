@@ -16,8 +16,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.Constant;
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.adapter.DrawLayoutAdapter;
 import com.lihb.babyvoice.command.BaseAndroidCommand;
 import com.lihb.babyvoice.command.NetStateChangedCommand;
@@ -249,6 +252,7 @@ public class NewMainActivity extends BaseFragmentActivity {
         mAssistTab.setOnClickListener(mTabOnClickListener);
         mMeTab.setOnClickListener(mTabOnClickListener);
 
+        initDrawableLayoutTopView();
 
         drawableLayoutSection1.setOnClickListener(v -> {
             showDrawableLayout(false);
@@ -490,9 +494,27 @@ public class NewMainActivity extends BaseFragmentActivity {
 
     public void showDrawableLayout(boolean enableShow) {
         if (enableShow) {
+            initDrawableLayoutTopView();
             mainDrawLayout.openDrawer(Gravity.LEFT);
         } else {
             mainDrawLayout.closeDrawers();
+        }
+    }
+
+    private void initDrawableLayoutTopView() {
+        if (BabyVoiceApp.mUserInfo != null) {
+            String headIcon = BabyVoiceApp.mUserInfo.headicon;
+
+            if (headIcon.startsWith("/upload")) {
+                headIcon = ServiceGenerator.API_BASE_URL + headIcon;
+            }
+            Glide.with(this)
+                    .load(headIcon)
+                    .placeholder(R.mipmap.logo)
+                    .error(R.mipmap.logo)
+                    .into(drawableLayoutUserAvatar);
+
+            drawableLayoutUserName.setText(BabyVoiceApp.mUserInfo.nickname);
         }
     }
 

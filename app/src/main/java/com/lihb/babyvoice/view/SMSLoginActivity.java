@@ -1,7 +1,6 @@
 package com.lihb.babyvoice.view;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.Editable;
@@ -293,7 +292,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                             }
 
                             SharedPreferencesUtil.setFirstLaunch(SMSLoginActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, loginAccount, password, httpResponse.user);
+                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, httpResponse.user);
                             BabyVoiceApp.getInstance().setLogin(true);
                             BabyVoiceApp.mUserInfo = httpResponse.user;
                             Intent intent = new Intent(SMSLoginActivity.this, NewMainActivity.class);
@@ -309,26 +308,6 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                 });
     }
 
-    /**
-     * 简单保存到SharedPreferences中
-     *
-     * @param username
-     * @param password
-     */
-    private void saveToPreferences(String username, String password) {
-        //创建sharedPreference对象，info表示文件名，MODE_PRIVATE表示访问权限为私有的
-        SharedPreferences sp = getSharedPreferences("userinfo", MODE_PRIVATE);
-
-        //获得sp的编辑器
-        SharedPreferences.Editor ed = sp.edit();
-
-        //以键值对的显示将用户名和密码保存到sp中
-        ed.putString("username", username);
-        ed.putString("password", password);
-
-        //提交用户名和密码
-        ed.apply();
-    }
 
     @Override
     public void onBackPressed() {

@@ -256,7 +256,7 @@ public class RegisterActivity extends BaseFragmentActivity {
                             }
 
                             SharedPreferencesUtil.setFirstLaunch(RegisterActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(RegisterActivity.this, userAccount, password, httpResponse.user);
+                            SharedPreferencesUtil.saveToPreferences(RegisterActivity.this, httpResponse.user);
                             BabyVoiceApp.getInstance().setLogin(true);
                             BabyVoiceApp.mUserInfo = httpResponse.user;
                             Intent intent = new Intent(RegisterActivity.this, NewMainActivity.class);
