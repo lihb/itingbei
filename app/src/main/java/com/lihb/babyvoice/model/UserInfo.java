@@ -20,47 +20,38 @@ public class UserInfo {
      * uuid : E31330BB-EFFD-4133-9DB4-5243CDF69FE1
      */
 
-    private int id;
-    private long lastdate;
-    private String mobile;
-    private int money;
-    private String password;
-    private String realname;
-    private long regdate;
-    private String username;
-    private boolean userstatus;
-    private String uuid;
+    public String username;
+    public String password;
+    public String realname;
+    public String telephon;
+    public String mobile;
+    public String userSex;
+    public String province;
+    public String city;
+    public String county;
+    public String gdcode;
+    public String email;
+    public String cardID;
+    public int department;
+    public int userstatus;
+    public String regDate;
+    public String address;
+    public String lastDate;
+    public String ipaddres;
+    public String uuid;
+    public String nickname;
+    public String birthday;
+    public String duedate;
+    public String qq;
+    public String headicon;
+    public float money;
 
-    public int getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public long getLastdate() {
-        return lastdate;
-    }
-
-    public void setLastdate(long lastdate) {
-        this.lastdate = lastdate;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -79,28 +70,124 @@ public class UserInfo {
         this.realname = realname;
     }
 
-    public long getRegdate() {
-        return regdate;
+    public String getTelephon() {
+        return telephon;
     }
 
-    public void setRegdate(long regdate) {
-        this.regdate = regdate;
+    public void setTelephon(String telephon) {
+        this.telephon = telephon;
     }
 
-    public String getUsername() {
-        return username;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public boolean isUserstatus() {
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCounty() {
+        return county;
+    }
+
+    public void setCounty(String county) {
+        this.county = county;
+    }
+
+    public String getGdcode() {
+        return gdcode;
+    }
+
+    public void setGdcode(String gdcode) {
+        this.gdcode = gdcode;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCardID() {
+        return cardID;
+    }
+
+    public void setCardID(String cardID) {
+        this.cardID = cardID;
+    }
+
+    public int getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(int department) {
+        this.department = department;
+    }
+
+    public int getUserstatus() {
         return userstatus;
     }
 
-    public void setUserstatus(boolean userstatus) {
+    public void setUserstatus(int userstatus) {
         this.userstatus = userstatus;
+    }
+
+    public String getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(String regDate) {
+        this.regDate = regDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getLastDate() {
+        return lastDate;
+    }
+
+    public void setLastDate(String lastDate) {
+        this.lastDate = lastDate;
+    }
+
+    public String getIpaddres() {
+        return ipaddres;
+    }
+
+    public void setIpaddres(String ipaddres) {
+        this.ipaddres = ipaddres;
     }
 
     public String getUuid() {
@@ -109,5 +196,53 @@ public class UserInfo {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getDuedate() {
+        return duedate;
+    }
+
+    public void setDuedate(String duedate) {
+        this.duedate = duedate;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getHeadicon() {
+        return headicon;
+    }
+
+    public void setHeadicon(String headicon) {
+        this.headicon = headicon;
+    }
+
+    public float getMoney() {
+        return money;
+    }
+
+    public void setMoney(float money) {
+        this.money = money;
     }
 }

@@ -31,10 +31,12 @@ import android.widget.Toast;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
-import com.lihb.babyvoice.model.HttpResponseV2;
+import com.lihb.babyvoice.model.HttpResponse;
+import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.SharedPreferencesUtil;
@@ -311,11 +313,11 @@ public class LoginActivity extends BaseFragmentActivity {
                 .loginByPassword(userAccount, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<HttpResponseV2>() {
+                .subscribe(new Action1<HttpResponse<UserInfo>>() {
                     @Override
-                    public void call(HttpResponseV2 httpResponse) {
+                    public void call(HttpResponse httpResponse) {
                         Log.i("lihbxxxxx", httpResponse.toString());
-                        if (httpResponse.msginfo.code == 200) {
+                        if (httpResponse.code == ResponseCode.RESPONSE_OK) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
 
@@ -328,12 +330,13 @@ public class LoginActivity extends BaseFragmentActivity {
                                 FileUtils.insertVaccineRemindData(FileUtils.getVaccineRemindData(LoginActivity.this));
 
                             }
+                            final UserInfo data = (UserInfo) httpResponse.data;
 
                             SharedPreferencesUtil.setFirstLaunch(LoginActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userAccount, password, httpResponse.user.getUuid());
+                            SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userAccount, password, data.getUuid());
                             BabyVoiceApp.getInstance().setLogin(true);
                             BabyVoiceApp.currUserName = userAccount;
-                            BabyVoiceApp.uuid = httpResponse.user.getUuid();
+                            BabyVoiceApp.uuid = data.getUuid();
                             Intent intent = new Intent(LoginActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();

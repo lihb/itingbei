@@ -162,7 +162,7 @@ public class VaccineFragment extends BaseFragment {
 //                .subscribe(new Action1<HttpResponse<HttpResList<VaccineInfo>>>() {
 //                    @Override
 //                    public void call(HttpResponse<HttpResList<VaccineInfo>> httpResListHttpResponse) {
-//                        if (httpResListHttpResponse.code == 0) {
+//                        if (httpResListHttpResponse.code == ResponseCode.RESPONSE_OK) {
 //                            HttpResList<VaccineInfo> httpResList = httpResListHttpResponse.data;
 //                            if (refresh) {
 //                                mData.clear();

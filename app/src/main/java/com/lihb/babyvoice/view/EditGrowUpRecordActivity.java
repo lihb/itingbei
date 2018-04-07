@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
@@ -158,7 +159,7 @@ public class EditGrowUpRecordActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse<GrowUpRecord> growUpRecordHttpResponse) {
                         Logger.i(growUpRecordHttpResponse.toString());
-                        if (growUpRecordHttpResponse.code == 0) {
+                        if (growUpRecordHttpResponse.code == ResponseCode.RESPONSE_OK) {
                             Logger.i("add GrowUpRecord success");
                         }
                     }
@@ -184,7 +185,7 @@ public class EditGrowUpRecordActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse<Void> voidHttpResponse) {
                         Logger.i(voidHttpResponse.toString());
-                        if (voidHttpResponse.code == 0) {
+                        if (voidHttpResponse.code == ResponseCode.RESPONSE_OK) {
                             Logger.i("add article success");
                         }
                     }
@@ -303,7 +304,7 @@ public class EditGrowUpRecordActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse<Void> stringBaseResponse) {
                         Logger.i(stringBaseResponse.msg);
-                        if (stringBaseResponse.code == 0) {
+                        if (stringBaseResponse.code == ResponseCode.RESPONSE_OK) {
                             Logger.i("upload pic success.");
                         }
                     }

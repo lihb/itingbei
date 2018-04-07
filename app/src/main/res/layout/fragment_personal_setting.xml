@@ -13,7 +13,8 @@
         android:background="@color/colorPrimary"
         app:leftDrawable="@mipmap/back"
         app:leftText="@string/txt_personal_info_setting"
-        app:leftTextColor="@android:color/white" />
+        app:leftTextColor="@android:color/white"
+        app:rightText="@string/save" />
 
     <ScrollView
         android:layout_width="match_parent"

@@ -304,7 +304,7 @@ public class HeartFragment extends BaseFragment {
 //                .subscribe(new Action1<HttpResponse<HttpResList<BabyVoice>>>() {
 //                    @Override
 //                    public void call(HttpResponse<HttpResList<BabyVoice>> httpResListHttpResponse) {
-//                        if (httpResListHttpResponse.code == 0) {
+//                        if (httpResListHttpResponse.code == ResponseCode.RESPONSE_OK) {
 //                            HttpResList<BabyVoice> httpResList = httpResListHttpResponse.data;
 //                            if (refresh) {
 //                                mData.clear();

@@ -10,6 +10,7 @@ import com.lihb.babyvoice.model.HttpResponseV2;
 import com.lihb.babyvoice.model.ITingBeiResponse;
 import com.lihb.babyvoice.model.Message;
 import com.lihb.babyvoice.model.ProductionInspection;
+import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.model.VaccineInfo;
 
 import java.util.List;
@@ -147,7 +148,7 @@ public interface ApiManager {
      * @return
      */
     @GET("mobile/login.do")
-    Observable<HttpResponseV2> loginByPassword(
+    Observable<HttpResponse<UserInfo>> loginByPassword(
             @Query("username") String userName,
             @Query("password") String passWord);
 
@@ -243,7 +244,7 @@ public interface ApiManager {
 
     /**
      * 更新头像
-     *http://www.itingbaby.com/web/pictures/doWebUploadHeadIcon.do
+     * http://www.itingbaby.com/web/pictures/doWebUploadHeadIcon.do
      * @param picfile
      * @return
      */
@@ -265,6 +266,39 @@ public interface ApiManager {
             @Query("latitude") long latitude,
             @Body MultipartBody files);
 
+    /**
+     * 更新个人信息
+     * http://www.itingbaby.com/mobile/updateuserinfo.do
+     */
+    @POST("/mobile/updateuserinfo.do")
+    Observable<HttpResponse<Void>> updateUserInfo(
+
+            @Query("username") String username,
+            @Query("password") String password,
+            @Query("realname") String realname,
+            @Query("telephone") String telephone,
+            @Query("mobile") String mobile,
+            @Query("userSex") String userSex,
+            @Query("province") String province,
+            @Query("city") String city,
+            @Query("county") String county,
+            @Query("gdcode") String gdcode,
+            @Query("email") String email,
+            @Query("cardID") String cardID,
+            @Query("departmentID") int departmentID,
+            @Query("userstatus") int userstatus,
+            @Query("regDate") String regDate,
+            @Query("address") String address,
+            @Query("lastDate") String lastDate,
+            @Query("ipaddress") String ipaddress,
+            @Query("uuid") String uuid,
+            @Query("nickname") String nickname,
+            @Query("birthday") String birthday,
+            @Query("duedate") String duedate,
+            @Query("qq") String qq,
+            @Query("headicon") String headicon,
+            @Query("money") float money
+    );
 
 }
 

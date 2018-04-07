@@ -10,6 +10,7 @@ import android.widget.EditText;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragment;
@@ -161,7 +162,7 @@ public class VoiceSaveFragment extends BaseFragment {
                     @Override
                     public void call(HttpResponse<String> stringBaseResponse) {
                         Logger.i(stringBaseResponse.msg);
-                        if (stringBaseResponse.code == 0) {
+                        if (stringBaseResponse.code == ResponseCode.RESPONSE_OK) {
                             CommonToast.showShortToast(R.string.upload_voice_record_success);
                         }
 //                                FileUtils.deleteFile(FileUtils.getVoiceFilePath(mEditText.getText().toString().trim()));

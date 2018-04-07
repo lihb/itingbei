@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.model.Article;
 import com.lihb.babyvoice.model.HttpResponse;
@@ -189,7 +190,7 @@ public class PregnantZoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 .subscribe(new Action1<HttpResponse<Void>>() {
                     @Override
                     public void call(HttpResponse<Void> voidHttpResponse) {
-                        if (voidHttpResponse.code == 0) {
+                        if (voidHttpResponse.code == ResponseCode.RESPONSE_OK) {
                             Logger.i("del pregnant zone record success, " + article.toString());
                         } else {
                             Logger.i("del pregnantzone record failed, " + article.toString());

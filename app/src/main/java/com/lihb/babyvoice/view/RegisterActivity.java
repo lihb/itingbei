@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
@@ -241,7 +242,7 @@ public class RegisterActivity extends BaseFragmentActivity {
                 .subscribe(new Action1<HttpResponseV2>() {
                     @Override
                     public void call(HttpResponseV2 httpResponse) {
-                        if (httpResponse.msginfo.code == 0) {
+                        if (httpResponse.msginfo.code == ResponseCode.RESPONSE_OK) {
                             dismissLoginDialog();
                             CommonToast.showShortToast("注册成功");
                             // 插入产检、疫苗数据到数据库，只插入一次

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
+import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
@@ -253,7 +254,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                             @Override
                             public void call(HttpResponse<Void> httpResponse) {
                                 Log.i("lihb", httpResponse.toString());
-                                if (httpResponse.code == 0) {
+                                if (httpResponse.code == ResponseCode.RESPONSE_OK) {
 
                                 }
                             }
@@ -279,7 +280,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponseV2 httpResponse) {
                         Log.i("lihb", httpResponse.toString());
-                        if (httpResponse.msginfo.code == 0) {
+                        if (httpResponse.msginfo.code == ResponseCode.RESPONSE_OK) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
                             // 插入产检、疫苗数据到数据库，只插入一次
