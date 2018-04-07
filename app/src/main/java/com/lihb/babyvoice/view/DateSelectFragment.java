@@ -128,7 +128,7 @@ public class DateSelectFragment extends BaseFragment {
     private void saveToDatabase() {
         if (type == AssistFragment.ITEM_EXAMINE || type == MeFragment.ITEM_SET_PREGNANT_DATE) {
             PregnantDay pregnantDay = new PregnantDay();
-            pregnantDay.username = BabyVoiceApp.currUserName;
+            pregnantDay.username = BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "";
             pregnantDay.pregnantDay = mSelYear + "/" + mSelMonth + "/" + mSelDay;
             PregnantDateDataImpl.getInstance()
                     .insertData(pregnantDay)
@@ -151,7 +151,7 @@ public class DateSelectFragment extends BaseFragment {
                     });
         } else {
             BabyBirthDay babyBirthDay = new BabyBirthDay();
-            babyBirthDay.username = BabyVoiceApp.currUserName;
+            babyBirthDay.username = BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "";
             babyBirthDay.birthday = mSelYear + "/" + mSelMonth + "/" + mSelDay;
             BirthdayDataImpl.getInstance()
                     .insertData(babyBirthDay)

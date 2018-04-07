@@ -9,6 +9,7 @@ import com.bumptech.glide.load.model.GlideUrl;
 import com.facebook.stetho.Stetho;
 import com.lihb.babyvoice.command.HeadSetPluginChangedCommand;
 import com.lihb.babyvoice.command.LoginStateChangedCommand;
+import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.utils.BroadcastWatcher;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.NotificationCenter;
@@ -27,10 +28,7 @@ import java.io.InputStream;
 
 public class BabyVoiceApp extends Application {
 
-
-    public static String currUserName;
-
-    public static String uuid;
+    public static UserInfo mUserInfo;
 
     private static BabyVoiceApp instance = null;
 

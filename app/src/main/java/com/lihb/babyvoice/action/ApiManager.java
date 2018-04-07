@@ -162,7 +162,7 @@ public interface ApiManager {
      * @return
      */
     @GET("mobile/user/registerUser.do")
-    Observable<HttpResponseV2> register(
+    Observable<HttpResponse<UserInfo>> register(
             @Query("username") String userName,
             @Query("password") String passWord,
             @Query("realname") String realName);

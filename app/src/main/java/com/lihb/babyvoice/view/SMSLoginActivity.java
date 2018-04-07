@@ -293,10 +293,9 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                             }
 
                             SharedPreferencesUtil.setFirstLaunch(SMSLoginActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, loginAccount, password, httpResponse.user.getUuid());
+                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, loginAccount, password, httpResponse.user);
                             BabyVoiceApp.getInstance().setLogin(true);
-                            BabyVoiceApp.currUserName = loginAccount;
-                            BabyVoiceApp.uuid = httpResponse.user.getUuid();
+                            BabyVoiceApp.mUserInfo = httpResponse.user;
                             Intent intent = new Intent(SMSLoginActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();

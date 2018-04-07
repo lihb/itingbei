@@ -97,7 +97,7 @@ public class EditGrowUpRecordActivity extends BaseFragmentActivity {
                     finish();
                 } else if (from == From.PREGNANT_ZONE_FRAGMENT) {
                     Article article = new Article();
-                    article.realname = BabyVoiceApp.currUserName;
+                    article.realname = BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.realname : "";
                     article.type = 10000;
                     article.time = System.currentTimeMillis();
                     article.title = mEditDateTxt.getText().toString();
@@ -152,7 +152,7 @@ public class EditGrowUpRecordActivity extends BaseFragmentActivity {
      */
     private void uploadGrowUpRecordToServer(final GrowUpRecord growUpRecord) {
         ServiceGenerator.createService(ApiManager.class)
-                .createGrowupRecord(growUpRecord.date, growUpRecord.content, BabyVoiceApp.currUserName, growUpRecord.picList.get(0), growUpRecord.picList.get(1))
+                .createGrowupRecord(growUpRecord.date, growUpRecord.content, BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "", growUpRecord.picList.get(0), growUpRecord.picList.get(1))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Action1<HttpResponse<GrowUpRecord>>() {
@@ -297,7 +297,7 @@ public class EditGrowUpRecordActivity extends BaseFragmentActivity {
         }
         MultipartBody body = filesToMultipartBody(files);
         ServiceGenerator.createService(ApiManager.class)
-                .uploadBatchPicFiles(BabyVoiceApp.currUserName, 0, 0, body)
+                .uploadBatchPicFiles(BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "", 0, 0, body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<HttpResponse<Void>>() {

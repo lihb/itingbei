@@ -651,7 +651,7 @@ public class FileUtils {
      */
     public static String getPicUrl(String picName) {
         StringBuilder sb = new StringBuilder("https://123.207.46.152:8080/itingbaby/upload/uploadImages/");
-        sb.append(BabyVoiceApp.currUserName).append("/");
+        sb.append(BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "").append("/");
         sb.append(picName);
         return sb.toString();
     }

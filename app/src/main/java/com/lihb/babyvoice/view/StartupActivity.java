@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
+import com.lihb.babyvoice.model.UserInfo;
+import com.lihb.babyvoice.utils.GsonHelper;
 import com.lihb.babyvoice.utils.SharedPreferencesUtil;
 import com.umeng.analytics.MobclickAgent;
 
@@ -77,8 +79,8 @@ public class StartupActivity extends BaseFragmentActivity {
         if (!SharedPreferencesUtil.isFirstLaunch(StartupActivity.this)) {
             SharedPreferences sharedPreferences = getSharedPreferences("userinfo", MODE_PRIVATE);
 
-            BabyVoiceApp.currUserName = sharedPreferences.getString("username", "");
-            BabyVoiceApp.uuid = sharedPreferences.getString("uuid", "");
+            BabyVoiceApp.mUserInfo = GsonHelper.jsonToObject(sharedPreferences.getString("user", ""), UserInfo.class);
+
             Intent intent = new Intent(StartupActivity.this, NewMainActivity.class);
             startActivity(intent);
             finish();

@@ -155,7 +155,7 @@ public class VoiceSaveFragment extends BaseFragment {
         files.add(file);
         MultipartBody body = filesToMultipartBody(files);
         ServiceGenerator.createService(ApiManager.class)
-                .uploadVoiceFiles(BabyVoiceApp.currUserName, body)
+                .uploadVoiceFiles(BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "", body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<HttpResponse<String>>() {

@@ -330,13 +330,12 @@ public class LoginActivity extends BaseFragmentActivity {
                                 FileUtils.insertVaccineRemindData(FileUtils.getVaccineRemindData(LoginActivity.this));
 
                             }
-                            final UserInfo data = (UserInfo) httpResponse.user;
+                            final UserInfo userInfo = (UserInfo) httpResponse.user;
 
                             SharedPreferencesUtil.setFirstLaunch(LoginActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userAccount, password, data.getUuid());
+                            SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userAccount, password, userInfo);
                             BabyVoiceApp.getInstance().setLogin(true);
-                            BabyVoiceApp.currUserName = userAccount;
-                            BabyVoiceApp.uuid = data.getUuid();
+                            BabyVoiceApp.mUserInfo = userInfo;
                             Intent intent = new Intent(LoginActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();

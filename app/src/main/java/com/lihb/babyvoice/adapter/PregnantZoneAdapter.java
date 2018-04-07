@@ -141,7 +141,7 @@ public class PregnantZoneAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
 
             // 本人只能删除自己发布的文章
-            if (StringUtils.areEqual(article.realname, BabyVoiceApp.currUserName)) {
+            if (StringUtils.areEqual(article.realname, BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "")) {
                 grow_up_del_img.setVisibility(View.VISIBLE);
             } else {
                 grow_up_del_img.setVisibility(View.GONE);

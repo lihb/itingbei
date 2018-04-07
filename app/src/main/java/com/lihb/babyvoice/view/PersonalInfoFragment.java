@@ -252,7 +252,7 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
         fileList.add(file);
         MultipartBody body = filesToMultipartBody(fileList);
         ServiceGenerator.createService(ApiManager.class)
-                .uploadPicFile(BabyVoiceApp.uuid, body)
+                .uploadPicFile(BabyVoiceApp.mUserInfo.getUuid(), body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<HttpResponse<Void>>() {
