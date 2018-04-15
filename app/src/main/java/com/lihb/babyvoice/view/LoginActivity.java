@@ -40,6 +40,7 @@ import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.SharedPreferencesUtil;
+import com.lihb.babyvoice.utils.StringUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -331,6 +332,8 @@ public class LoginActivity extends BaseFragmentActivity {
 
                             }
                             final UserInfo userInfo = (UserInfo) httpResponse.user;
+                            userInfo.setBirthday(StringUtils.TimeStamp2Date(userInfo.birthday, "yyyy-MM-dd"));
+                            userInfo.setDuedate(StringUtils.TimeStamp2Date(userInfo.duedate, "yyyy-MM-dd"));
 
                             SharedPreferencesUtil.setFirstLaunch(LoginActivity.this, false);
                             SharedPreferencesUtil.saveToPreferences(LoginActivity.this, userInfo);

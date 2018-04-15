@@ -175,15 +175,13 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
 
         titleBar.setLeftOnClickListener(v -> getActivity().onBackPressed());
 
+        titleBar.setRightOnClickListener(v -> {
+            updatePersonInfo();
+        });
+
         final UserInfo userInfo = BabyVoiceApp.mUserInfo;
         if (userInfo != null) {
-            if (userInfo.headicon.startsWith("/upload")) {
-                itemUserAvatar.setUserAvatar(ServiceGenerator.API_BASE_URL + userInfo.headicon);
-            } else {
-                itemUserAvatar.setUserAvatar(userInfo.headicon);
-
-            }
-
+            itemUserAvatar.setUserAvatar(ServiceGenerator.API_BASE_URL + userInfo.headicon);
             onUpdateNickName(userInfo.nickname);
             onUpdatePhoneNum(userInfo.telephone);
             onUpdateEmail(userInfo.email);
@@ -238,6 +236,52 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
 
     }
 
+    private void updatePersonInfo() {
+        try {
+
+            final String mobilePhone = itemMobilePhone.getItemValue();
+            final String email = itemEmail.getItemValue();
+            final String address = itemAddress.getItemValue();
+            final String uuid = BabyVoiceApp.mUserInfo.getUuid();
+            final String nickName = itemNickName.getItemValue();
+            final String birthday = itemBirthday.getItemValue();
+            final String dueDate = itemDueDate.getItemValue();
+            final String qq = itemQQNumber.getItemValue();
+
+            ServiceGenerator.createService(ApiManager.class)
+                    .updateUserInfo(mobilePhone, email, address, uuid, nickName, birthday, dueDate, qq)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<HttpResponse<Void>>() {
+                        @Override
+                        public void call(HttpResponse<Void> voidHttpResponse) {
+                            Logger.i(voidHttpResponse.toString());
+                            CommonToast.showShortToast("更新成功");
+                            final UserInfo mUserInfo = BabyVoiceApp.mUserInfo;
+
+                            mUserInfo.setMobile(mobilePhone);
+                            mUserInfo.setEmail(email);
+                            mUserInfo.setAddress(address);
+                            mUserInfo.setNickname(nickName);
+                            mUserInfo.setBirthday(birthday);
+                            mUserInfo.setDuedate(dueDate);
+                            mUserInfo.setQq(qq);
+                            SharedPreferencesUtil.saveToPreferences(getContext(), mUserInfo);
+
+                        }
+                    }, new Action1<Throwable>() {
+                        @Override
+                        public void call(Throwable throwable) {
+                            Logger.e(throwable.getMessage());
+                            CommonToast.showShortToast("更新失败");
+
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void selectImageFromAlbum() {
         PhotoHelper.create(getActivity())
 //                .setSourceGallery()
@@ -279,10 +323,12 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
                 .subscribe(new Action1<HttpResponse<Void>>() {
                     @Override
                     public void call(HttpResponse<Void> stringBaseResponse) {
-                        Logger.i(stringBaseResponse.msg);
+                        final String msg = stringBaseResponse.msg;
+                        Logger.i(msg);
                         if (stringBaseResponse.code == ResponseCode.RESPONSE_OK) {
                             Logger.i("upload pic success.");
-                            BabyVoiceApp.mUserInfo.headicon = filePath;
+
+                            BabyVoiceApp.mUserInfo.headicon = msg.substring(msg.indexOf("/") + 1);
                             SharedPreferencesUtil.saveToPreferences(getContext(), BabyVoiceApp.mUserInfo);
                         }
                     }

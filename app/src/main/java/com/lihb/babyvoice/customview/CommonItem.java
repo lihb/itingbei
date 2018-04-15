@@ -129,7 +129,7 @@ public class CommonItem extends RelativeLayout {
     }
 
     public String getItemValue() {
-        return mItemValueTv.getText().toString();
+        return mItemValueTv.getText().toString().trim();
     }
 
     public void setOnClickListener(OnClickListener listener) {

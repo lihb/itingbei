@@ -504,14 +504,10 @@ public class NewMainActivity extends BaseFragmentActivity {
     private void initDrawableLayoutTopView() {
         if (BabyVoiceApp.mUserInfo != null) {
             String headIcon = BabyVoiceApp.mUserInfo.headicon;
+            headIcon = ServiceGenerator.API_BASE_URL + headIcon;
 
-            if (headIcon.startsWith("/upload")) {
-                headIcon = ServiceGenerator.API_BASE_URL + headIcon;
-            }
             Glide.with(this)
                     .load(headIcon)
-                    .placeholder(R.mipmap.logo)
-                    .error(R.mipmap.logo)
                     .into(drawableLayoutUserAvatar);
 
             drawableLayoutUserName.setText(BabyVoiceApp.mUserInfo.nickname);

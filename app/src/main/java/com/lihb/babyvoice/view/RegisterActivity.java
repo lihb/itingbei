@@ -29,6 +29,7 @@ import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.SharedPreferencesUtil;
+import com.lihb.babyvoice.utils.StringUtils;
 import com.umeng.analytics.MobclickAgent;
 
 import rx.android.schedulers.AndroidSchedulers;
@@ -255,10 +256,15 @@ public class RegisterActivity extends BaseFragmentActivity {
                                 FileUtils.insertVaccineRemindData(FileUtils.getVaccineRemindData(RegisterActivity.this));
                             }
 
+                            final UserInfo userInfo = httpResponse.user;
+
+                            userInfo.setBirthday(StringUtils.TimeStamp2Date(userInfo.birthday, "yyyy-MM-dd"));
+                            userInfo.setDuedate(StringUtils.TimeStamp2Date(userInfo.duedate, "yyyy-MM-dd"));
+
                             SharedPreferencesUtil.setFirstLaunch(RegisterActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(RegisterActivity.this, httpResponse.user);
+                            SharedPreferencesUtil.saveToPreferences(RegisterActivity.this, userInfo);
                             BabyVoiceApp.getInstance().setLogin(true);
-                            BabyVoiceApp.mUserInfo = httpResponse.user;
+                            BabyVoiceApp.mUserInfo = userInfo;
                             Intent intent = new Intent(RegisterActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();

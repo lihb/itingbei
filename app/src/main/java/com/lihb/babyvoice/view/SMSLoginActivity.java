@@ -24,9 +24,11 @@ import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
 import com.lihb.babyvoice.model.HttpResponse;
 import com.lihb.babyvoice.model.HttpResponseV2;
+import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.SharedPreferencesUtil;
+import com.lihb.babyvoice.utils.StringUtils;
 import com.orhanobut.logger.Logger;
 import com.umeng.analytics.MobclickAgent;
 
@@ -291,8 +293,13 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                                 FileUtils.insertVaccineRemindData(FileUtils.getVaccineRemindData(SMSLoginActivity.this));
                             }
 
+                            final UserInfo userInfo = httpResponse.user;
+
+                            userInfo.setBirthday(StringUtils.TimeStamp2Date(userInfo.birthday, "yyyy-MM-dd"));
+                            userInfo.setDuedate(StringUtils.TimeStamp2Date(userInfo.duedate, "yyyy-MM-dd"));
+
                             SharedPreferencesUtil.setFirstLaunch(SMSLoginActivity.this, false);
-                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, httpResponse.user);
+                            SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, userInfo);
                             BabyVoiceApp.getInstance().setLogin(true);
                             BabyVoiceApp.mUserInfo = httpResponse.user;
                             Intent intent = new Intent(SMSLoginActivity.this, NewMainActivity.class);

@@ -43,7 +43,6 @@ public class PersonalInfoChangeFragment extends BaseFragment {
 
     private String content;
     private int currChangeItem;
-    private PersonalInfoFragment mPersonalInfoFragment;
 
     public static PersonalInfoChangeFragment create() {
         return new PersonalInfoChangeFragment();
@@ -68,7 +67,6 @@ public class PersonalInfoChangeFragment extends BaseFragment {
     }
 
     private void initView() {
-        personalInfoChangeContentEdit.setText(content);
         personalInfoChangeClearInputImg.setVisibility(content.length() > 0 ? View.VISIBLE : View.GONE);
         personalInfoChangeContentEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -103,6 +101,7 @@ public class PersonalInfoChangeFragment extends BaseFragment {
 
     public void onResume() {
         super.onResume();
+        personalInfoChangeContentEdit.setText(content);
         MobclickAgent.onPageStart(TAG);
     }
 
@@ -122,25 +121,5 @@ public class PersonalInfoChangeFragment extends BaseFragment {
     public void onViewClicked() {
         personalInfoChangeContentEdit.setText("");
     }
-
-//    private void gotoPersonalInfoFragment() {
-//        if (null == mPersonalInfoFragment) {
-//            mPersonalInfoFragment = PersonalInfoFragment.create();
-//        }
-//
-//        Bundle bundle = new Bundle();
-//        content = personalInfoChangeContentEdit.getText().toString();
-//        bundle.putString("content", content);
-//        bundle.putInt("itemIndex", currChangeItem);
-//        mPersonalInfoFragment.setArguments(bundle);
-//        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//        transaction.hide(this);
-//        transaction.add(R.id.main_layout, mPersonalInfoFragment, "PersonalInfoFragment")
-//                .show(mPersonalInfoFragment)
-//                .addToBackStack(null)
-//                .commit();
-//
-//
-//    }
 
 }
