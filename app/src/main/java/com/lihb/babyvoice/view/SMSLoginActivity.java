@@ -23,7 +23,6 @@ import com.lihb.babyvoice.action.ServiceGenerator;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
 import com.lihb.babyvoice.model.HttpResponse;
-import com.lihb.babyvoice.model.HttpResponseV2;
 import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
@@ -277,11 +276,11 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                 .loginBySmsCode(loginAccount, password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<HttpResponseV2>() {
+                .subscribe(new Action1<HttpResponse<UserInfo>>() {
                     @Override
-                    public void call(HttpResponseV2 httpResponse) {
+                    public void call(HttpResponse httpResponse) {
                         Log.i("lihb", httpResponse.toString());
-                        if (httpResponse.msginfo.code == ResponseCode.RESPONSE_OK) {
+                        if (httpResponse.code == ResponseCode.RESPONSE_OK) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
                             // 插入产检、疫苗数据到数据库，只插入一次
@@ -293,7 +292,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                                 FileUtils.insertVaccineRemindData(FileUtils.getVaccineRemindData(SMSLoginActivity.this));
                             }
 
-                            final UserInfo userInfo = httpResponse.user;
+                            final UserInfo userInfo = (UserInfo) httpResponse.user;
 
                             userInfo.setBirthday(StringUtils.TimeStamp2Date(userInfo.birthday, "yyyy-MM-dd"));
                             userInfo.setDuedate(StringUtils.TimeStamp2Date(userInfo.duedate, "yyyy-MM-dd"));
@@ -301,7 +300,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                             SharedPreferencesUtil.setFirstLaunch(SMSLoginActivity.this, false);
                             SharedPreferencesUtil.saveToPreferences(SMSLoginActivity.this, userInfo);
                             BabyVoiceApp.getInstance().setLogin(true);
-                            BabyVoiceApp.mUserInfo = httpResponse.user;
+                            BabyVoiceApp.mUserInfo = userInfo;
                             Intent intent = new Intent(SMSLoginActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();

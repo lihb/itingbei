@@ -6,7 +6,6 @@ import com.lihb.babyvoice.model.Contributor;
 import com.lihb.babyvoice.model.GrowUpRecord;
 import com.lihb.babyvoice.model.HttpResList;
 import com.lihb.babyvoice.model.HttpResponse;
-import com.lihb.babyvoice.model.HttpResponseV2;
 import com.lihb.babyvoice.model.ITingBeiResponse;
 import com.lihb.babyvoice.model.Message;
 import com.lihb.babyvoice.model.ProductionInspection;
@@ -135,7 +134,7 @@ public interface ApiManager {
      * @return
      */
     @GET("web/applogin.do")
-    Observable<HttpResponseV2> loginBySmsCode(
+    Observable<HttpResponse<UserInfo>> loginBySmsCode(
             @Query("mobilenumber") String mobileNumber,
             @Query("smscode") String smsCode);
 
