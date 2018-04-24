@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -508,9 +509,12 @@ public class NewMainActivity extends BaseFragmentActivity {
 
             Glide.with(this)
                     .load(headIcon)
+                    .placeholder(R.mipmap.logo)
+                    .error(R.mipmap.logo)
+                    .dontAnimate()
                     .into(drawableLayoutUserAvatar);
 
-            drawableLayoutUserName.setText(BabyVoiceApp.mUserInfo.nickname);
+            drawableLayoutUserName.setText(TextUtils.isEmpty(BabyVoiceApp.mUserInfo.nickname) ? BabyVoiceApp.mUserInfo.realname : BabyVoiceApp.mUserInfo.nickname);
         }
     }
 
