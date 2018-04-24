@@ -1,5 +1,6 @@
 package com.lihb.babyvoice.customview.base;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,8 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity implements
     protected final Handler mHandler = new Handler(Looper.getMainLooper());
     private int mUiState = kUiInit;
     private String path = "";
+    private ProgressDialog mProgressDialog = null;
+
 
     protected String getPath() {
         if (StringUtils.isBlank(this.path)) {
@@ -110,6 +113,24 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity implements
         if (mUiState != kUiDestroyed) {
             mUiState = isFinishing() ? kUiDestroyed : kUiInstanceStateSaved;
         }
+    }
+
+    protected void showProgressDialog(String msg) {
+        if (mProgressDialog == null) {
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setMessage(msg);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+            mProgressDialog.setIndeterminate(true);
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        mProgressDialog.show();
+    }
+
+    protected void dismissLoginDialog() {
+        if (mProgressDialog == null) {
+            return;
+        }
+        mProgressDialog.dismiss();
     }
 
     @Override

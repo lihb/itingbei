@@ -1,6 +1,5 @@
 package com.lihb.babyvoice.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -57,7 +56,6 @@ public class RegisterActivity extends BaseFragmentActivity {
 
     private boolean mIsPwdVisiable = false;
 
-    private ProgressDialog mProgressDialog = null;
 
     private TitleBar mTitleBar;
 
@@ -279,24 +277,6 @@ public class RegisterActivity extends BaseFragmentActivity {
                     }
                 });
 
-    }
-
-    private void showProgressDialog(String msg) {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(msg);
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgressDialog.setIndeterminate(true);
-            mProgressDialog.setCanceledOnTouchOutside(false);
-        }
-        mProgressDialog.show();
-    }
-
-    private void dismissLoginDialog() {
-        if (mProgressDialog == null) {
-            return;
-        }
-        mProgressDialog.dismiss();
     }
 
     private void showDialog(String tips) {

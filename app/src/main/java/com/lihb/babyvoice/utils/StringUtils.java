@@ -363,8 +363,12 @@ public class StringUtils {
      * @return 返回结果 如："2016-09-05 16:06:42";
      */
     public static String TimeStamp2Date(String timestampString, String formats) {
-        if (TextUtils.isEmpty(formats))
+        if (TextUtils.isEmpty(timestampString)) {
+            return "";
+        }
+        if (TextUtils.isEmpty(formats)) {
             formats = "yyyy-MM-dd HH:mm:ss";
+        }
         Long timestamp = Long.parseLong(timestampString);
         String date = new SimpleDateFormat(formats, Locale.CHINA).format(new Date(timestamp));
         return date;

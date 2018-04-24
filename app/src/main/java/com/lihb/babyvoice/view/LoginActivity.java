@@ -9,7 +9,6 @@
  */
 package com.lihb.babyvoice.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -63,8 +62,6 @@ public class LoginActivity extends BaseFragmentActivity {
     private String mPassword;
 
     private String mLoginAccount = null;
-
-    private ProgressDialog mProgressDialog = null;
 
     private ImageView mAccountClearInputImg = null;
     private ImageView mPwdClearInputImg = null;
@@ -267,35 +264,6 @@ public class LoginActivity extends BaseFragmentActivity {
         finish();
     }
 
-    @Override
-    protected void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
-        dismissLoginDialog();
-
-        mProgressDialog = null;
-    }
-
-
-    private void showProgressDialog(String msg) {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage("Login...");
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgressDialog.setIndeterminate(true);
-            mProgressDialog.setCanceledOnTouchOutside(false);
-        }
-        mProgressDialog.show();
-    }
-
-    private void dismissLoginDialog() {
-        if (mProgressDialog == null) {
-            return;
-        }
-        mProgressDialog.dismiss();
-    }
-
-
     private void showDialog(String tips) {
         Toast toast = Toast.makeText(getApplicationContext(),
                 tips, Toast.LENGTH_LONG);
@@ -309,7 +277,7 @@ public class LoginActivity extends BaseFragmentActivity {
             showDialog("帐号不能为空！");
             return;
         }
-
+        showProgressDialog("登录中");
         ServiceGenerator.createService(ApiManager.class)
                 .loginByPassword(userAccount, password)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -318,6 +286,7 @@ public class LoginActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse httpResponse) {
                         Log.i("lihbxxxxx", httpResponse.toString());
+                        dismissLoginDialog();
                         if (httpResponse.code == ResponseCode.RESPONSE_OK) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
@@ -342,11 +311,14 @@ public class LoginActivity extends BaseFragmentActivity {
                             Intent intent = new Intent(LoginActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();
+                        } else {
+                            CommonToast.showShortToast(httpResponse.msg);
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        dismissLoginDialog();
                         CommonToast.showShortToast("登录失败，请重新登录!");
                         Log.e("lihb", throwable.toString());
                     }

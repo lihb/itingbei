@@ -272,6 +272,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
     }
 
     private void login(final String loginAccount, final String password) {
+        showProgressDialog("登录中...");
         ServiceGenerator.createService(ApiManager.class)
                 .loginBySmsCode(loginAccount, password)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -280,6 +281,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse httpResponse) {
                         Log.i("lihb", httpResponse.toString());
+                        dismissLoginDialog();
                         if (httpResponse.code == ResponseCode.RESPONSE_OK) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
@@ -304,11 +306,14 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                             Intent intent = new Intent(SMSLoginActivity.this, NewMainActivity.class);
                             startActivity(intent);
                             finish();
+                        } else {
+                            CommonToast.showShortToast(httpResponse.msg);
                         }
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        dismissLoginDialog();
                         CommonToast.showShortToast("登录失败，请重新登录!");
                     }
                 });
