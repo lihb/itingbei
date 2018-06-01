@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,6 +54,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     private int mRecordType;
     private WaveSurfaceView mWaveSfv;
     private WaveCanvas waveCanvas;
+    private ImageView voicePosImg;
 
     private static final int FREQUENCY = 16000;// 设置音频采样率，44100是目前的标准，但是某些设备仍然支持22050，16000，11025
     private static final int CHANNELCONGIFIGURATION = AudioFormat.CHANNEL_IN_MONO;// 设置单声道声道
@@ -161,6 +163,8 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     private void initView() {
         mChronometer = (Chronometer) getView().findViewById(R.id.chronometer);
         recordText = (TextView) getView().findViewById(R.id.record_txt);
+        voicePosImg = (ImageView) getView().findViewById(R.id.voice_pos_img);
+
         recordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,6 +172,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                     recordText.setText("完成");
                     if (waveCanvas != null) {
                         waveCanvas.startWriteFile();
+                        voicePosImg.setVisibility(View.GONE);
                     } else {
                         CommonToast.showShortToast("发生错误，请重新打开该页面");
                     }
@@ -176,6 +181,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                     waveCanvas.stop();
                     waveCanvas = null;
                     gotoVoiceSaveFragment();
+                    voicePosImg.setVisibility(View.VISIBLE);
                 }
             }
         });

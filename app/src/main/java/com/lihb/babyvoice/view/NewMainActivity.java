@@ -299,7 +299,7 @@ public class NewMainActivity extends BaseFragmentActivity {
     }
 
     private void initDrawLayoutData() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             DrawLayoutEntity entity = new DrawLayoutEntity();
             entity.itemUrl = "";
             mData.add(entity);
@@ -317,6 +317,9 @@ public class NewMainActivity extends BaseFragmentActivity {
 
         mData.get(2).title = "分享";
         mData.get(2).icon = getString(R.string.share_friends);
+
+        mData.get(3).title = "蓝牙";
+        mData.get(3).icon = getString(R.string.my_devices);
 
 
 //        mData.get(3).itemUrl = Constant.MY_CARD_INFO;

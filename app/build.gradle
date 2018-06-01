@@ -29,6 +29,12 @@ android {
 //            path "CMakeLists.txt"
 //        }
 //    }
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+
+    }
+
 
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'

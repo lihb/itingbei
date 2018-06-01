@@ -16,11 +16,25 @@
         android:background="@color/colorPrimary"
         android:paddingTop="@dimen/padding_top" />
 
-    <com.cokus.wavelibrary.view.WaveSurfaceView
-        android:id="@+id/wavesfv"
-        android:layout_marginTop="15dp"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="200dp">
+
+        <com.cokus.wavelibrary.view.WaveSurfaceView
+            android:id="@+id/wavesfv"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <ImageView
+            android:id="@+id/voice_pos_img"
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/voice_pos" />
+    </FrameLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"

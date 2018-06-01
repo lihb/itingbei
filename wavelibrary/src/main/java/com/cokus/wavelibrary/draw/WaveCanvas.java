@@ -231,7 +231,9 @@ public class WaveCanvas {
                     if (inBuf.size() == 0)
                         return;
                     while (inBuf.size() > (sfv.getWidth() - marginRight) / divider) {
-                        inBuf.remove(0);
+                        if (inBuf.size() > 0) {
+                            inBuf.remove(0);
+                        }
                     }
                     buf = (ArrayList<Short>) inBuf.clone();// 保存
                 }

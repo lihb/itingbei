@@ -16,6 +16,7 @@ import com.lihb.babyvoice.customview.DividerLine;
 import com.lihb.babyvoice.customview.IconFontTextView;
 import com.lihb.babyvoice.model.DrawLayoutEntity;
 import com.lihb.babyvoice.utils.CommonToast;
+import com.lihb.babyvoice.view.BluetoothActivity;
 import com.lihb.babyvoice.view.WebViewActivity;
 import com.orhanobut.logger.Logger;
 
@@ -89,6 +90,9 @@ public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 } else {
                     Logger.e("url 为空！！");
                     CommonToast.showShortToast(mEntity.title + " was clicked");
+                }
+                if (mEntity.title.equals("蓝牙")) {
+                    BluetoothActivity.navigate(itemView.getContext());
                 }
             });
         }
