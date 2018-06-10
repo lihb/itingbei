@@ -6,7 +6,7 @@ import com.lihb.babyvoice.utils.RxBus;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Created by lihb on 2018/6/1.
+ * Created by lihb on 2018/5/24.
  */
 
 public class BluetoothParser {

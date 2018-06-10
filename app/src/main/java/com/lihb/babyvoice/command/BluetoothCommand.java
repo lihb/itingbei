@@ -1,7 +1,7 @@
 package com.lihb.babyvoice.command;
 
 /**
- * Created by lihb on 2018/6/2.
+ * Created by lihb on 2018/5/24.
  */
 
 public class BluetoothCommand extends BaseAndroidCommand {

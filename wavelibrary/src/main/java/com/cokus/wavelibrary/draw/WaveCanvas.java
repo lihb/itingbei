@@ -14,6 +14,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceView;
 
+import com.cokus.wavelibrary.utils.BabyJni;
 import com.cokus.wavelibrary.utils.Pcm2Wav;
 import com.cokus.wavelibrary.view.WaveSurfaceView;
 
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 
@@ -68,8 +70,7 @@ public class WaveCanvas {
 
     /**
      * 开始录音
-     *
-     * @param audioRecord
+     *  @param audioRecord
      * @param recBufSize
      * @param sfv
      * @param audioName
@@ -167,6 +168,7 @@ public class WaveCanvas {
         private Paint mPaint;// 画笔  
         private Callback callback;
         private boolean isStart = false;
+        private BabyJni jni = new BabyJni();
 
 
         public RecordTask(AudioRecord audioRecord, AudioTrack audioTrack, int recBufSize,
@@ -191,6 +193,17 @@ public class WaveCanvas {
                 while (isRecording) {
                     // 从MIC保存数据到缓冲区  
                     readsize = audioRecord.read(buffer, 0, recBufSize);
+
+                    double[] doubleData = new double[buffer.length];
+                    for (int i = 0; i < buffer.length; i++) {
+                        doubleData[i] = buffer[i];
+                    }
+//                    System.arraycopy(buffer, 0,doubleData, 0, buffer.length);
+
+                    double[] replyArray = jni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData, readsize);
+
+                    Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
+
                     audioTrack.write(buffer, 0, readsize);
                     synchronized (inBuf) {
                         for (int i = 0; i < readsize; i += rateX) {

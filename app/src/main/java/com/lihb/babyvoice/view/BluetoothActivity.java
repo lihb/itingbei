@@ -29,11 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by lihb on 2018/4/8.
@@ -212,7 +210,8 @@ public class BluetoothActivity extends BaseActivity implements AdapterView.OnIte
                 // 需要发送的信息
                 String text = "成功发送信息";
                 // 以utf-8的格式发送出去
-                os.write(text.getBytes("UTF-8"));
+                byte[] handPacket = {(byte) 0xaa, (byte) 0x0b, (byte) 0x10, (byte) 0x01, (byte) 0x12, (byte) 0x06, (byte) 0x02, (byte) 0x0a, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x55};
+                os.write(handPacket);
             }
             // 吐司一下，告诉用户发送成功
             Toast.makeText(this, "发送信息成功，请查收", Toast.LENGTH_SHORT).show();
@@ -260,10 +259,10 @@ public class BluetoothActivity extends BaseActivity implements AdapterView.OnIte
                     // 发送一个String的数据，让他向上转型为obj类型
                     final String receiveData = new String(buffer, 0, count, "utf-8");
                     // 发送数据
-                    rx.Observable.timer(0, TimeUnit.MILLISECONDS).observeOn(Schedulers.io()).subscribe(aLong -> {
-                        BluetoothParser.getInstance().putBytes(buffer);
-                        BluetoothParser.getInstance().parserBytes();
-                    });
+                    BluetoothParser.getInstance().putBytes(buffer);
+                    BluetoothParser.getInstance().parserBytes();
+//                    rx.Observable.timer(0, TimeUnit.MILLISECONDS).observeOn(Schedulers.io()).subscribe(aLong -> {
+//                    });
                 }
             } catch (Exception e) {
                 // TODO: handle exception

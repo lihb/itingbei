@@ -87,12 +87,11 @@ public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             itemView.setOnClickListener(v -> {
                 if (mEntity != null && !TextUtils.isEmpty(mEntity.itemUrl)) {
                     WebViewActivity.navigate(itemView.getContext(), mEntity.itemUrl, null);
+                } else if (mEntity != null && mEntity.title.equals("蓝牙")) {
+                    BluetoothActivity.navigate(itemView.getContext());
                 } else {
                     Logger.e("url 为空！！");
                     CommonToast.showShortToast(mEntity.title + " was clicked");
-                }
-                if (mEntity.title.equals("蓝牙")) {
-                    BluetoothActivity.navigate(itemView.getContext());
                 }
             });
         }

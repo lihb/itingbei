@@ -204,6 +204,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     public void initAudio() {
         recBufSize = AudioRecord.getMinBufferSize(FREQUENCY,
                 CHANNELCONGIFIGURATION, AUDIOENCODING);// 录音组件
+
         audioRecord = new AudioRecord(AUDIO_SOURCE,// 指定音频来源，这里为麦克风
                 FREQUENCY, // 16000HZ采样频率
                 CHANNELCONGIFIGURATION,// 录制通道
@@ -311,6 +312,13 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
         }
         return System.currentTimeMillis() - mChronometer.getBase();
     }
+
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//        waveCanvas.stop();
+//        waveCanvas = null;
+//    }
 
     private VoiceSaveFragment mVoiceSaveFragment;
 

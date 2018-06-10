@@ -123,6 +123,7 @@ public class NewMainActivity extends BaseFragmentActivity {
         checkVaccineRemind();
         checkPregnantExamineRemind();
 //        CommonToast.showShortToast(UpgradeUtil.getVersionName(NewMainActivity.this));
+//        BabyJni jni = new BabyJni();
     }
 
     private void checkVaccineRemind() {
