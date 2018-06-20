@@ -18,10 +18,12 @@ public class BabyJni {
             hasInitSuccess = true;
         } catch (UnsatisfiedLinkError var1) {
             hasInitSuccess = false;
+            Log.e("[lihb data]", var1.toString());
         }
     }
 
+    public static native int fun(int appData);
 
-    public native double[] FHRCal(double a1, double a2, double b1, double b2, double[] data, int length);
+    public static native double[] FHRCal(double a1, double a2, double b1, double b2, double[] data);
 
 }

@@ -168,7 +168,6 @@ public class WaveCanvas {
         private Paint mPaint;// 画笔  
         private Callback callback;
         private boolean isStart = false;
-        private BabyJni jni = new BabyJni();
 
 
         public RecordTask(AudioRecord audioRecord, AudioTrack audioTrack, int recBufSize,
@@ -200,9 +199,12 @@ public class WaveCanvas {
                     }
 //                    System.arraycopy(buffer, 0,doubleData, 0, buffer.length);
 
-                    double[] replyArray = jni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData, readsize);
+//                    int replyData = BabyJni.fun(new Random().nextInt(99));
+//                    Log.d("[lihb data]", "replyData = " + replyData);
 
+                    double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
                     Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
+
 
                     audioTrack.write(buffer, 0, readsize);
                     synchronized (inBuf) {
