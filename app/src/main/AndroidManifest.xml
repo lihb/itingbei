@@ -117,6 +117,8 @@
         <activity android:name=".view.SMSLoginActivity" />
         <activity android:name=".view.WebViewActivity" />
         <activity android:name=".view.BluetoothActivity" />
+        <activity android:name=".view.BluetoothActivityNew" />
+        <activity android:name=".view.OperationActivity" />
         <activity
             android:name=".view.EntryPointActivity"
             android:alwaysRetainTaskState="true"

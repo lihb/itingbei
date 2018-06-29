@@ -16,7 +16,7 @@ import com.lihb.babyvoice.customview.DividerLine;
 import com.lihb.babyvoice.customview.IconFontTextView;
 import com.lihb.babyvoice.model.DrawLayoutEntity;
 import com.lihb.babyvoice.utils.CommonToast;
-import com.lihb.babyvoice.view.BluetoothActivity;
+import com.lihb.babyvoice.view.BluetoothActivityNew;
 import com.lihb.babyvoice.view.WebViewActivity;
 import com.orhanobut.logger.Logger;
 
@@ -88,7 +88,7 @@ public class DrawLayoutAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
                 if (mEntity != null && !TextUtils.isEmpty(mEntity.itemUrl)) {
                     WebViewActivity.navigate(itemView.getContext(), mEntity.itemUrl, null);
                 } else if (mEntity != null && mEntity.title.equals("蓝牙")) {
-                    BluetoothActivity.navigate(itemView.getContext());
+                    BluetoothActivityNew.navigate(itemView.getContext());
                 } else {
                     Logger.e("url 为空！！");
                     CommonToast.showShortToast(mEntity.title + " was clicked");
