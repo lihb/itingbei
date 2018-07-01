@@ -84,10 +84,10 @@ public class BluetoothParser {
         return null;
     }
 
-    public void parserBytes() {
-        byte[] data = takeBytes();
+    public void parserBytes(byte[] data) {
+//        byte[] data = takeBytes();
 
-        while (data != null) {
+        if (data != null) {
             packetHead = data[0];
             packetLen = data[1];
             int contentLength = packetLen - 5;
@@ -159,11 +159,11 @@ public class BluetoothParser {
                     }
                 }
                 if (status != null) {
-                    BluetoothCommand command = new BluetoothCommand(status, packetContent);
+                    BluetoothCommand command = new BluetoothCommand(status, data);
                     RxBus.getDefault().post(command);
                 }
             }
-            data = takeBytes();
+//            data = takeBytes();
 
         }
     }

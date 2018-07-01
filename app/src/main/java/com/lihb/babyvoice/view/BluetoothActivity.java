@@ -260,7 +260,7 @@ public class BluetoothActivity extends BaseActivity implements AdapterView.OnIte
                     final String receiveData = new String(buffer, 0, count, "utf-8");
                     // 发送数据
                     BluetoothParser.getInstance().putBytes(buffer);
-                    BluetoothParser.getInstance().parserBytes();
+//                    BluetoothParser.getInstance().parserBytes();
 //                    rx.Observable.timer(0, TimeUnit.MILLISECONDS).observeOn(Schedulers.io()).subscribe(aLong -> {
 //                    });
                 }

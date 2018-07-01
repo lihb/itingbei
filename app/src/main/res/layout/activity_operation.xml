@@ -5,12 +5,16 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.lihb.babyvoice.customview.TitleBar
+        android:id="@+id/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        app:titleTextColor="@android:color/white" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingTop="@dimen/padding_top"
+        app:titleTextColor="@android:color/white"
+        app:leftTextColor="@android:color/white"
+        app:leftDrawable="@mipmap/back"
+        app:titleText="@string/devices_list" />
 
     <FrameLayout
         android:id="@+id/fragment"

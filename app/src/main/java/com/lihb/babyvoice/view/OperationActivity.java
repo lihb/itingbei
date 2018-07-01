@@ -6,21 +6,29 @@ import android.bluetooth.BluetoothGattService;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
+import com.clj.fastble.utils.HexUtil;
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.command.BluetoothCommand;
+import com.lihb.babyvoice.customview.TitleBar;
+import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
 import com.lihb.babyvoice.observer.Observer;
 import com.lihb.babyvoice.observer.ObserverManager;
+import com.lihb.babyvoice.utils.CommonToast;
+import com.lihb.babyvoice.utils.RxBus;
+import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperationActivity extends AppCompatActivity implements Observer {
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+
+public class OperationActivity extends BaseFragmentActivity implements Observer {
 
     public static final String KEY_DATA = "key_data";
 
@@ -29,10 +37,10 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     private BluetoothGattCharacteristic characteristic;
     private int charaProp;
 
-    private Toolbar toolbar;
     private List<Fragment> fragments = new ArrayList<>();
     private int currentPage = 0;
     private String[] titles = new String[3];
+    private TitleBar mTitleBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +84,11 @@ public class OperationActivity extends AppCompatActivity implements Observer {
     }
 
     private void initView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(titles[0]);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        mTitleBar = (TitleBar) findViewById(R.id.title_bar);
+        mTitleBar.setTitle(titles[0]);
+        mTitleBar.setLeftOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 if (currentPage != 0) {
                     currentPage--;
                     changePage(currentPage);
@@ -91,6 +97,39 @@ public class OperationActivity extends AppCompatActivity implements Observer {
                 }
             }
         });
+        RxBus.getDefault().registerOnActivity(BluetoothCommand.class, this)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<BluetoothCommand>() {
+                    @Override
+                    public void call(BluetoothCommand command) {
+                        if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_SEND_HAND_SIGNAL) {
+                            Logger.i("主机发起握手信号");
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_REPLY_HAND_SIGNAL) {
+                            Logger.i("从机回复握手信号");
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.HEART_BEAT_SIGNAL) {
+                            Logger.i("心跳包: " + HexUtil.formatHexString(command.getData(), true));
+                            CommonToast.showShortToast("收到心跳包: " + HexUtil.formatHexString(command.getData(), true));
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_STOP_SIGNAL) {
+                            Logger.i("主机正常断开蓝牙前的通知数据包");
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL) {
+                            Logger.i("从机上传实时胎心音数据");
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_SETTING_SIGNAL) {
+                            Logger.i("主机配置设备的信息");
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_STATUS_SIGNAL) {
+                            Logger.i("从机主动上传设备状态信息");
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_BATTERY_LEFT_SIGNAL) {
+                            Logger.i("从机回复电池剩余可用监护时间");
+                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_PACKET_ERROR_SIGNAL) {
+                            Logger.i("设备解析数据包时发现错误，进行信息返回。");
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Logger.e("headset out ,error: %s", throwable.getMessage());
+                    }
+                });
+
     }
 
     private void initData() {
@@ -111,7 +150,8 @@ public class OperationActivity extends AppCompatActivity implements Observer {
 
     public void changePage(int page) {
         currentPage = page;
-        toolbar.setTitle(titles[page]);
+        mTitleBar.setTitle(titles[page]);
+
         updateFragment(page);
         if (currentPage == 1) {
             ((CharacteristicListFragment) fragments.get(1)).showData();

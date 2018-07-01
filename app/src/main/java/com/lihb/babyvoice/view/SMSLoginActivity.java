@@ -281,7 +281,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse httpResponse) {
                         Log.i("lihb", httpResponse.toString());
-                        dismissLoginDialog();
+                        dismissProgressDialog();
                         if (httpResponse.code == ResponseCode.RESPONSE_OK) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
@@ -313,7 +313,7 @@ public class SMSLoginActivity extends BaseFragmentActivity {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        dismissLoginDialog();
+                        dismissProgressDialog();
                         CommonToast.showShortToast("登录失败，请重新登录!");
                     }
                 });

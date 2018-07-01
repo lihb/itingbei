@@ -243,7 +243,7 @@ public class RegisterActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse<UserInfo> httpResponse) {
                         if (httpResponse.code == ResponseCode.RESPONSE_OK) {
-                            dismissLoginDialog();
+                            dismissProgressDialog();
                             CommonToast.showShortToast("注册成功");
                             // 插入产检、疫苗数据到数据库，只插入一次
                             if (SharedPreferencesUtil.isFirstLaunch(RegisterActivity.this)) {
@@ -271,7 +271,7 @@ public class RegisterActivity extends BaseFragmentActivity {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        dismissLoginDialog();
+                        dismissProgressDialog();
                         CommonToast.showShortToast("注册失败");
                         Log.e("error:", throwable.toString());
                     }

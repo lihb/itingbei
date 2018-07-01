@@ -286,7 +286,7 @@ public class LoginActivity extends BaseFragmentActivity {
                     @Override
                     public void call(HttpResponse httpResponse) {
                         Log.i("lihbxxxxx", httpResponse.toString());
-                        dismissLoginDialog();
+                        dismissProgressDialog();
                         if (httpResponse.code == ResponseCode.RESPONSE_OK) {
                             // 成功
                             CommonToast.showShortToast("登录成功");
@@ -318,7 +318,7 @@ public class LoginActivity extends BaseFragmentActivity {
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        dismissLoginDialog();
+                        dismissProgressDialog();
                         CommonToast.showShortToast("登录失败，请重新登录!");
                         Log.e("lihb", throwable.toString());
                     }

@@ -24,6 +24,7 @@ import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.clj.fastble.utils.HexUtil;
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.utils.bluetooth.BluetoothParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -244,10 +245,13 @@ public class CharacteristicOperationFragment extends Fragment {
 
                                             @Override
                                             public void onCharacteristicChanged(byte[] data) {
+//                                                BluetoothParser.getInstance().putBytes(data);
+                                                BluetoothParser.getInstance().parserBytes(data);
                                                 runOnUiThread(new Runnable() {
                                                     @Override
                                                     public void run() {
                                                         addText(txt, HexUtil.formatHexString(characteristic.getValue(), true));
+
                                                     }
                                                 });
                                             }

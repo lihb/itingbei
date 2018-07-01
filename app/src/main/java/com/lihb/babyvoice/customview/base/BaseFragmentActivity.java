@@ -126,7 +126,7 @@ public abstract class BaseFragmentActivity extends RxFragmentActivity implements
         mProgressDialog.show();
     }
 
-    protected void dismissLoginDialog() {
+    protected void dismissProgressDialog() {
         if (mProgressDialog == null) {
             return;
         }

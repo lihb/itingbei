@@ -2,7 +2,6 @@ package com.lihb.babyvoice.view;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGatt;
 import android.content.Context;
@@ -58,7 +57,6 @@ public class BluetoothActivityNew extends BaseFragmentActivity implements View.O
 
     private Animation operatingAnim;
     private DeviceAdapter mDeviceAdapter;
-    private ProgressDialog progressDialog;
     private TitleBar mTitleBar;
 
     @Override
@@ -119,7 +117,6 @@ public class BluetoothActivityNew extends BaseFragmentActivity implements View.O
         img_loading = (ImageView) findViewById(R.id.img_loading);
         operatingAnim = AnimationUtils.loadAnimation(this, R.anim.rotate);
         operatingAnim.setInterpolator(new LinearInterpolator());
-        progressDialog = new ProgressDialog(this);
 
         mDeviceAdapter = new DeviceAdapter(this);
         mDeviceAdapter.setOnDeviceClickListener(new DeviceAdapter.OnDeviceClickListener() {
@@ -140,12 +137,11 @@ public class BluetoothActivityNew extends BaseFragmentActivity implements View.O
 
             @Override
             public void onDetail(BleDevice bleDevice) {
-                // FIXME: 2018/6/29
-//                if (BleManager.getInstance().isConnected(bleDevice)) {
-//                    Intent intent = new Intent(BluetoothActivityNew.this, OperationActivity.class);
-//                    intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
-//                    startActivity(intent);
-//                }
+                if (BleManager.getInstance().isConnected(bleDevice)) {
+                    Intent intent = new Intent(BluetoothActivityNew.this, OperationActivity.class);
+                    intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
+                    startActivity(intent);
+                }
             }
         });
         ListView listView_device = (ListView) findViewById(R.id.list_device);
@@ -209,7 +205,7 @@ public class BluetoothActivityNew extends BaseFragmentActivity implements View.O
         BleManager.getInstance().connect(bleDevice, new BleGattCallback() {
             @Override
             public void onStartConnect() {
-                progressDialog.show();
+                showProgressDialog("连接中...");
             }
 
             @Override
@@ -217,20 +213,20 @@ public class BluetoothActivityNew extends BaseFragmentActivity implements View.O
                 img_loading.clearAnimation();
                 img_loading.setVisibility(View.INVISIBLE);
                 btn_scan.setText(getString(R.string.start_scan));
-                progressDialog.dismiss();
+                dismissProgressDialog();
                 Toast.makeText(BluetoothActivityNew.this, getString(R.string.connect_fail), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onConnectSuccess(BleDevice bleDevice, BluetoothGatt gatt, int status) {
-                progressDialog.dismiss();
+                dismissProgressDialog();
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onDisConnected(boolean isActiveDisConnected, BleDevice bleDevice, BluetoothGatt gatt, int status) {
-                progressDialog.dismiss();
+                dismissProgressDialog();
 
                 mDeviceAdapter.removeDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
