@@ -109,10 +109,10 @@ public class DateSelectFragment extends BaseFragment {
                     case AssistFragment.ITEM_HEALTH_PROTECT:
                         gotoNextFragment(HealthShowFragment.create());
                         break;
-                    case MeFragment.ITEM_SET_BABY_BIRTHDAY:
+                    case SettingFragment.ITEM_SET_BABY_BIRTHDAY:
                         getActivity().onBackPressed();
                         break;
-                    case MeFragment.ITEM_SET_PREGNANT_DATE:
+                    case SettingFragment.ITEM_SET_PREGNANT_DATE:
                         getActivity().onBackPressed();
                         break;
 
@@ -126,7 +126,7 @@ public class DateSelectFragment extends BaseFragment {
     }
 
     private void saveToDatabase() {
-        if (type == AssistFragment.ITEM_EXAMINE || type == MeFragment.ITEM_SET_PREGNANT_DATE) {
+        if (type == AssistFragment.ITEM_EXAMINE || type == SettingFragment.ITEM_SET_PREGNANT_DATE) {
             PregnantDay pregnantDay = new PregnantDay();
             pregnantDay.username = BabyVoiceApp.mUserInfo != null ? BabyVoiceApp.mUserInfo.username : "";
             pregnantDay.pregnantDay = mSelYear + "/" + mSelMonth + "/" + mSelDay;
@@ -176,7 +176,7 @@ public class DateSelectFragment extends BaseFragment {
     }
 
     private void saveToSharedPreferences() {
-        if (type == AssistFragment.ITEM_EXAMINE || type == MeFragment.ITEM_SET_PREGNANT_DATE) {
+        if (type == AssistFragment.ITEM_EXAMINE || type == SettingFragment.ITEM_SET_PREGNANT_DATE) {
             SharedPreferencesUtil.setFirstPregnantDate(BabyVoiceApp.getInstance(), false);
             SharedPreferencesUtil.setPregnantDateInfo(BabyVoiceApp.getInstance(), mSelYear + "/" + mSelMonth + "/" + mSelDay);
         } else {
@@ -203,11 +203,11 @@ public class DateSelectFragment extends BaseFragment {
                 mTitleBar.setLeftText(R.string.txt_health_protect_assist);
                 mLabelTxt.setText(R.string.enter_baby_birthday);
                 break;
-            case MeFragment.ITEM_SET_BABY_BIRTHDAY:
+            case SettingFragment.ITEM_SET_BABY_BIRTHDAY:
                 mTitleBar.setLeftText("");
 //                mLabelTxt.setText("请设置宝昵称");
                 break;
-            case MeFragment.ITEM_SET_PREGNANT_DATE:
+            case SettingFragment.ITEM_SET_PREGNANT_DATE:
                 mTitleBar.setLeftText("");
                 mLabelTxt.setText(R.string.enter_your_pregnant_date);
                 break;

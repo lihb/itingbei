@@ -23,11 +23,11 @@ import com.umeng.analytics.MobclickAgent;
  * Created by lhb on 2017/2/8.
  */
 
-public class MeFragment extends BaseFragment {
+public class SettingFragment extends BaseFragment {
 
     public static final int ITEM_SET_PREGNANT_DATE = 100;
     public static final int ITEM_SET_BABY_BIRTHDAY = 200;
-    private static final String TAG = "MeFragment";
+    private static final String TAG = "SettingFragment";
 
     private CommonItem itemMeCenter;
     private CommonItem itemPersonalInfo;
@@ -42,13 +42,13 @@ public class MeFragment extends BaseFragment {
     private HeartFragment mHeartFragment;
     private CommonItem itemScan;
 
-    public static MeFragment create() {
-        return new MeFragment();
+    public static SettingFragment create() {
+        return new SettingFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_me, container, false);
+        return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
 
@@ -59,52 +59,11 @@ public class MeFragment extends BaseFragment {
     }
 
     private void initView() {
-//        itemMeCenter = (CommonItem) getView().findViewById(R.id.item_me_center);
-//        itemMeCenter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CommonToast.showShortToast("itemMeCenter");
-//            }
-//        });
-//
-//        itemPersonalInfo = (CommonItem) getView().findViewById(R.id.item_personal_info);
-//        itemPersonalInfo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CommonToast.showShortToast("itemPersonalInfo");
-//                gotoPersonalInfoFragment();
-//            }
-//        });
-//
-//        itemBabyInfo = (CommonItem) getView().findViewById(R.id.item_baby_info);
-//        itemBabyInfo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CommonToast.showShortToast("itemBabyInfo");
-//                gotoDateSelectFragment(ITEM_SET_BABY_BIRTHDAY);
-//            }
-//        });
         itemVersionUpdate = (CommonItem) getView().findViewById(R.id.item_version_update);
         itemVersionUpdate.setOnClickListener(v -> UpgradeUtil.checkUpgrade(getActivity(), UpgradeUtil.FROM_ME_FRAGMENT));
 
         mTitleBar = (TitleBar) getView().findViewById(R.id.title_bar);
         mTitleBar.setLeftOnClickListener(v -> gotoHeartFragment());
-
-//        itemRemoteVideoAddress = (CommonItem) getView().findViewById(R.id.item_remote_video_address);
-//        itemRemoteVideoAddress.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CommonToast.showShortToast("itemRemoteVideoAddress");
-//            }
-//        });
-
-//        itemLanguageSelect = (CommonItem) getView().findViewById(R.id.item_language_select);
-//        itemLanguageSelect.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                CommonToast.showShortToast("itemLanguageSelect");
-//            }
-//        });
 
         itemAboutApp = (CommonItem) getView().findViewById(R.id.item_about_app);
         itemAboutApp.setOnClickListener(new View.OnClickListener() {

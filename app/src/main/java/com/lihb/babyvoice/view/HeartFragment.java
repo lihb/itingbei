@@ -52,7 +52,7 @@ public class HeartFragment extends BaseFragment {
     private VoiceRecordFragmentV2 mVoiceRecordFragmentV2;
     private VoiceRecordFragment mVoiceRecordFragment;
     private VoicePlayFragment mVoicePlayFragment;
-    private MeFragment meFragment;
+    private SettingFragment settingFragment;
     private MessageFragment msgFragment;
 
     private TitleBar mTitleBar;
@@ -235,8 +235,8 @@ public class HeartFragment extends BaseFragment {
     }
 
     private void gotoMeFragment() {
-        if (null == meFragment) {
-            meFragment = MeFragment.create();
+        if (null == settingFragment) {
+            settingFragment = SettingFragment.create();
         }
 
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -245,8 +245,8 @@ public class HeartFragment extends BaseFragment {
         if (count > 0) {
             getActivity().getSupportFragmentManager().popBackStackImmediate();
         }
-        transaction.add(R.id.main_layout, meFragment, "meFragment")
-                .show(meFragment)
+        transaction.add(R.id.main_layout, settingFragment, "settingFragment")
+                .show(settingFragment)
                 .addToBackStack(null)
                 .commit();
 

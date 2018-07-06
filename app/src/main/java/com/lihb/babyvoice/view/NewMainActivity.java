@@ -79,7 +79,7 @@ public class NewMainActivity extends BaseFragmentActivity {
 
     private Fragment[] mFragmentList;
 
-    private MeFragment mMeFragment;
+    private MeFragmentNew meFragmentNew;
     private WebViewFragment mWebViewFragment;
     private HeartFragment mHeartFragment;
 
@@ -257,17 +257,17 @@ public class NewMainActivity extends BaseFragmentActivity {
 
         mHeartFragment = HeartFragment.create();
         mWebViewFragment = WebViewFragment.create();
-        mMeFragment = MeFragment.create();
+        meFragmentNew = MeFragmentNew.create();
 
-        mFragmentList = new Fragment[]{mHeartFragment, mWebViewFragment, mMeFragment};
+        mFragmentList = new Fragment[]{mHeartFragment, mWebViewFragment, meFragmentNew};
 
         // 加入fragment,显示爱听贝tab
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_layout, mHeartFragment)
-                .add(R.id.main_layout, mMeFragment)
+                .add(R.id.main_layout, meFragmentNew)
                 .add(R.id.main_layout, mWebViewFragment)
                 .show(mHeartFragment)
-                .hide(mMeFragment)
+                .hide(meFragmentNew)
                 .hide(mWebViewFragment)
                 .commit();
 
@@ -392,15 +392,15 @@ public class NewMainActivity extends BaseFragmentActivity {
 
     }
 
-    private void switchToSettingFragment() {
-        if (null == mMeFragment) {
-            mMeFragment = MeFragment.create();
+    private void switchToMeFragment() {
+        if (null == meFragmentNew) {
+            meFragmentNew = MeFragmentNew.create();
         }
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.hide(mFragmentList[mCurrTab]);
-        transaction.replace(R.id.main_layout, mMeFragment, "MeFragment")
-                .show(mMeFragment)
+        transaction.replace(R.id.main_layout, meFragmentNew, "MeFragmentNew")
+                .show(meFragmentNew)
                 .addToBackStack(null)
                 .commit();
 

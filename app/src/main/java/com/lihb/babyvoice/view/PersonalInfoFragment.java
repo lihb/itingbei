@@ -226,7 +226,7 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
         });
 
         itemBabyInfo.setOnClickListener(v -> {
-//            gotoDateSelectFragment(MeFragment.ITEM_SET_BABY_BIRTHDAY);
+//            gotoDateSelectFragment(SettingFragment.ITEM_SET_BABY_BIRTHDAY);
             gotoBabyInfoFragment();
         });
 

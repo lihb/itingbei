@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lihb.babyvoice.customview.TitleBar
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/padding_top"
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@android:color/white"
+        app:titleText="我" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar"
+        android:background="@color/color_f4f6f9">
+
+        <LinearLayout
+            android:id="@+id/additional_item_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="我的钱包"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@string/icon_scan"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_devices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="我的设备"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@string/check_new_version"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_exchange_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="false"
+                app:commonItemName="退换货管理"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@string/about_us"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+
+            <com.lihb.babyvoice.customview.CommonItem
+                android:id="@+id/item_bluetooth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:commonDividerVisible="true"
+                app:commonItemName="蓝牙"
+                app:commonItemSelector="@drawable/voice_item_selector"
+                app:commonLeftIcon="@string/user_agreenment"
+                app:commonRightIcon="@mipmap/next_icon" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -74,7 +74,7 @@ public class BabyInfoFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 CommonToast.showShortToast("Add Baby Info ");
-                gotoDateSelectFragment(MeFragment.ITEM_SET_BABY_BIRTHDAY);
+                gotoDateSelectFragment(SettingFragment.ITEM_SET_BABY_BIRTHDAY);
             }
         });
 
