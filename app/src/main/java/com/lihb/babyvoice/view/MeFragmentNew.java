@@ -116,6 +116,7 @@ public class MeFragmentNew extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden == false) {
+            initUserInfo();
             showBottomTab();
         }
     }

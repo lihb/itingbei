@@ -492,8 +492,9 @@ public class NewMainActivity extends BaseFragmentActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PhotoHelper.REQUEST_TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
             String picturePath = data.getStringExtra(PhotoHelper.OUTPUT_PATH);
-            if (mPersonalInfoFragment != null && mPersonalInfoFragment.isVisible()) {
-                mPersonalInfoFragment.updatePhoto(picturePath);
+            Fragment fragment = getSupportFragmentManager().findFragmentByTag("PersonalInfoFragment");
+            if (fragment != null && fragment instanceof PersonalInfoFragment && fragment.isVisible()) {
+                ((PersonalInfoFragment) fragment).updatePhoto(picturePath);
             }
         }
     }
