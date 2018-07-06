@@ -29,11 +29,6 @@ public class SettingFragment extends BaseFragment {
     public static final int ITEM_SET_BABY_BIRTHDAY = 200;
     private static final String TAG = "SettingFragment";
 
-    private CommonItem itemMeCenter;
-    private CommonItem itemPersonalInfo;
-    private CommonItem itemBabyInfo;
-    //    private CommonItem itemRemoteVideoAddress;
-    private CommonItem itemLanguageSelect;
     private CommonItem itemAboutApp;
     private CommonItem itemVersionUpdate;
     private DateSelectFragment mDateSelectFragment;
@@ -56,6 +51,7 @@ public class SettingFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        hideBottomTab();
     }
 
     private void initView() {
@@ -63,7 +59,7 @@ public class SettingFragment extends BaseFragment {
         itemVersionUpdate.setOnClickListener(v -> UpgradeUtil.checkUpgrade(getActivity(), UpgradeUtil.FROM_ME_FRAGMENT));
 
         mTitleBar = (TitleBar) getView().findViewById(R.id.title_bar);
-        mTitleBar.setLeftOnClickListener(v -> gotoHeartFragment());
+        mTitleBar.setLeftOnClickListener(v -> getActivity().onBackPressed());
 
         itemAboutApp = (CommonItem) getView().findViewById(R.id.item_about_app);
         itemAboutApp.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +74,23 @@ public class SettingFragment extends BaseFragment {
             toScanBarCode();
         });
 
+    }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden == false) {
+            hideBottomTab();
+        }
+    }
+
+    private void hideBottomTab() {
+        if (getActivity() == null) {
+            return;
+        }
+        // 隐藏底部的导航栏和分割线
+        (getActivity().findViewById(R.id.tab_layout)).setVisibility(View.GONE);
+        (getActivity().findViewById(R.id.main_divider_line)).setVisibility(View.GONE);
     }
 
     private void toScanBarCode() {

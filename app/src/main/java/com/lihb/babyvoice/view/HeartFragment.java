@@ -145,6 +145,24 @@ public class HeartFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden == false) {
+            getData(true);
+            showBottomTab();
+        }
+    }
+
+    private void showBottomTab() {
+        if (getActivity() == null) {
+            return;
+        }
+        // 隐藏底部的导航栏和分割线
+        (getActivity().findViewById(R.id.tab_layout)).setVisibility(View.VISIBLE);
+        (getActivity().findViewById(R.id.main_divider_line)).setVisibility(View.VISIBLE);
+    }
+
     private void showPickCategoryDialog() {
         if (mPickCategoryDialog == null) {
             mPickCategoryDialog = new PickRecordDialog(getContext(), R.style.loading_dialog);
@@ -234,7 +252,7 @@ public class HeartFragment extends BaseFragment {
 
     }
 
-    private void gotoMeFragment() {
+    private void gotoSettingFragment() {
         if (null == settingFragment) {
             settingFragment = SettingFragment.create();
         }
@@ -360,14 +378,6 @@ public class HeartFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (hidden == false) {
-            getData(true);
-//            ((NewMainActivity) getActivity()).toggleDrawableLayout(true);
-        }
-    }
 
     public void onResume() {
         super.onResume();

@@ -473,22 +473,6 @@ public class NewMainActivity extends BaseFragmentActivity {
 //        }
 //    }
 
-//    private void initDrawableLayoutTopView() {
-//        if (BabyVoiceApp.mUserInfo != null) {
-//            String headIcon = BabyVoiceApp.mUserInfo.headicon;
-//            headIcon = ServiceGenerator.API_BASE_URL + headIcon;
-//
-//            Glide.with(this)
-//                    .load(headIcon)
-//                    .placeholder(R.mipmap.logo)
-//                    .error(R.mipmap.logo)
-//                    .dontAnimate()
-//                    .into(drawableLayoutUserAvatar);
-//
-//            drawableLayoutUserName.setText(TextUtils.isEmpty(BabyVoiceApp.mUserInfo.nickname) ? BabyVoiceApp.mUserInfo.realname : BabyVoiceApp.mUserInfo.nickname);
-//        }
-//    }
-
 //    public void toggleDrawableLayout(boolean open) {
 //        mainDrawLayout.setDrawerLockMode(open ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 //    }

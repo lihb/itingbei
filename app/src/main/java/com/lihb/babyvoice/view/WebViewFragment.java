@@ -61,16 +61,6 @@ public class WebViewFragment extends BaseFragment {
     }
 
     private void initViews() {
-//        mBackImg = (ImageView) findViewById(R.id.imageView_back);
-//        mBackImg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                finish();
-//            }
-//        });
-
-//        mTitleTextView = (TextView) findViewById(R.id.textView_title);
-//        mTitleTextView.setText(getIntent().getStringExtra("title"));
 
         mProgressBar = (ProgressBar) getView().findViewById(R.id.showAdvProgressBar);
         mProgressBar.setProgress(0);
@@ -122,5 +112,22 @@ public class WebViewFragment extends BaseFragment {
             // 移除所有控件，防止关闭该activity时，内存泄漏的问题
             viewGroup.removeAllViews();
         }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden == false) {
+            showBottomTab();
+        }
+    }
+
+    private void showBottomTab() {
+        if (getActivity() == null) {
+            return;
+        }
+        // 隐藏底部的导航栏和分割线
+        (getActivity().findViewById(R.id.tab_layout)).setVisibility(View.VISIBLE);
+        (getActivity().findViewById(R.id.main_divider_line)).setVisibility(View.VISIBLE);
     }
 }

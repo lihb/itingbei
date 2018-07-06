@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/padding_top"
         android:background="@color/colorPrimary"
+        app:rightTextColor="@android:color/white"
+        app:rightText="@string/app_setting"
         app:titleTextColor="@android:color/white"
         app:titleText="我" />
 
@@ -25,6 +27,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/user_info_layout"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@color/white">
+
+                <com.lihb.babyvoice.customview.CircularImageView
+                    android:id="@+id/drawable_layout_user_avatar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:src="@mipmap/logo" />
+
+                <TextView
+                    android:id="@+id/drawable_layout_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/drawable_layout_user_avatar"
+                    android:text="昵称"
+                    android:textColor="@android:color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <com.lihb.babyvoice.customview.DividerLine
+                    android:id="@+id/item_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
 
             <com.lihb.babyvoice.customview.CommonItem
                 android:id="@+id/item_wallet"
@@ -50,7 +85,7 @@
                 android:id="@+id/item_exchange_device"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:commonDividerVisible="false"
+                app:commonDividerVisible="true"
                 app:commonItemName="退换货管理"
                 app:commonItemSelector="@drawable/voice_item_selector"
                 app:commonLeftIcon="@string/about_us"

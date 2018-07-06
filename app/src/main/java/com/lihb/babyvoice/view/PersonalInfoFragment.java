@@ -126,18 +126,22 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
         return view;
     }
 
-//    @Override
-//    public void onHiddenChanged(boolean hidden) {
-//        super.onHiddenChanged(hidden);
-//        if (!hidden) {
-//            Bundle b = getArguments();
-//            if (null != b) {
-//                content = b.getString("content");
-//                currChangeItem = b.getInt("itemIndex");
-//            }
-//            testUpdateContent();
-//        }
-//    }
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden == false) {
+            hideBottomTab();
+        }
+    }
+
+    private void hideBottomTab() {
+        if (getActivity() == null) {
+            return;
+        }
+        // 隐藏底部的导航栏和分割线
+        (getActivity().findViewById(R.id.tab_layout)).setVisibility(View.GONE);
+        (getActivity().findViewById(R.id.main_divider_line)).setVisibility(View.GONE);
+    }
 
     private void testUpdateContent() {
         switch (currChangeItem) {
@@ -169,6 +173,7 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        hideBottomTab();
     }
 
     private void initView() {

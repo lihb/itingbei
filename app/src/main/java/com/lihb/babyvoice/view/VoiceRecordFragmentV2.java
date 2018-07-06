@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Chronometer;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cokus.wavelibrary.draw.WaveCanvas;
@@ -84,7 +83,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        hideBottomTab();
+        hideBottomTab();
         initView();
         FileUtils.createDirectory(Constant.DATA_DIRECTORY);
         if (mWaveSfv != null) {
@@ -128,7 +127,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden == false) {
-//            hideBottomTab();
+            hideBottomTab();
             mChronometer.setBase(System.currentTimeMillis());
             if (mWaveSfv != null) {
                 mWaveSfv.initDraw();
@@ -156,8 +155,8 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
             return;
         }
         // 隐藏底部的导航栏和分割线
-        ((LinearLayout) getActivity().findViewById(R.id.linearLayout1)).setVisibility(View.GONE);
-        ((View) getActivity().findViewById(R.id.divider_line2)).setVisibility(View.GONE);
+        (getActivity().findViewById(R.id.tab_layout)).setVisibility(View.GONE);
+        (getActivity().findViewById(R.id.main_divider_line)).setVisibility(View.GONE);
     }
 
     private void initView() {

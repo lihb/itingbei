@@ -24,6 +24,7 @@
     <string name="cancel">取消</string>
     <string name="save">保存</string>
     <string name="confirm">确认</string>
+    <string name="app_setting">设置</string>
 
     <!-- 爱助手 -->
     <string name="txt_pregnant_zone">孕婴圈</string>
