@@ -75,7 +75,7 @@ public class HeartFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        ((NewMainActivity) getActivity()).toggleDrawableLayout(true);
+//        ((NewMainActivity) getActivity()).toggleDrawableLayout(true);
     }
 
 
@@ -83,7 +83,6 @@ public class HeartFragment extends BaseFragment {
         emptyView = getView().findViewById(R.id.empty_root_view);
 
         mTitleBar = (TitleBar) getView().findViewById(R.id.title_bar);
-        mTitleBar.setLeftOnClickListener(v -> ((NewMainActivity) getActivity()).showDrawableLayout(true));
         mTitleBar.setRightOnClickListener(v -> gotoMessageFragment());
 
         mRefreshLayout = (RefreshLayout) getView().findViewById(R.id.heart_refreshlayout);
@@ -366,7 +365,7 @@ public class HeartFragment extends BaseFragment {
         super.onHiddenChanged(hidden);
         if (hidden == false) {
             getData(true);
-            ((NewMainActivity) getActivity()).toggleDrawableLayout(true);
+//            ((NewMainActivity) getActivity()).toggleDrawableLayout(true);
         }
     }
 

@@ -6,29 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.Constant;
 import com.lihb.babyvoice.R;
-import com.lihb.babyvoice.action.ServiceGenerator;
-import com.lihb.babyvoice.adapter.DrawLayoutAdapter;
 import com.lihb.babyvoice.command.BaseAndroidCommand;
 import com.lihb.babyvoice.command.NetStateChangedCommand;
 import com.lihb.babyvoice.command.PickedCategoryCommand;
-import com.lihb.babyvoice.customview.CircularImageView;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
-import com.lihb.babyvoice.customview.base.BaseRecyclerView;
 import com.lihb.babyvoice.db.impl.BirthdayDataImpl;
 import com.lihb.babyvoice.db.impl.PregnantDateDataImpl;
 import com.lihb.babyvoice.db.impl.PregnantRemindDataImpl;
@@ -53,62 +43,57 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.sharesdk.framework.ShareSDK;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-import static com.lzy.okgo.OkGo.getContext;
-
 public class NewMainActivity extends BaseFragmentActivity {
 
     private static final String TAG = "NewMainActivity";
 
     private static final int HEART_TAB = 0;
-    private static final int WATCH_TAB = 1;
-    private static final int ASSIST_TAB = 2;
-    private static final int ME_TAB = 3;
-    @BindView(R.id.main_activity_draw_layout)
-    DrawerLayout mainDrawLayout;
-    @BindView(R.id.drawable_layout_user_avatar)
-    CircularImageView drawableLayoutUserAvatar;
-    @BindView(R.id.drawable_layout_user_name)
-    TextView drawableLayoutUserName;
-    @BindView(R.id.drawable_layout_section_1)
-    RelativeLayout drawableLayoutSection1;
+    private static final int MUSIC_TAB = 1;
+    private static final int ME_TAB = 2;
+//    @BindView(R.id.main_activity_draw_layout)
+//    DrawerLayout mainDrawLayout;
+//    @BindView(R.id.drawable_layout_user_avatar)
+//    CircularImageView drawableLayoutUserAvatar;
+//    @BindView(R.id.drawable_layout_user_name)
+//    TextView drawableLayoutUserName;
+//    @BindView(R.id.drawable_layout_section_1)
+//    RelativeLayout drawableLayoutSection1;
     //    @BindView(R.id.drawable_layout_achievement_num)
 //    TextView drawableLayoutAchievementNum;
 //    @BindView(R.id.drawable_layout_section_2)
 //    RelativeLayout drawableLayoutSection2;
-    @BindView(R.id.drawable_layout_recycler_view)
-    BaseRecyclerView drawableLayoutRecyclerView;
-    @BindView(R.id.drawable_layout_setting)
-    TextView drawableLayoutSetting;
-    @BindView(R.id.drawable_layout_user_guide)
-    TextView drawableLayoutUserGuide;
-    @BindView(R.id.drawable_layout_section_3)
-    RelativeLayout drawableLayoutSection3;
+//    @BindView(R.id.drawable_layout_recycler_view)
+//    BaseRecyclerView drawableLayoutRecyclerView;
+//    @BindView(R.id.drawable_layout_setting)
+//    TextView drawableLayoutSetting;
+//    @BindView(R.id.drawable_layout_user_guide)
+//    TextView drawableLayoutUserGuide;
+//    @BindView(R.id.drawable_layout_section_3)
+//    RelativeLayout drawableLayoutSection3;
 
     private Fragment[] mFragmentList;
 
     private MeFragment mMeFragment;
-    private PregnantZoneFragment mPregnantZoneFragment;
+    private WebViewFragment mWebViewFragment;
     private HeartFragment mHeartFragment;
-    private AssistFragment mAssistFragment;
 
     //ui
     private TextView mHeartPageTab;
-    private TextView mWatchTab;
-    private TextView mAssistTab;
+    private TextView mMusicTab;
     private TextView mMeTab;
     private RelativeLayout mNetErrorNoticeBar;
 
     private int mCurrTab = HEART_TAB;
 
-    private DrawLayoutAdapter mDrawLayoutAdapter;
+    //    private DrawLayoutAdapter mDrawLayoutAdapter;
     private List<DrawLayoutEntity> mData = new ArrayList<>();
+    private RelativeLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -244,58 +229,54 @@ public class NewMainActivity extends BaseFragmentActivity {
 
     private void initViews() {
         mHeartPageTab = (TextView) findViewById(R.id.heart_textview);
-        mWatchTab = (TextView) findViewById(R.id.watch_textview);
-        mAssistTab = (TextView) findViewById(R.id.assist_textview);
+        mMusicTab = (TextView) findViewById(R.id.music_textview);
         mMeTab = (TextView) findViewById(R.id.me_textview);
+        mainLayout = (RelativeLayout) findViewById(R.id.main_layout);
 
         mHeartPageTab.setOnClickListener(mTabOnClickListener);
-        mWatchTab.setOnClickListener(mTabOnClickListener);
-        mAssistTab.setOnClickListener(mTabOnClickListener);
+        mMusicTab.setOnClickListener(mTabOnClickListener);
         mMeTab.setOnClickListener(mTabOnClickListener);
 
-        initDrawableLayoutTopView();
+//        initDrawableLayoutTopView();
 
-        drawableLayoutSection1.setOnClickListener(v -> {
-            showDrawableLayout(false);
-            switchToPersonalInfoFragment();
-        });
-        drawableLayoutSetting.setOnClickListener(v -> {
-            showDrawableLayout(false);
-            switchToSettingFragment();
-        });
+//        drawableLayoutSection1.setOnClickListener(v -> {
+//            showDrawableLayout(false);
+//            switchToPersonalInfoFragment();
+//        });
+//        drawableLayoutSetting.setOnClickListener(v -> {
+//            showDrawableLayout(false);
+//            switchToSettingFragment();
+//        });
 
-        drawableLayoutUserGuide.setOnClickListener(v -> {
-            showDrawableLayout(false);
-            WebViewActivity.navigate(NewMainActivity.this, Constant.USER_AGREEMENT, null);
-        });
+//        drawableLayoutUserGuide.setOnClickListener(v -> {
+//            showDrawableLayout(false);
+//            WebViewActivity.navigate(NewMainActivity.this, Constant.USER_AGREEMENT, null);
+//        });
 
         mNetErrorNoticeBar = (RelativeLayout) findViewById(R.id.net_error_notice_bar);
 
         mHeartFragment = HeartFragment.create();
-        mPregnantZoneFragment = PregnantZoneFragment.create();
-        mAssistFragment = AssistFragment.create();
+        mWebViewFragment = WebViewFragment.create();
         mMeFragment = MeFragment.create();
 
-        mFragmentList = new Fragment[]{mHeartFragment, mPregnantZoneFragment, mAssistFragment, mMeFragment};
+        mFragmentList = new Fragment[]{mHeartFragment, mWebViewFragment, mMeFragment};
 
         // 加入fragment,显示爱听贝tab
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.main_layout, mHeartFragment)
-//                .add(R.id.main_layout, mMeFragment)
-                .add(R.id.main_layout, mPregnantZoneFragment)
-                .add(R.id.main_layout, mAssistFragment)
+                .add(R.id.main_layout, mMeFragment)
+                .add(R.id.main_layout, mWebViewFragment)
                 .show(mHeartFragment)
                 .hide(mMeFragment)
-                .hide(mPregnantZoneFragment)
-                .hide(mAssistFragment)
+                .hide(mWebViewFragment)
                 .commit();
 
         switchToFragment(HEART_TAB);
 
         initDrawLayoutData();
-        mDrawLayoutAdapter = new DrawLayoutAdapter(getContext(), mData);
-        drawableLayoutRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        drawableLayoutRecyclerView.setAdapter(mDrawLayoutAdapter);
+//        mDrawLayoutAdapter = new DrawLayoutAdapter(getContext(), mData);
+//        drawableLayoutRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        drawableLayoutRecyclerView.setAdapter(mDrawLayoutAdapter);
     }
 
     private void initDrawLayoutData() {
@@ -333,10 +314,8 @@ public class NewMainActivity extends BaseFragmentActivity {
             int index;
             if (view == mHeartPageTab) {
                 index = HEART_TAB;
-            } else if (view == mWatchTab) {
-                index = WATCH_TAB;
-            } else if (view == mAssistTab) {
-                index = ASSIST_TAB;
+            } else if (view == mMusicTab) {
+                index = MUSIC_TAB;
             } else {
                 index = ME_TAB;
             }
@@ -375,29 +354,19 @@ public class NewMainActivity extends BaseFragmentActivity {
             case HEART_TAB:
                 mHeartPageTab.setSelected(true);
                 mMeTab.setSelected(false);
-                mAssistTab.setSelected(false);
-                mWatchTab.setSelected(false);
+                mMusicTab.setSelected(false);
                 mCurrTab = HEART_TAB;
                 break;
-            case WATCH_TAB:
+            case MUSIC_TAB:
                 mHeartPageTab.setSelected(false);
                 mMeTab.setSelected(false);
-                mAssistTab.setSelected(false);
-                mWatchTab.setSelected(true);
-                mCurrTab = WATCH_TAB;
-                break;
-            case ASSIST_TAB:
-                mHeartPageTab.setSelected(false);
-                mMeTab.setSelected(false);
-                mAssistTab.setSelected(true);
-                mWatchTab.setSelected(false);
-                mCurrTab = ASSIST_TAB;
+                mMusicTab.setSelected(true);
+                mCurrTab = MUSIC_TAB;
                 break;
             case ME_TAB:
                 mHeartPageTab.setSelected(false);
                 mMeTab.setSelected(true);
-                mAssistTab.setSelected(false);
-                mWatchTab.setSelected(false);
+                mMusicTab.setSelected(false);
                 mCurrTab = ME_TAB;
                 break;
             default:
@@ -479,7 +448,6 @@ public class NewMainActivity extends BaseFragmentActivity {
 
     private void updateNetErrorNoticeBar() {
         mNetErrorNoticeBar.setVisibility(NetworkHelper.isDisconnected(NewMainActivity.this) ? View.VISIBLE : View.GONE);
-        findViewById(R.id.divider_line).setVisibility(NetworkHelper.isDisconnected(NewMainActivity.this) ? View.VISIBLE : View.GONE);
     }
 
     private void addStatusBarView() {
@@ -496,34 +464,34 @@ public class NewMainActivity extends BaseFragmentActivity {
         return context.getResources().getDimensionPixelSize(resourceId);
     }
 
-    public void showDrawableLayout(boolean enableShow) {
-        if (enableShow) {
-            initDrawableLayoutTopView();
-            mainDrawLayout.openDrawer(Gravity.LEFT);
-        } else {
-            mainDrawLayout.closeDrawers();
-        }
-    }
+//    public void showDrawableLayout(boolean enableShow) {
+//        if (enableShow) {
+//            initDrawableLayoutTopView();
+//            mainDrawLayout.openDrawer(Gravity.LEFT);
+//        } else {
+//            mainDrawLayout.closeDrawers();
+//        }
+//    }
 
-    private void initDrawableLayoutTopView() {
-        if (BabyVoiceApp.mUserInfo != null) {
-            String headIcon = BabyVoiceApp.mUserInfo.headicon;
-            headIcon = ServiceGenerator.API_BASE_URL + headIcon;
+//    private void initDrawableLayoutTopView() {
+//        if (BabyVoiceApp.mUserInfo != null) {
+//            String headIcon = BabyVoiceApp.mUserInfo.headicon;
+//            headIcon = ServiceGenerator.API_BASE_URL + headIcon;
+//
+//            Glide.with(this)
+//                    .load(headIcon)
+//                    .placeholder(R.mipmap.logo)
+//                    .error(R.mipmap.logo)
+//                    .dontAnimate()
+//                    .into(drawableLayoutUserAvatar);
+//
+//            drawableLayoutUserName.setText(TextUtils.isEmpty(BabyVoiceApp.mUserInfo.nickname) ? BabyVoiceApp.mUserInfo.realname : BabyVoiceApp.mUserInfo.nickname);
+//        }
+//    }
 
-            Glide.with(this)
-                    .load(headIcon)
-                    .placeholder(R.mipmap.logo)
-                    .error(R.mipmap.logo)
-                    .dontAnimate()
-                    .into(drawableLayoutUserAvatar);
-
-            drawableLayoutUserName.setText(TextUtils.isEmpty(BabyVoiceApp.mUserInfo.nickname) ? BabyVoiceApp.mUserInfo.realname : BabyVoiceApp.mUserInfo.nickname);
-        }
-    }
-
-    public void toggleDrawableLayout(boolean open) {
-        mainDrawLayout.setDrawerLockMode(open ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-    }
+//    public void toggleDrawableLayout(boolean open) {
+//        mainDrawLayout.setDrawerLockMode(open ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+//    }
 
     public void onResume() {
         super.onResume();

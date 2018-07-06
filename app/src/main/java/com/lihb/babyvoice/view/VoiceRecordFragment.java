@@ -57,7 +57,7 @@ public class VoiceRecordFragment extends BaseFragment {
         FileUtils.createDirectory(Constant.DATA_DIRECTORY);
         initRecordHelper();
         initView();
-        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
+//        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
     }
 
     private void initRecordHelper() {

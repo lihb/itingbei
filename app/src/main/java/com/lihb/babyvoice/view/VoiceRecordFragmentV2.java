@@ -118,7 +118,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                         Logger.e("headset out ,error: %s", throwable.getMessage());
                     }
                 });
-        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
+//        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
 
         record();
     }

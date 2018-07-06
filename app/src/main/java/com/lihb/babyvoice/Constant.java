@@ -40,6 +40,8 @@ public class Constant {
     // 我的服务卡
     public static final String MY_CARD_INFO = "https://www.itingbaby.com/mobile/device/mycardinfo.do";
 
+    public static final String ITING_MUSIC = "http://www.itingbaby.com/web/article/itemList.do?parentcode=1800";
+
     public static final String DATA_DIRECTORY = BabyVoiceApp.getInstance().getCachePath() + "babyVoiceRecord/";
 
 }

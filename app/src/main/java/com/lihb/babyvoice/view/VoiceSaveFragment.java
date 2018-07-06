@@ -73,7 +73,6 @@ public class VoiceSaveFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
     }
 
     private void initView() {

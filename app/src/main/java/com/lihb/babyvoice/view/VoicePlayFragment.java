@@ -87,7 +87,7 @@ public class VoicePlayFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
-        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
+//        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
     }
 
     private void initView() {
