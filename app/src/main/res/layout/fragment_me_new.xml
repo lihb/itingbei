@@ -54,6 +54,15 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+                <ImageView
+                    android:id="@+id/icon_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="16dp"
+                    android:src="@mipmap/next_icon" />
+
                 <com.lihb.babyvoice.customview.DividerLine
                     android:id="@+id/item_divider"
                     android:layout_width="match_parent"
