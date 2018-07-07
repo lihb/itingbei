@@ -197,13 +197,14 @@ public class WaveCanvas {
                     for (int i = 0; i < buffer.length; i++) {
                         doubleData[i] = buffer[i];
                     }
+                    Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
 //                    System.arraycopy(buffer, 0,doubleData, 0, buffer.length);
 
 //                    int replyData = BabyJni.fun(new Random().nextInt(99));
 //                    Log.d("[lihb data]", "replyData = " + replyData);
 
-                    double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
-                    Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
+//                    double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
+//                    Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
 
 
                     audioTrack.write(buffer, 0, readsize);
@@ -212,7 +213,7 @@ public class WaveCanvas {
                             inBuf.add(buffer[i]);
                         }
                     }
-                    publishProgress();
+                    publishProgress(doubleData);
                     if (AudioRecord.ERROR_INVALID_OPERATION != readsize && startWrite) {
                         synchronized (write_data) {
                             byte bys[] = new byte[readsize * 2];
@@ -239,6 +240,12 @@ public class WaveCanvas {
 
         @Override
         protected void onProgressUpdate(Object... values) {
+            double[] doubleData = (double[]) values[0];
+            Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
+
+            double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
+            Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
+
             long time = new Date().getTime();
             if (time - c_time >= draw_time) {
                 ArrayList<Short> buf = new ArrayList<Short>();
