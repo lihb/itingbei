@@ -3,6 +3,7 @@ package com.lihb.babyvoice.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -114,6 +115,19 @@ public class WebViewActivity extends BaseFragmentActivity {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+        // 点击后退按钮, 让WebView后退一页
+        mWebView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {  //表示按返回键时的操作
+                        mWebView.goBack();   // 后退
+                        return true;         // 已处理
+                    }
+                }
+                return false;
             }
         });
     }
