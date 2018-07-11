@@ -43,7 +43,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import butterknife.ButterKnife;
 import cn.sharesdk.framework.ShareSDK;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -99,7 +98,7 @@ public class NewMainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
         ShareSDK.initSDK(this);
 
         initViews();
