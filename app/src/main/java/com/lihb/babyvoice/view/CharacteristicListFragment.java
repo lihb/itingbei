@@ -5,11 +5,9 @@ import android.annotation.TargetApi;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +66,7 @@ public class CharacteristicListFragment extends Fragment {
                     propNameList.add("Indicate");
                 }
 
-                if (propList.size() > 1) {
+               /* if (propList.size() > 1) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle(getActivity().getString(R.string.select_operation_type))
                             .setItems(propNameList.toArray(new String[propNameList.size()]), new DialogInterface.OnClickListener() {
@@ -80,10 +78,11 @@ public class CharacteristicListFragment extends Fragment {
                                 }
                             })
                             .show();
-                } else if (propList.size() > 0) {
+                } else*/
+                if (propList.size() > 0) {
                     ((OperationActivity) getActivity()).setCharacteristic(characteristic);
                     ((OperationActivity) getActivity()).setCharaProp(propList.get(0));
-                    ((OperationActivity) getActivity()).changePage(2);
+//                    ((OperationActivity) getActivity()).changePage(0);
                 }
             }
         });

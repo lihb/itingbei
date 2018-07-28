@@ -222,6 +222,7 @@ public class BluetoothActivityNew extends BaseFragmentActivity implements View.O
                 dismissProgressDialog();
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
+                setMtu(bleDevice, 300);
             }
 
             @Override

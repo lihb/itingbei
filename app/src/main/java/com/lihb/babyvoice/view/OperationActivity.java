@@ -1,17 +1,17 @@
 package com.lihb.babyvoice.view;
 
 
+import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.utils.HexUtil;
+import com.lihb.babyvoice.Constant;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.command.BluetoothCommand;
 import com.lihb.babyvoice.customview.TitleBar;
@@ -21,9 +21,6 @@ import com.lihb.babyvoice.observer.ObserverManager;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.RxBus;
 import com.orhanobut.logger.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -37,8 +34,6 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
     private BluetoothGattCharacteristic characteristic;
     private int charaProp;
 
-    private List<Fragment> fragments = new ArrayList<>();
-    private int currentPage = 0;
     private String[] titles = new String[3];
     private TitleBar mTitleBar;
 
@@ -48,8 +43,8 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 
         setContentView(R.layout.activity_operation);
         initData();
-        initView();
         initPage();
+        initView();
 
         ObserverManager.getInstance().addObserver(this);
     }
@@ -71,14 +66,8 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (currentPage != 0) {
-                currentPage--;
-                changePage(currentPage);
-                return true;
-            } else {
-                finish();
-                return true;
-            }
+            finish();
+            return true;
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -89,12 +78,7 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
         mTitleBar.setLeftOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (currentPage != 0) {
-                    currentPage--;
-                    changePage(currentPage);
-                } else {
-                    finish();
-                }
+                finish();
             }
         });
         RxBus.getDefault().registerOnActivity(BluetoothCommand.class, this)
@@ -141,48 +125,23 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
                 getString(R.string.service_list),
                 getString(R.string.characteristic_list),
                 getString(R.string.console)};
+        BluetoothGatt gatt = BleManager.getInstance().getBluetoothGatt(bleDevice);
+        for (BluetoothGattService service : gatt.getServices()) {
+            if (service.getUuid().toString().equals(Constant.BlUETOOTH_SERVICE_UUID)) {
+                bluetoothGattService = service;
+                break;
+            }
+        }
+        if (bluetoothGattService != null) {
+
+        }
     }
 
     private void initPage() {
-        prepareFragment();
-        changePage(0);
-    }
+        CharacteristicOperationFragment characteristicOperationFragment = new CharacteristicOperationFragment();
 
-    public void changePage(int page) {
-        currentPage = page;
-        mTitleBar.setTitle(titles[page]);
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment, characteristicOperationFragment).commit();
 
-        updateFragment(page);
-        if (currentPage == 1) {
-            ((CharacteristicListFragment) fragments.get(1)).showData();
-        } else if (currentPage == 2) {
-            ((CharacteristicOperationFragment) fragments.get(2)).showData();
-        }
-    }
-
-    private void prepareFragment() {
-        fragments.add(new ServiceListFragment());
-        fragments.add(new CharacteristicListFragment());
-        fragments.add(new CharacteristicOperationFragment());
-        for (Fragment fragment : fragments) {
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment, fragment).hide(fragment).commit();
-        }
-    }
-
-    private void updateFragment(int position) {
-        if (position > fragments.size() - 1) {
-            return;
-        }
-        for (int i = 0; i < fragments.size(); i++) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            Fragment fragment = fragments.get(i);
-            if (i == position) {
-                transaction.show(fragment);
-            } else {
-                transaction.hide(fragment);
-            }
-            transaction.commit();
-        }
     }
 
     public BleDevice getBleDevice() {
