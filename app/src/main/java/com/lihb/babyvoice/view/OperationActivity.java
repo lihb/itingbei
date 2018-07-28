@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -96,7 +97,7 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_STOP_SIGNAL) {
                             Logger.i("主机正常断开蓝牙前的通知数据包");
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL) {
-                            Logger.i("从机上传实时胎心音数据");
+                            Log.d("lihb command", "从机上传实时胎心音数据: " + HexUtil.formatHexString(command.getData(), true));
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_SETTING_SIGNAL) {
                             Logger.i("主机配置设备的信息");
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_STATUS_SIGNAL) {

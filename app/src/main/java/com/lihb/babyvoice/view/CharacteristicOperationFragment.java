@@ -27,7 +27,9 @@ import com.lihb.babyvoice.Constant;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.utils.bluetooth.BluetoothParser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -47,6 +49,8 @@ public class CharacteristicOperationFragment extends Fragment {
     private LinearLayout layout_container;
 
     Subscription subscription = null;
+    private boolean isFirstRead = false;
+    private List<Byte> commandDataList = new ArrayList<>();
 
 
     @Override
@@ -105,6 +109,7 @@ public class CharacteristicOperationFragment extends Fragment {
             public void onClick(View view) {
                 if (readBtn.getText().toString().equals("开始读数据")) {
                     readBtn.setText("停止读数据");
+                    isFirstRead = true;
                     BleManager.getInstance().notify(
                             bleDevice,
                             Constant.BlUETOOTH_SERVICE_UUID,
@@ -133,10 +138,21 @@ public class CharacteristicOperationFragment extends Fragment {
 
                                 @Override
                                 public void onCharacteristicChanged(byte[] data) {
-//                                                BluetoothParser.getInstance().putBytes(data);
-                                    Log.d("lihb getdata1 ", HexUtil.formatHexString(data, true));
 
-                                    BluetoothParser.getInstance().parserBytes(data);
+                                    Log.d("lihb getdata1 ", HexUtil.formatHexString(data, true));
+                                    if (isFirstRead && data[0] != (byte) 0xAA) {
+                                        return;
+                                    }
+                                    isFirstRead = false;
+
+                                    for (int i = 0; i < data.length; i++) {
+                                        commandDataList.add(data[i]);
+                                        if (data[i] == (byte) 0x55) {
+                                            BluetoothParser.getInstance().parserBytes(commandDataList.toArray(new Byte[commandDataList.size()]));
+                                            commandDataList.clear();
+                                        }
+                                    }
+
 
                                     runOnUiThread(new Runnable() {
                                         @Override
@@ -149,6 +165,7 @@ public class CharacteristicOperationFragment extends Fragment {
                             });
                 } else {
                     readBtn.setText("开始读数据");
+                    isFirstRead = false;
                     BleManager.getInstance().stopNotify(
                             bleDevice,
                             Constant.BlUETOOTH_SERVICE_UUID,

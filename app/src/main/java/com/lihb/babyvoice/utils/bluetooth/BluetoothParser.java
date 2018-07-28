@@ -5,6 +5,7 @@ import android.util.Log;
 import com.clj.fastble.utils.HexUtil;
 import com.lihb.babyvoice.command.BluetoothCommand;
 import com.lihb.babyvoice.utils.RxBus;
+import com.lihb.babyvoice.utils.StringUtils;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -105,19 +106,19 @@ public class BluetoothParser {
         return (byte) 0xff;
     }
 
-    public void parserBytes(byte[] data) {
+    public void parserBytes(Byte[] data) {
 //        byte[] data = takeBytes();
-        Log.d(TAG, HexUtil.formatHexString(data, true));
+        Log.d(TAG, HexUtil.formatHexString(StringUtils.toPrimitives(data), true));
         try {
             if (data != null) {
                 packetHead = data[0];
                 packetLen = data[1];
-                int contentLength = packetLen - 3;
+                int contentLength = packetLen - 4; // FIXME: 2018/7/29
                 Log.d(TAG, "packetLen = " + packetLen + ", contentLength = " + contentLength);
                 packetType = data[2];
                 packetSubType = data[3];
                 packetContent = new byte[contentLength];
-                System.arraycopy(data, 4, packetContent, 0, contentLength);
+                System.arraycopy(StringUtils.toPrimitives(data), 4, packetContent, 0, contentLength);
                 packetCheckSum = data[packetLen - 1];
                 packetTail = data[packetLen];
                 BluetoothCommand.BlueToothStatus status = null;
@@ -182,17 +183,15 @@ public class BluetoothParser {
                         }
                     }
                     if (status != null) {
-                        BluetoothCommand command = new BluetoothCommand(status, data);
+                        BluetoothCommand command = new BluetoothCommand(status, packetContent);
                         RxBus.getDefault().post(command);
                     }
-                } else {
-
                 }
 //            data = takeBytes();
 
             }
         } catch (Exception e) {
-            Log.d(TAG, "eeeeee");
+            Log.d(TAG, e.getMessage());
         }
 
     }
