@@ -12,6 +12,7 @@ import android.view.View;
 import com.clj.fastble.BleManager;
 import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.utils.HexUtil;
+import com.cokus.wavelibrary.utils.Pcm2Wav;
 import com.lihb.babyvoice.Constant;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.command.BluetoothCommand;
@@ -20,8 +21,14 @@ import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
 import com.lihb.babyvoice.observer.Observer;
 import com.lihb.babyvoice.observer.ObserverManager;
 import com.lihb.babyvoice.utils.CommonToast;
+import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.RxBus;
 import com.orhanobut.logger.Logger;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -29,6 +36,8 @@ import rx.functions.Action1;
 public class OperationActivity extends BaseFragmentActivity implements Observer {
 
     public static final String KEY_DATA = "key_data";
+    private String TAG = "OperationActivity";
+
 
     private BleDevice bleDevice;
     private BluetoothGattService bluetoothGattService;
@@ -37,12 +46,25 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 
     private String[] titles = new String[3];
     private TitleBar mTitleBar;
+    private ArrayList<byte[]> write_data = new ArrayList<byte[]>();//写入文件数据
+    private String savePcmPath;
+    private String saveWavPath;
+    private boolean startWrite;
+
+    private boolean isWriting;
+
+    public void setWriting(boolean writing) {
+        isWriting = writing;
+    }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_operation);
+        FileUtils.createDirectory(Constant.DATA_DIRECTORY);
         initData();
         initPage();
         initView();
@@ -97,7 +119,21 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_STOP_SIGNAL) {
                             Logger.i("主机正常断开蓝牙前的通知数据包");
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL) {
-                            Log.d("lihb command", "从机上传实时胎心音数据: " + HexUtil.formatHexString(command.getData(), true));
+                            final byte[] data = command.getData();
+                            Log.d("lihb command", "从机上传实时胎心音数据: " + HexUtil.formatHexString(data, true));
+                            if (startWrite) {
+                                synchronized (write_data) {
+                                    int readSize = data.length;
+                                    byte bys[] = new byte[readSize * 2];
+                                    //因为arm字节序问题，所以需要高低位交换
+                                    for (int i = 0; i < readSize; i++) {
+                                        byte ss[] = getBytes(data[i]);
+                                        bys[i * 2] = ss[0];
+                                        bys[i * 2 + 1] = ss[1];
+                                    }
+                                    write_data.add(bys);
+                                }
+                            }
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_SETTING_SIGNAL) {
                             Logger.i("主机配置设备的信息");
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_STATUS_SIGNAL) {
@@ -117,6 +153,15 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 
     }
 
+    public byte[] getBytes(short s) {
+        byte[] buf = new byte[2];
+        for (int i = 0; i < buf.length; i++) {
+            buf[i] = (byte) (s & 0x00ff);
+            s >>= 8;
+        }
+        return buf;
+    }
+
     private void initData() {
         bleDevice = getIntent().getParcelableExtra(KEY_DATA);
         if (bleDevice == null)
@@ -132,9 +177,6 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
                 bluetoothGattService = service;
                 break;
             }
-        }
-        if (bluetoothGattService != null) {
-
         }
     }
 
@@ -171,6 +213,91 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 
     public void setCharaProp(int charaProp) {
         this.charaProp = charaProp;
+    }
+
+    public void startWriteFile() {
+        isWriting = true;
+        new Thread(new WriteRunnable()).start();//开线程写文件
+    }
+
+
+    /**
+     * 异步写文件
+     *
+     * @author cokus
+     */
+    class WriteRunnable implements Runnable {
+        @Override
+        public void run() {
+            try {
+                startWrite = true;
+                savePcmPath = Constant.DATA_DIRECTORY + System.currentTimeMillis() + "test.pcm";
+                saveWavPath = Constant.DATA_DIRECTORY + System.currentTimeMillis() + "test.wav";
+                FileOutputStream fos2wav = null;
+                File file2wav = null;
+                try {
+                    file2wav = new File(savePcmPath);
+                    if (file2wav.exists()) {
+                        file2wav.delete();
+                    }
+                    fos2wav = new FileOutputStream(file2wav);// 建立一个可存取字节的文件
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                while (isWriting || write_data.size() > 0) {
+                    byte[] buffer = null;
+                    synchronized (write_data) {
+                        if (write_data.size() > 0) {
+                            buffer = write_data.get(0);
+                            write_data.remove(0);
+                        }
+                    }
+                    try {
+                        if (buffer != null) {
+                            fos2wav.write(buffer);
+                            fos2wav.flush();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                fos2wav.close();
+                Pcm2Wav p2w = new Pcm2Wav();//将pcm格式转换成wav 其实就尼玛加了一个44字节的头信息
+                p2w.convertAudioFiles(savePcmPath, saveWavPath);
+            } catch (Throwable t) {
+                Log.e(TAG, "save file failed..");
+            } finally {
+                Log.i(TAG, "finally, always delete pcm file..");
+                deleteFile(savePcmPath);
+            }
+        }
+    }
+
+    /**
+     * 删除SD卡或者手机的缓存图片和目录
+     */
+    public boolean deleteFile(String filePath) {
+        File dirFile = new File(filePath);
+        if (!dirFile.exists()) {
+            return false;
+        }
+        if (dirFile.isDirectory()) {
+            String[] children = dirFile.list();
+            for (int i = 0; i < children.length; i++) {
+                File subFile = new File(dirFile.getAbsolutePath() + File.separator + children[i]);
+                if (subFile.isDirectory()) {
+                    deleteFile(subFile.getAbsolutePath());
+                } else {
+                    final File to = new File(subFile.getAbsolutePath() + System.currentTimeMillis());
+                    subFile.renameTo(to);
+                    to.delete();
+//					new File(dirFile, children[i]).delete();
+                }
+            }
+        }
+
+        return dirFile.delete();
     }
 
 

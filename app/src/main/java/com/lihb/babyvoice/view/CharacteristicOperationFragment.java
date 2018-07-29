@@ -124,6 +124,7 @@ public class CharacteristicOperationFragment extends Fragment {
                                             addText(contentTxt, "notify success");
                                         }
                                     });
+                                    ((OperationActivity) getActivity()).startWriteFile();
                                 }
 
                                 @Override
@@ -170,6 +171,7 @@ public class CharacteristicOperationFragment extends Fragment {
                             bleDevice,
                             Constant.BlUETOOTH_SERVICE_UUID,
                             Constant.BlUETOOTH_NOTIFY_UUID);
+                    ((OperationActivity) getActivity()).setWriting(false);
                 }
             }
         });
