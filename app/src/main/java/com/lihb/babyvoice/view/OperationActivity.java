@@ -110,7 +110,7 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 
     private void initView() {
         mTitleBar = (TitleBar) findViewById(R.id.title_bar);
-        mTitleBar.setTitle(titles[0]);
+        mTitleBar.setTitle(titles[2]);
         mTitleBar.setLeftOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

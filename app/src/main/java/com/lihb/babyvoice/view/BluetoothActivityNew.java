@@ -38,6 +38,7 @@ import com.lihb.babyvoice.adapter.DeviceAdapter;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
 import com.lihb.babyvoice.observer.ObserverManager;
+import com.lihb.babyvoice.utils.CommonToast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -223,6 +224,14 @@ public class BluetoothActivityNew extends BaseFragmentActivity implements View.O
                 mDeviceAdapter.addDevice(bleDevice);
                 mDeviceAdapter.notifyDataSetChanged();
                 setMtu(bleDevice, 300);
+
+                CommonToast.showShortToast("连接成功.");
+                if (BleManager.getInstance().isConnected(bleDevice)) {
+                    Intent intent = new Intent(BluetoothActivityNew.this, OperationActivity.class);
+                    intent.putExtra(OperationActivity.KEY_DATA, bleDevice);
+                    startActivity(intent);
+                }
+
             }
 
             @Override

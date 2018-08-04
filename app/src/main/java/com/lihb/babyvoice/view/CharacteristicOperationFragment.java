@@ -25,6 +25,7 @@ import com.clj.fastble.exception.BleException;
 import com.clj.fastble.utils.HexUtil;
 import com.lihb.babyvoice.Constant;
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.utils.SoftInputUtil;
 import com.lihb.babyvoice.utils.bluetooth.BluetoothParser;
 
 import java.util.ArrayList;
@@ -78,6 +79,14 @@ public class CharacteristicOperationFragment extends Fragment {
         TextView contentTxt = (TextView) view.findViewById(R.id.content_txt);
 
         contentTxt.setMovementMethod(ScrollingMovementMethod.getInstance());
+        contentTxt.clearFocus();
+        writeEditText.clearFocus();
+        writeEditText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                SoftInputUtil.hideSoftInput(getActivity());
+            }
+        }, 50);
 
         Observable observable = rx.Observable.interval(800, TimeUnit.MILLISECONDS).observeOn(Schedulers.io());
 
