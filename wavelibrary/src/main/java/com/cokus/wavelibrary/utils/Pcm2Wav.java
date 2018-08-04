@@ -28,10 +28,10 @@ public class Pcm2Wav {
         WaveHeader header = new WaveHeader();
         header.fileLength = PCMSize + (44 - 8);
         header.FmtHdrLeth = 16;
-        header.BitsPerSample = 16;
+        header.BitsPerSample = 8;
         header.Channels = 1;
         header.FormatTag = 0x0001;
-        header.SamplesPerSec = 16000;
+        header.SamplesPerSec = 5000;
         header.BlockAlign = (short) (header.Channels * header.BitsPerSample / 8);
         header.AvgBytesPerSec = header.BlockAlign * header.SamplesPerSec;
         header.DataHdrLeth = PCMSize;

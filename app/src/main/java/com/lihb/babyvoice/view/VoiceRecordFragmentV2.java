@@ -55,7 +55,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     private WaveCanvas waveCanvas;
     private ImageView voicePosImg;
 
-    private static final int FREQUENCY = 44100;// 设置音频采样率，44100是目前的标准，但是某些设备仍然支持22050，16000，11025
+    private static final int FREQUENCY = 16000;// 设置音频采样率，44100是目前的标准，但是某些设备仍然支持22050，16000，11025
     private static final int CHANNELCONGIFIGURATION = AudioFormat.CHANNEL_IN_MONO;// 设置单声道声道
     private static final int AUDIOENCODING = AudioFormat.ENCODING_PCM_16BIT;// 音频数据格式：每个样本16位
     public final static int AUDIO_SOURCE = MediaRecorder.AudioSource.MIC;// 音频获取源

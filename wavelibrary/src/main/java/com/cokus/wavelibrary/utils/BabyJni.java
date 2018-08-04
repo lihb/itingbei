@@ -13,7 +13,7 @@ public class BabyJni {
 
     static {
         try {
-            System.loadLibrary("FHRAndroidLib");
+            System.loadLibrary("FHRAndroidLib2_0");
             Log.e("[lihb data]", "加载so库成功");
             hasInitSuccess = true;
         } catch (UnsatisfiedLinkError var1) {
@@ -22,7 +22,7 @@ public class BabyJni {
         }
     }
 
-    public static native int fun(int appData);
+//    public static native int fun(int appData);
 
     public static native double[] FHRCal(double a1, double a2, double b1, double b2, double[] data);
 

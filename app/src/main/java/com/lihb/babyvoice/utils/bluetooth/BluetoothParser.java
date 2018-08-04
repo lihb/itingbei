@@ -30,7 +30,7 @@ public class BluetoothParser {
     /**
      * 长度, 1 byte
      */
-    private byte packetLen;
+    private int packetLen;
 
     /**
      * 数据类型
@@ -112,7 +112,7 @@ public class BluetoothParser {
         try {
             if (data != null) {
                 packetHead = data[0];
-                packetLen = data[1];
+                packetLen = data[1] & 0xff;
                 int contentLength = packetLen - 4; // FIXME: 2018/7/29
                 Log.d(TAG, "packetLen = " + packetLen + ", contentLength = " + contentLength);
                 packetType = data[2];
