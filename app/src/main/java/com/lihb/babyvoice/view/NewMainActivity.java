@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.Constant;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.command.BaseAndroidCommand;
@@ -499,4 +501,12 @@ public class NewMainActivity extends BaseFragmentActivity {
         }
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK /*&& this.getCanExit()*/) {
+            BabyVoiceApp.getInstance().ExitAPP(getApplicationContext());
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
