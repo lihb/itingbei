@@ -11,13 +11,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.activity.BluetoothActivityNew;
+import com.lihb.babyvoice.activity.WebViewActivity;
 import com.lihb.babyvoice.customview.CircularImageView;
 import com.lihb.babyvoice.customview.DividerLine;
 import com.lihb.babyvoice.customview.IconFontTextView;
 import com.lihb.babyvoice.model.DrawLayoutEntity;
 import com.lihb.babyvoice.utils.CommonToast;
-import com.lihb.babyvoice.view.BluetoothActivityNew;
-import com.lihb.babyvoice.view.WebViewActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;
