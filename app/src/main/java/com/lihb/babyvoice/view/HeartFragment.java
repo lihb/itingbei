@@ -252,24 +252,6 @@ public class HeartFragment extends BaseFragment {
 
     }
 
-    private void gotoSettingFragment() {
-        if (null == settingFragment) {
-            settingFragment = SettingFragment.create();
-        }
-
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.hide(this);
-        int count = getActivity().getSupportFragmentManager().getBackStackEntryCount();
-        if (count > 0) {
-            getActivity().getSupportFragmentManager().popBackStackImmediate();
-        }
-        transaction.add(R.id.main_layout, settingFragment, "settingFragment")
-                .show(settingFragment)
-                .addToBackStack(null)
-                .commit();
-
-    }
-
     private void gotoBluetoothFragment() {
         if (null == mBluetoothFragment) {
             mBluetoothFragment = BluetoothFragment.create();

@@ -503,10 +503,29 @@ public class NewMainActivity extends BaseFragmentActivity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK /*&& this.getCanExit()*/) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && getCanExit()) {
             BabyVoiceApp.getInstance().ExitAPP(getApplicationContext());
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    /**
+     * 对不同的fragment区分不同的退出机制
+     *
+     * @return
+     */
+    private boolean getCanExit() {
+        if (getSupportFragmentManager().findFragmentByTag("SettingFragment") != null &&
+                getSupportFragmentManager().findFragmentByTag("SettingFragment").isVisible()) {
+            return false;
+        }
+        if (getSupportFragmentManager().findFragmentByTag("msgFragment") != null &&
+                getSupportFragmentManager().findFragmentByTag("msgFragment").isVisible()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

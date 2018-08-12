@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lihb.babyvoice.R;
@@ -61,24 +60,16 @@ public class MessageFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
+        hideBottomTab();
     }
 
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-//        if (hidden == false) {
-//            showBottomTab();
-//        }
-    }
-
-    private void showBottomTab() {
-        if (getActivity() == null) {
-            return;
+        if (hidden == false) {
+            hideBottomTab();
         }
-        // 隐藏底部的导航栏和分割线
-        ((LinearLayout) getActivity().findViewById(R.id.linearLayout1)).setVisibility(View.VISIBLE);
-        ((View) getActivity().findViewById(R.id.divider_line2)).setVisibility(View.VISIBLE);
     }
 
     private void initView() {
@@ -122,6 +113,15 @@ public class MessageFragment extends BaseFragment {
         });
         getData(true);
 
+    }
+
+    private void hideBottomTab() {
+        if (getActivity() == null) {
+            return;
+        }
+        // 隐藏底部的导航栏和分割线
+        (getActivity().findViewById(R.id.tab_layout)).setVisibility(View.GONE);
+        (getActivity().findViewById(R.id.main_divider_line)).setVisibility(View.GONE);
     }
 
     private void getData(final boolean refresh) {
