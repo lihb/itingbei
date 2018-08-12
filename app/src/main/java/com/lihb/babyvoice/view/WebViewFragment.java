@@ -2,6 +2,7 @@ package com.lihb.babyvoice.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,21 @@ public class WebViewFragment extends BaseFragment {
         TitleBar titleBar = (TitleBar) getView().findViewById(R.id.title_bar);
         titleBar.setLeftVisible(false);
         titleBar.setTitle(R.string.tab_music);
+
+        mWebView.setOnKeyListener(new View.OnKeyListener() {
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {  //表示按返回键时的操作
+                        mWebView.goBack();   //后退
+                        //webview.goForward();//前进
+                        return true;    //已处理
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     @Override
