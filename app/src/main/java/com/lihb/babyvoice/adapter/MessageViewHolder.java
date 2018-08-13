@@ -8,9 +8,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ServiceGenerator;
+import com.lihb.babyvoice.activity.WebViewActivity;
 import com.lihb.babyvoice.model.Message;
 import com.lihb.babyvoice.utils.StringUtils;
-import com.lihb.babyvoice.view.WebViewActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

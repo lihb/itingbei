@@ -1,6 +1,7 @@
 package com.lihb.babyvoice;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Environment;
 
 import com.bumptech.glide.Glide;
@@ -11,6 +12,7 @@ import com.lihb.babyvoice.command.HeadSetPluginChangedCommand;
 import com.lihb.babyvoice.command.LoginStateChangedCommand;
 import com.lihb.babyvoice.model.UserInfo;
 import com.lihb.babyvoice.utils.BroadcastWatcher;
+import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.NotificationCenter;
 import com.lihb.babyvoice.utils.RxBus;
@@ -44,6 +46,7 @@ public class BabyVoiceApp extends Application {
      * 耳机是否插入
      */
     private boolean mIsPlugIn = false;
+    private long exitTime;
 
     public String getCachePath() {
         return cachePath;
@@ -190,6 +193,21 @@ public class BabyVoiceApp extends Application {
         File f = new File(cachePath);
         if (!f.exists())
             f.mkdirs();
+    }
+
+
+    /**
+     * 退出程序
+     *
+     * @param context
+     */
+    public void ExitAPP(Context context) {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            CommonToast.showShortToast(R.string.exit_tip);
+            exitTime = System.currentTimeMillis();
+        } else {
+            System.exit(0);
+        }
     }
 
 

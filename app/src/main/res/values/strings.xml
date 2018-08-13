@@ -162,5 +162,6 @@
     <string name="connected">已连接</string>
     <string name="disconnect">断开连接</string>
     <string name="enter">进入操作</string>
+    <string name="exit_tip">再按一次退出爱听贝</string>
 
 </resources>

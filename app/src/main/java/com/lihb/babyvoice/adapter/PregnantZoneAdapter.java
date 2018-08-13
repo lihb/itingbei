@@ -14,12 +14,12 @@ import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.action.ApiManager;
 import com.lihb.babyvoice.action.ResponseCode;
 import com.lihb.babyvoice.action.ServiceGenerator;
+import com.lihb.babyvoice.activity.ImageBrowseActivity;
+import com.lihb.babyvoice.activity.WebViewActivity;
 import com.lihb.babyvoice.model.Article;
 import com.lihb.babyvoice.model.HttpResponse;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.StringUtils;
-import com.lihb.babyvoice.view.ImageBrowseActivity;
-import com.lihb.babyvoice.view.WebViewActivity;
 import com.orhanobut.logger.Logger;
 
 import java.util.ArrayList;

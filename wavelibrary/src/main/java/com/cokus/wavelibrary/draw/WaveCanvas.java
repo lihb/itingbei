@@ -14,7 +14,6 @@ import android.os.Message;
 import android.util.Log;
 import android.view.SurfaceView;
 
-import com.cokus.wavelibrary.utils.BabyJni;
 import com.cokus.wavelibrary.utils.Pcm2Wav;
 import com.cokus.wavelibrary.view.WaveSurfaceView;
 
@@ -22,7 +21,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
 
@@ -193,11 +191,11 @@ public class WaveCanvas {
                     // 从MIC保存数据到缓冲区  
                     readsize = audioRecord.read(buffer, 0, recBufSize);
 
-                    double[] doubleData = new double[buffer.length];
-                    for (int i = 0; i < buffer.length; i++) {
-                        doubleData[i] = buffer[i];
-                    }
-                    Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
+//                    double[] doubleData = new double[buffer.length];
+//                    for (int i = 0; i < buffer.length; i++) {
+//                        doubleData[i] = buffer[i];
+//                    }
+//                    Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
 //                    System.arraycopy(buffer, 0,doubleData, 0, buffer.length);
 
 //                    int replyData = BabyJni.fun(new Random().nextInt(99));
@@ -213,7 +211,7 @@ public class WaveCanvas {
                             inBuf.add(buffer[i]);
                         }
                     }
-                    publishProgress(doubleData);
+                    publishProgress();
                     if (AudioRecord.ERROR_INVALID_OPERATION != readsize && startWrite) {
                         synchronized (write_data) {
                             byte bys[] = new byte[readsize * 2];
@@ -240,11 +238,11 @@ public class WaveCanvas {
 
         @Override
         protected void onProgressUpdate(Object... values) {
-            double[] doubleData = (double[]) values[0];
-            Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
-
-            double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
-            Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
+//            double[] doubleData = (double[]) values[0];
+//            Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
+//
+//            double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
+//            Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
 
             long time = new Date().getTime();
             if (time - c_time >= draw_time) {
