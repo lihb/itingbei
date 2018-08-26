@@ -9,7 +9,7 @@ public class WaveHeader {
     public int fileLength;
 
     public char wavTag[] = {'W', 'A', 'V', 'E'};
-    ;
+
 
     public char FmtHdrID[] = {'f', 'm', 't', ' '};
 
