@@ -144,6 +144,8 @@ public class VoicePlayFragment extends BaseFragment {
 
         loadDataFromFile();
 
+        total_time_txt.setText(StringUtils.formatTime(Integer.parseInt(babyVoice.duration)));
+
     }
 
     File mFile;
@@ -272,7 +274,7 @@ public class VoicePlayFragment extends BaseFragment {
                     public void onPrepared(MediaPlayer mp) {
                         mediaPlayer.start();
                         seekBar.setMax(mediaPlayer.getDuration());
-                        total_time_txt.setText(StringUtils.formatTime(mediaPlayer.getDuration() / 1000));
+                        total_time_txt.setText(StringUtils.formatTime(Integer.parseInt(babyVoice.duration)));
                         mPlayEndMsec = mediaPlayer.getDuration();
                         //更新进度
                         myHandler.removeCallbacks(null);
