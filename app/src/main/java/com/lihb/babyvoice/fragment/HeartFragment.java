@@ -1,5 +1,6 @@
 package com.lihb.babyvoice.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentTransaction;
@@ -13,6 +14,7 @@ import android.view.Window;
 import android.widget.ImageView;
 
 import com.lihb.babyvoice.R;
+import com.lihb.babyvoice.activity.ViewFlipperActivity;
 import com.lihb.babyvoice.adapter.HeartAdapter;
 import com.lihb.babyvoice.command.PickedCategoryCommand;
 import com.lihb.babyvoice.customview.PickRecordDialog;
@@ -81,7 +83,10 @@ public class HeartFragment extends BaseFragment {
         emptyView = getView().findViewById(R.id.empty_root_view);
 
         mTitleBar = (TitleBar) getView().findViewById(R.id.title_bar);
-        mTitleBar.setRightOnClickListener(v -> gotoMessageFragment());
+//        mTitleBar.setRightOnClickListener(v -> gotoMessageFragment());
+        mTitleBar.setRightOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), ViewFlipperActivity.class));
+        });
 
         mRefreshLayout = (RefreshLayout) getView().findViewById(R.id.heart_refreshlayout);
         mRecyclerView = (RemovedRecyclerView) getView().findViewById(R.id.heart_recyclerView);
