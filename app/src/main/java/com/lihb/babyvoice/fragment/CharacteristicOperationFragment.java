@@ -28,6 +28,8 @@ import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.activity.OperationActivity;
 import com.lihb.babyvoice.utils.SoftInputUtil;
 import com.lihb.babyvoice.utils.bluetooth.BluetoothParser;
+import com.lihb.babyvoice.utils.bluetooth.CalcHeartRatioUtil;
+import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,6 +55,7 @@ public class CharacteristicOperationFragment extends Fragment {
     Subscription subscription = null;
     //    private boolean isFirstRead = false;
     private List<Byte> commandDataList = new ArrayList<>();
+    private CalcHeartRatioUtil calcHeartRatioUtil;
 
 
     @Override
@@ -160,6 +163,10 @@ public class CharacteristicOperationFragment extends Fragment {
                                         if (data[i] == (byte) 0x55) {
                                             if (commandDataList.get(0) == (byte) 0xAA) {
                                                 BluetoothParser.getInstance().parserBytes(commandDataList.toArray(new Byte[commandDataList.size()]));
+                                                if (calcHeartRatioUtil == null) {
+                                                    calcHeartRatioUtil = new CalcHeartRatioUtil((RxFragmentActivity) getActivity());
+                                                    calcHeartRatioUtil.initRxBus();
+                                                }
                                             }
                                             commandDataList.clear();
                                         }
@@ -183,6 +190,7 @@ public class CharacteristicOperationFragment extends Fragment {
                             Constant.BlUETOOTH_SERVICE_UUID,
                             Constant.BlUETOOTH_NOTIFY_UUID);
                     ((OperationActivity) getActivity()).setWriting(false);
+                    calcHeartRatioUtil.release();
                 }
             }
         });

@@ -136,26 +136,10 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
                             final byte[] data = command.getData();
                             Log.d("lihb command", "从机上传实时胎心音数据: " + HexUtil.formatHexString(data, true));
                             int readSize = data.length;
-
-//                            double[] doubleData = new double[readSize];
-//                            for (int i = 0; i < readSize; i++) {
-//                                doubleData[i] = (data[i] & 0xff);
-//                            }
-//
-//                            Log.d("[lihb command]", "doubleData = " + Arrays.toString(doubleData));
-//                            double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
-//                            Log.d("[lihb command]", "replyData " + Arrays.toString(replyArray));
                             audioTrack.write(data, 0, readSize);
                             if (startWrite) {
                                 synchronized (write_data) {
-//                                    byte bys[] = new byte[readSize];
-//                                    //因为arm字节序问题，所以需要高低位交换
-//                                    for (int i = 0; i < readSize; i++) {
-//                                        bys[i] = (byte)(Math.abs(data[i] - (byte)0x50));
-//                                    }
-//                                    Log.d("lihb command", "减去80: " + Arrays.toString(bys));
-//                                    write_data.add(bys);
-                                    write_data.add(data);
+                                    write_data.add(data);  // 实时播放数据
                                 }
                             }
                         } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_SETTING_SIGNAL) {
