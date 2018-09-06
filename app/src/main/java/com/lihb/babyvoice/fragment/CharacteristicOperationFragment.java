@@ -51,7 +51,7 @@ public class CharacteristicOperationFragment extends Fragment {
     private LinearLayout layout_container;
 
     Subscription subscription = null;
-    private boolean isFirstRead = false;
+    //    private boolean isFirstRead = false;
     private List<Byte> commandDataList = new ArrayList<>();
 
 
@@ -119,7 +119,6 @@ public class CharacteristicOperationFragment extends Fragment {
             public void onClick(View view) {
                 if (readBtn.getText().toString().equals("开始读数据")) {
                     readBtn.setText("停止读数据");
-                    isFirstRead = true;
                     BleManager.getInstance().notify(
                             bleDevice,
                             Constant.BlUETOOTH_SERVICE_UUID,
@@ -151,15 +150,17 @@ public class CharacteristicOperationFragment extends Fragment {
                                 public void onCharacteristicChanged(byte[] data) {
 
                                     Log.d("lihb getdata1 ", HexUtil.formatHexString(data, true));
-                                    if (isFirstRead && data[0] != (byte) 0xAA) {
-                                        return;
-                                    }
-                                    isFirstRead = false;
+//                                    if (isFirstRead && data[0] != (byte) 0xAA) {
+//                                        return;
+//                                    }
+//                                    isFirstRead = false;
 
                                     for (int i = 0; i < data.length; i++) {
                                         commandDataList.add(data[i]);
                                         if (data[i] == (byte) 0x55) {
-                                            BluetoothParser.getInstance().parserBytes(commandDataList.toArray(new Byte[commandDataList.size()]));
+                                            if (commandDataList.get(0) == (byte) 0xAA) {
+                                                BluetoothParser.getInstance().parserBytes(commandDataList.toArray(new Byte[commandDataList.size()]));
+                                            }
                                             commandDataList.clear();
                                         }
                                     }
@@ -176,7 +177,7 @@ public class CharacteristicOperationFragment extends Fragment {
                             });
                 } else {
                     readBtn.setText("开始读数据");
-                    isFirstRead = false;
+//                    isFirstRead = false;
                     BleManager.getInstance().stopNotify(
                             bleDevice,
                             Constant.BlUETOOTH_SERVICE_UUID,

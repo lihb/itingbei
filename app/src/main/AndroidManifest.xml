@@ -119,6 +119,7 @@
         <activity android:name=".activity.BluetoothActivity" />
         <activity android:name=".activity.BluetoothActivityNew" />
         <activity android:name=".activity.OperationActivity" />
+        <activity android:name=".activity.ViewFlipperActivity" />
         <activity
             android:name=".activity.EntryPointActivity"
             android:alwaysRetainTaskState="true"
