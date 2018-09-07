@@ -190,7 +190,9 @@ public class CharacteristicOperationFragment extends Fragment {
                             Constant.BlUETOOTH_SERVICE_UUID,
                             Constant.BlUETOOTH_NOTIFY_UUID);
                     ((OperationActivity) getActivity()).setWriting(false);
-                    calcHeartRatioUtil.release();
+                    if (calcHeartRatioUtil != null) {
+                        calcHeartRatioUtil.release();
+                    }
                 }
             }
         });

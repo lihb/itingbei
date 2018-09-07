@@ -2,6 +2,7 @@ package com.lihb.babyvoice.utils.bluetooth;
 
 import android.util.Log;
 
+import com.cokus.wavelibrary.utils.BabyJni;
 import com.lihb.babyvoice.command.BluetoothCommand;
 import com.lihb.babyvoice.utils.RxBus;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
@@ -54,10 +55,8 @@ public class CalcHeartRatioUtil {
                             final byte[] data = command.getData();
                             int readSize = data.length;
 
-                            double[] doubleData = new double[readSize];
-                            for (int i = 0; i < readSize; i++) {
-                                doubleData[i] = (data[i] & 0xff);
-                            }
+//                            double[] doubleData = new double[readSize];
+
                             if (beginTime == 0) {
                                 startWork();
                             }
@@ -73,8 +72,10 @@ public class CalcHeartRatioUtil {
                             CopyOnWriteArrayList list = dataMap.get(yu);
 
                             setIndexList(yu, list, sequence);
-
-                            list.addAll(Arrays.asList(doubleData));
+                            for (int i = 0; i < readSize; i++) {
+//                                doubleData[i] = (data[i] & 0xff);
+                                list.add((data[i] & 0xff) * 1.0d);
+                            }
 
                         }
                     }
@@ -111,10 +112,14 @@ public class CalcHeartRatioUtil {
                     CopyOnWriteArrayList<Double> list = e.getValue();
                     sendDataList.addAll(list);
                 }
-                Log.d(TAG, "pollingDisposableObserver onNext, size = " + sendDataList.size() + ", sendDataList =" + sendDataList);
-                // FIXME: 2018/9/6
-//                double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
-//                Log.d("[lihb command]", "replyData " + Arrays.toString(replyArray));
+                final int size = sendDataList.size();
+                Log.d(TAG, "pollingDisposableObserver onNext, size = " + size + ", sendDataList =" + sendDataList);
+                double[] sendDataArr = new double[size];
+                for (int i = 0; i < size; i++) {
+                    sendDataArr[i] = sendDataList.get(i);
+                }
+                double[] replyArray = BabyJni.FHRCal(1, -0.993522329411315, 0.003238835294343, 0.003238835294343, sendDataArr);
+                Log.d("[lihb command]", "replyData " + Arrays.toString(replyArray));
             }
 
             @Override

@@ -3,6 +3,7 @@ package com.lihb.babyvoice;
 import android.app.Application;
 import android.content.Context;
 import android.os.Environment;
+import android.support.multidex.MultiDex;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
@@ -208,6 +209,12 @@ public class BabyVoiceApp extends Application {
         } else {
             System.exit(0);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
 
