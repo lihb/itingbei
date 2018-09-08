@@ -29,7 +29,6 @@ import com.lihb.babyvoice.activity.OperationActivity;
 import com.lihb.babyvoice.utils.SoftInputUtil;
 import com.lihb.babyvoice.utils.bluetooth.BluetoothParser;
 import com.lihb.babyvoice.utils.bluetooth.CalcHeartRatioUtil;
-import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +52,6 @@ public class CharacteristicOperationFragment extends Fragment {
     private LinearLayout layout_container;
 
     Subscription subscription = null;
-    //    private boolean isFirstRead = false;
     private List<Byte> commandDataList = new ArrayList<>();
     private CalcHeartRatioUtil calcHeartRatioUtil;
 
@@ -153,20 +151,16 @@ public class CharacteristicOperationFragment extends Fragment {
                                 public void onCharacteristicChanged(byte[] data) {
 
                                     Log.d("lihb getdata1 ", HexUtil.formatHexString(data, true));
-//                                    if (isFirstRead && data[0] != (byte) 0xAA) {
-//                                        return;
-//                                    }
-//                                    isFirstRead = false;
 
                                     for (int i = 0; i < data.length; i++) {
                                         commandDataList.add(data[i]);
                                         if (data[i] == (byte) 0x55) {
                                             if (commandDataList.get(0) == (byte) 0xAA) {
                                                 BluetoothParser.getInstance().parserBytes(commandDataList.toArray(new Byte[commandDataList.size()]));
-                                                if (calcHeartRatioUtil == null) {
-                                                    calcHeartRatioUtil = new CalcHeartRatioUtil((RxFragmentActivity) getActivity());
-                                                    calcHeartRatioUtil.initRxBus();
-                                                }
+//                                                if (calcHeartRatioUtil == null) {
+//                                                    calcHeartRatioUtil = new CalcHeartRatioUtil((RxFragmentActivity) getActivity());
+//                                                    calcHeartRatioUtil.initRxBus();
+//                                                }
                                             }
                                             commandDataList.clear();
                                         }
@@ -184,7 +178,6 @@ public class CharacteristicOperationFragment extends Fragment {
                             });
                 } else {
                     readBtn.setText("开始读数据");
-//                    isFirstRead = false;
                     BleManager.getInstance().stopNotify(
                             bleDevice,
                             Constant.BlUETOOTH_SERVICE_UUID,
