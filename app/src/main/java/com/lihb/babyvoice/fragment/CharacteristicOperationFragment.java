@@ -28,7 +28,6 @@ import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.activity.OperationActivity;
 import com.lihb.babyvoice.utils.SoftInputUtil;
 import com.lihb.babyvoice.utils.bluetooth.BluetoothParser;
-import com.lihb.babyvoice.utils.bluetooth.CalcHeartRatioUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,7 +52,7 @@ public class CharacteristicOperationFragment extends Fragment {
 
     Subscription subscription = null;
     private List<Byte> commandDataList = new ArrayList<>();
-    private CalcHeartRatioUtil calcHeartRatioUtil;
+//    private CalcHeartRatioUtil calcHeartRatioUtil;
 
 
     @Override
@@ -183,9 +182,9 @@ public class CharacteristicOperationFragment extends Fragment {
                             Constant.BlUETOOTH_SERVICE_UUID,
                             Constant.BlUETOOTH_NOTIFY_UUID);
                     ((OperationActivity) getActivity()).setWriting(false);
-                    if (calcHeartRatioUtil != null) {
-                        calcHeartRatioUtil.release();
-                    }
+//                    if (calcHeartRatioUtil != null) {
+//                        calcHeartRatioUtil.release();
+//                    }
                 }
             }
         });
