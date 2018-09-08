@@ -84,10 +84,33 @@ public class VoicePlayFragment extends BaseFragment {
     }
 
     @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        hideBottomTab();
         initView();
 //        ((NewMainActivity) getActivity()).toggleDrawableLayout(false);
+    }
+
+    private void hideBottomTab() {
+        if (getActivity() == null) {
+            return;
+        }
+        // 隐藏底部的导航栏和分割线
+        (getActivity().findViewById(R.id.tab_layout)).setVisibility(View.GONE);
+        (getActivity().findViewById(R.id.main_divider_line)).setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden == false) {
+            hideBottomTab();
+        }
     }
 
     private void initView() {

@@ -48,6 +48,11 @@ public class AssistFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_assist, container, false);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
 
     private void showBottomTab() {
         if (getActivity() == null) {

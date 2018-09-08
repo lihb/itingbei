@@ -77,6 +77,11 @@ public class HeartFragment extends BaseFragment {
     }
 
     @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         initView();
@@ -156,7 +161,11 @@ public class HeartFragment extends BaseFragment {
         mImgGoToRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gotoVoiceRecordFragmentV2();
+                if (!BabyVoiceApp.getInstance().isPlugIn()) {
+                    CommonToast.showShortToast(R.string.plugin_headset_first);
+                } else {
+                    gotoVoiceRecordFragmentV2();
+                }
 //                showPickCategoryDialog();
             }
         });

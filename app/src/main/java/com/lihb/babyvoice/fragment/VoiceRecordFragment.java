@@ -52,6 +52,11 @@ public class VoiceRecordFragment extends BaseFragment {
     }
 
     @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         FileUtils.createDirectory(Constant.DATA_DIRECTORY);

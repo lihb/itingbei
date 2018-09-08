@@ -20,6 +20,8 @@ import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.command.BaseAndroidCommand;
 import com.lihb.babyvoice.command.NetStateChangedCommand;
 import com.lihb.babyvoice.command.PickedCategoryCommand;
+import com.lihb.babyvoice.customview.base.BackHandledInterface;
+import com.lihb.babyvoice.customview.base.BaseFragment;
 import com.lihb.babyvoice.customview.base.BaseFragmentActivity;
 import com.lihb.babyvoice.db.impl.BirthdayDataImpl;
 import com.lihb.babyvoice.db.impl.PregnantDateDataImpl;
@@ -54,7 +56,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class NewMainActivity extends BaseFragmentActivity {
+public class NewMainActivity extends BaseFragmentActivity implements BackHandledInterface {
 
     private static final String TAG = "NewMainActivity";
 
@@ -99,6 +101,7 @@ public class NewMainActivity extends BaseFragmentActivity {
     //    private DrawLayoutAdapter mDrawLayoutAdapter;
     private List<DrawLayoutEntity> mData = new ArrayList<>();
     private RelativeLayout mainLayout;
+    private BaseFragment mCurrFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -414,8 +417,15 @@ public class NewMainActivity extends BaseFragmentActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         RecorderHelper.getInstance().cancel();
+        if (mCurrFragment == null || !mCurrFragment.onBackPressed()) {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                super.onBackPressed();
+            } else {
+                getSupportFragmentManager().popBackStack();
+            }
+        }
+
     }
 
     private void checkNetStatus() {
@@ -546,4 +556,10 @@ public class NewMainActivity extends BaseFragmentActivity {
             return true;
         }
     }
+
+    @Override
+    public void setSelectedFragment(BaseFragment selectedFragment) {
+        mCurrFragment = selectedFragment;
+    }
+
 }

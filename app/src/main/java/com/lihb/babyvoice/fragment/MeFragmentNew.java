@@ -52,6 +52,11 @@ public class MeFragmentNew extends BaseFragment {
         return inflater.inflate(R.layout.fragment_me_new, container, false);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

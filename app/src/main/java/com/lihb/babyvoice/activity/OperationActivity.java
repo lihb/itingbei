@@ -274,7 +274,7 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 
                 fos2wav.close();
                 Pcm2Wav p2w = new Pcm2Wav();//将pcm格式转换成wav 其实就尼玛加了一个44字节的头信息
-                p2w.convertAudioFiles(savePcmPath, saveWavPath);
+                p2w.convertAudioFiles(savePcmPath, saveWavPath, (short) 8, 5000);
             } catch (Throwable t) {
                 Log.e(TAG, "save file failed..");
             } finally {

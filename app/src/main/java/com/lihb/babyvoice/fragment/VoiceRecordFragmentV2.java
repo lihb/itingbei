@@ -81,6 +81,15 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     }
 
     @Override
+    public boolean onBackPressed() {
+        if (null != waveCanvas) {
+            waveCanvas.stop();
+            waveCanvas = null;
+        }
+        return false;
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         hideBottomTab();

@@ -68,7 +68,8 @@ public class WaveCanvas {
 
     /**
      * 开始录音
-     *  @param audioRecord
+     *
+     * @param audioRecord
      * @param recBufSize
      * @param sfv
      * @param audioName
@@ -162,8 +163,8 @@ public class WaveCanvas {
         private int recBufSize;
         private AudioRecord audioRecord;
         private AudioTrack audioTrack;
-        private SurfaceView sfv;// 画板  
-        private Paint mPaint;// 画笔  
+        private SurfaceView sfv;// 画板
+        private Paint mPaint;// 画笔
         private Callback callback;
         private boolean isStart = false;
 
@@ -177,7 +178,7 @@ public class WaveCanvas {
             line_off = ((WaveSurfaceView) sfv).getLine_off();
             this.mPaint = mPaint;
             this.callback = callback;
-            inBuf.clear();// 清除  
+            inBuf.clear();// 清除
         }
 
 
@@ -188,23 +189,8 @@ public class WaveCanvas {
                 audioRecord.startRecording();// 开始录制
                 audioTrack.play();
                 while (isRecording) {
-                    // 从MIC保存数据到缓冲区  
+                    // 从MIC保存数据到缓冲区
                     readsize = audioRecord.read(buffer, 0, recBufSize);
-
-//                    double[] doubleData = new double[buffer.length];
-//                    for (int i = 0; i < buffer.length; i++) {
-//                        doubleData[i] = buffer[i];
-//                    }
-//                    Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
-//                    System.arraycopy(buffer, 0,doubleData, 0, buffer.length);
-
-//                    int replyData = BabyJni.fun(new Random().nextInt(99));
-//                    Log.d("[lihb data]", "replyData = " + replyData);
-
-//                    double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
-//                    Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
-
-
                     audioTrack.write(buffer, 0, readsize);
                     synchronized (inBuf) {
                         for (int i = 0; i < readsize; i += rateX) {
@@ -238,12 +224,6 @@ public class WaveCanvas {
 
         @Override
         protected void onProgressUpdate(Object... values) {
-//            double[] doubleData = (double[]) values[0];
-//            Log.d("[lihb data]", "thread : " + Thread.currentThread().getName() + ", sendData " + Arrays.toString(doubleData));
-//
-//            double[] replyArray = BabyJni.FHRCal(1, -0.998032, 0.000983996, 0.000983996, doubleData);
-//            Log.d("[lihb data]", "replyData " + Arrays.toString(replyArray));
-
             long time = new Date().getTime();
             if (time - c_time >= draw_time) {
                 ArrayList<Short> buf = new ArrayList<Short>();
@@ -382,7 +362,7 @@ public class WaveCanvas {
 
                 fos2wav.close();
                 Pcm2Wav p2w = new Pcm2Wav();//将pcm格式转换成wav 其实就尼玛加了一个44字节的头信息
-                p2w.convertAudioFiles(savePcmPath, saveWavPath);
+                p2w.convertAudioFiles(savePcmPath, saveWavPath, (short) 16, 16000);
             } catch (Throwable t) {
                 Log.e(TAG, "save file failed..");
             } finally {

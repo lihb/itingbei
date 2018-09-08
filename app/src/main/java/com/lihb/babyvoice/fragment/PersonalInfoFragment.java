@@ -127,6 +127,11 @@ public class PersonalInfoFragment extends BaseFragment implements PersonalInfoMv
     }
 
     @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
+    @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden == false) {

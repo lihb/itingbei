@@ -47,6 +47,11 @@ public class SettingFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_setting, container, false);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {

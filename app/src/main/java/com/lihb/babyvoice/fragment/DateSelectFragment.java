@@ -57,6 +57,11 @@ public class DateSelectFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    public boolean onBackPressed() {
+        return false;
+    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
