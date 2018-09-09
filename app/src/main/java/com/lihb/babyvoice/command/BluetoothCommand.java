@@ -28,7 +28,7 @@ public class BluetoothCommand extends BaseAndroidCommand {
         this.data = data;
     }
 
-    public BlueToothStatus getmStatus() {
+    public BlueToothStatus getStatus() {
         return mStatus;
     }
 

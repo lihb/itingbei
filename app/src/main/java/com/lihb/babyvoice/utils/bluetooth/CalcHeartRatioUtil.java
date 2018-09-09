@@ -14,7 +14,10 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.functions.Func1;
 
 /**
  * Created by lihb on 2018/9/6.
@@ -41,54 +44,67 @@ public class CalcHeartRatioUtil {
 
     public void initRxBus() {
         RxBus.getDefault().registerOnActivity(BluetoothCommand.class, mActivity)
-                .observeOn(rx.android.schedulers.AndroidSchedulers.mainThread())
-                .subscribe(new Action1<BluetoothCommand>() {
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter(new Func1<BluetoothCommand, Boolean>() {
                     @Override
-                    public void call(BluetoothCommand command) {
-                        if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL) {
+                    public Boolean call(BluetoothCommand bluetoothCommand) {
+                        if (bluetoothCommand.getStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL) {
+                            return true;
+                        }
+                        return false;
+                    }
+                })
+                .map(new Func1<BluetoothCommand, double[]>() {
+                    @Override
+                    public double[] call(BluetoothCommand bluetoothCommand) {
+                        final byte[] commandData = bluetoothCommand.getData();
+                        int len = commandData.length;
 
-                            final byte[] data = command.getData();
-                            int readSize = data.length;
+                        double[] data = new double[len];
+                        for (int i = 0; i < len; i++) {
+                            data[i] = (commandData[i] & 0xff) * 1.0d;
+                        }
+                        return data;
+                    }
+                })
+                .subscribe(new Action1<double[]>() {
+                    @Override
+                    public void call(double[] doubles) {
 
-                            if (beginTime == 0) {
-                                startWork();
-                            }
-                            long pastTime = (System.currentTimeMillis() - beginTime) / 1000;
-                            int sequence = (int) (pastTime * 1.0f / INTERVAL_COUNT);
-                            int yu = (int) pastTime % INTERVAL_COUNT;
-                            Log.i("[lihb ratio]", "pastTime = " + pastTime + ", sequence = " + sequence + ", yu = " + yu);
+                        int readSize = doubles.length;
 
-                            if (!dataMap.containsKey(yu)) {
-                                double[] saveData = new double[readSize];
+                        if (beginTime == 0) {
+                            startWork();
+                        }
+                        long pastTime = (System.currentTimeMillis() - beginTime) / 1000;
+                        int sequence = (int) (pastTime * 1.0f / INTERVAL_COUNT);
+                        int yu = (int) pastTime % INTERVAL_COUNT;
+                        Log.i("[lihb ratio]", "pastTime = " + pastTime + ", sequence = " + sequence + ", yu = " + yu);
 
-                                for (int i = 0; i < readSize; i++) {
-                                    saveData[i] = (data[i] & 0xff) * 1.0d;
-                                }
-                                dataMap.put(yu, saveData);
-                                Log.i("[lihb ratio]", "if saveData size = " + saveData.length);
+                        if (!dataMap.containsKey(yu)) {
 
-                            } else {
-                                double[] saveData = dataMap.get(yu);
-                                int currLen = saveData.length;
+                            dataMap.put(yu, doubles);
+                            Log.i("[lihb ratio]", "if doubles size = " + doubles.length);
 
-                                double[] tmpData = new double[readSize + currLen];
-                                System.arraycopy(saveData, 0, tmpData, 0, currLen);
-                                Log.i("[lihb ratio]", "readSize = " + readSize + ", currLen = " + currLen);
+                        } else {
+                            double[] saveData = dataMap.get(yu);
+                            int currLen = saveData.length;
+
+                            double[] tmpData = new double[readSize + currLen];
+                            System.arraycopy(saveData, 0, tmpData, 0, currLen);
+                            System.arraycopy(doubles, 0, tmpData, currLen, readSize);
+
+                            Log.i("[lihb ratio]", "readSize = " + readSize + ", currLen = " + currLen + ", tmpData len = " + tmpData.length);
 //                                Log.i("[lihb ratio]", "else saveData  = " +Arrays.toString(saveData) +
 //                                        ", data= " + Arrays.toString(data)+",tmpData = " +Arrays.toString(tmpData));
 
-                                for (int i = 0; i < readSize; i++) {
-                                    tmpData[currLen + i] = (data[i] & 0xff) * 1.0d;
-                                }
-                                dataMap.put(yu, tmpData);
-
-                                Log.i("[lihb ratio]", "finally else tmpData size = " + tmpData.length);
-                            }
-
-                            setIndexList(yu, sequence);
-
+                            dataMap.put(yu, tmpData);
                         }
+
+                        setIndexList(yu, sequence);
+
                     }
+
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
@@ -105,7 +121,7 @@ public class CalcHeartRatioUtil {
         DisposableObserver<Long> pollingDisposableObserver = getPollingDisposableObserver();
 
         beginTime = System.currentTimeMillis();
-//        pollingObservable.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(pollingDisposableObserver);
+        pollingObservable.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(pollingDisposableObserver);
         mCompositeDisposable.add(pollingDisposableObserver);
     }
 

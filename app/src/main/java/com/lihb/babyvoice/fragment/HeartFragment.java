@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import com.lihb.babyvoice.BabyVoiceApp;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.adapter.HeartAdapter;
+import com.lihb.babyvoice.command.BluetoothCommand;
 import com.lihb.babyvoice.command.PickedCategoryCommand;
 import com.lihb.babyvoice.customview.PickRecordDialog;
 import com.lihb.babyvoice.customview.RefreshLayout;
@@ -25,6 +26,7 @@ import com.lihb.babyvoice.db.impl.BabyVoiceDataImpl;
 import com.lihb.babyvoice.model.BabyVoice;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.DimensionUtil;
+import com.lihb.babyvoice.utils.RxBus;
 import com.lihb.babyvoice.utils.bluetooth.CalcHeartRatioUtil;
 import com.orhanobut.logger.Logger;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
@@ -32,6 +34,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -96,22 +99,22 @@ public class HeartFragment extends BaseFragment {
         }
 
         mTitleBar = (TitleBar) getView().findViewById(R.id.title_bar);
-        mTitleBar.setRightOnClickListener(v -> gotoMessageFragment());
-//        mTitleBar.setRightOnClickListener(v -> {
-////            startActivity(new Intent(getActivity(), ViewFlipperActivity.class));
-//            if (subscription != null && subscription.isUnsubscribed()) {
-//                subscription.unsubscribe();
-//            } else {
-//                subscription = rx.Observable.interval(100, TimeUnit.MILLISECONDS).subscribe(new Action1<Long>() {
-//                    @Override
-//                    public void call(Long aLong) {
-//                        byte s = aLong.byteValue();
-//                        BluetoothCommand command = new BluetoothCommand(BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL, new byte[]{s});
-//                        RxBus.getDefault().post(command);
-//                    }
-//                });
-//            }
-//        });
+//        mTitleBar.setRightOnClickListener(v -> gotoMessageFragment());
+        mTitleBar.setRightOnClickListener(v -> {
+//            startActivity(new Intent(getActivity(), ViewFlipperActivity.class));
+            if (subscription != null && subscription.isUnsubscribed()) {
+                subscription.unsubscribe();
+            } else {
+                subscription = rx.Observable.interval(100, TimeUnit.MILLISECONDS).subscribe(new Action1<Long>() {
+                    @Override
+                    public void call(Long aLong) {
+                        byte s = aLong.byteValue();
+                        BluetoothCommand command = new BluetoothCommand(BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL, new byte[]{s});
+                        RxBus.getDefault().post(command);
+                    }
+                });
+            }
+        });
 
         mRefreshLayout = (RefreshLayout) getView().findViewById(R.id.heart_refreshlayout);
         mRecyclerView = (RemovedRecyclerView) getView().findViewById(R.id.heart_recyclerView);

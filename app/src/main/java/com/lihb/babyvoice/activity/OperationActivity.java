@@ -116,16 +116,16 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 //                .subscribe(new Action1<BluetoothCommand>() {
 //                    @Override
 //                    public void call(BluetoothCommand command) {
-//                        if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_SEND_HAND_SIGNAL) {
+//                        if (command.getStatus() == BluetoothCommand.BlueToothStatus.PHONE_SEND_HAND_SIGNAL) {
 //                            Logger.i("主机发起握手信号");
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_REPLY_HAND_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.DEV_REPLY_HAND_SIGNAL) {
 //                            Logger.i("从机回复握手信号");
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.HEART_BEAT_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.HEART_BEAT_SIGNAL) {
 //                            Log.i("心跳包: ", HexUtil.formatHexString(command.getData(), true));
 ////                            CommonToast.showShortToast("收到心跳包: " + HexUtil.formatHexString(command.getData(), true));
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_STOP_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.PHONE_STOP_SIGNAL) {
 //                            Logger.i("主机正常断开蓝牙前的通知数据包");
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_VOICE_DATA_SIGNAL) {
 //                            final byte[] data = command.getData();
 //                            Log.d("lihb command", "从机上传实时胎心音数据: " + HexUtil.formatHexString(data, true));
 //                            int readSize = data.length;
@@ -135,13 +135,13 @@ public class OperationActivity extends BaseFragmentActivity implements Observer 
 //                                    write_data.add(data);  // 实时播放数据
 //                                }
 //                            }
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.PHONE_SETTING_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.PHONE_SETTING_SIGNAL) {
 //                            Logger.i("主机配置设备的信息");
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_STATUS_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_STATUS_SIGNAL) {
 //                            Logger.i("从机主动上传设备状态信息");
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_BATTERY_LEFT_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.DEV_UPLOAD_BATTERY_LEFT_SIGNAL) {
 //                            Logger.i("从机回复电池剩余可用监护时间");
-//                        } else if (command.getmStatus() == BluetoothCommand.BlueToothStatus.DEV_PACKET_ERROR_SIGNAL) {
+//                        } else if (command.getStatus() == BluetoothCommand.BlueToothStatus.DEV_PACKET_ERROR_SIGNAL) {
 //                            Logger.i("设备解析数据包时发现错误，进行信息返回。");
 //                        }
 //                    }
