@@ -84,7 +84,6 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
     public boolean onBackPressed() {
         if (null != waveCanvas) {
             waveCanvas.stop();
-            waveCanvas = null;
         }
         return false;
     }
@@ -114,7 +113,6 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                                 CommonToast.showLongToast(R.string.plugin_headset_first);
                                 if (null != waveCanvas) {
                                     waveCanvas.stop();
-                                    waveCanvas = null;
                                 }
                                 getActivity().onBackPressed();
                             }
@@ -145,6 +143,9 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
         }
     }
 
+    /**
+     * 开始录制
+     */
     private void record() {
         // 权限检测
         String permissions[] = new String[]{Manifest.permission.RECORD_AUDIO,
@@ -179,6 +180,9 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                 if (recordText.getText().toString().equals("录制")) {
                     recordText.setText("完成");
                     if (waveCanvas != null) {
+                        if (!mIsBegin) {
+                            record();
+                        }
                         waveCanvas.startWriteFile();
                         voicePosImg.setVisibility(View.GONE);
                     } else {
@@ -187,7 +191,6 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                 } else if (recordText.getText().toString().equals("完成")) {
                     recordText.setText("录制");
                     waveCanvas.stop();
-                    waveCanvas = null;
                     gotoVoiceSaveFragment();
                     voicePosImg.setVisibility(View.VISIBLE);
                 }
@@ -199,7 +202,6 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
             public void onClick(View view) {
                 if (null != waveCanvas) {
                     waveCanvas.stop();
-                    waveCanvas = null;
                 }
                 getActivity().onBackPressed();
             }
@@ -207,9 +209,11 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
 
         mWaveSfv = (WaveSurfaceView) getView().findViewById(R.id.wavesfv);
 
+        configAudioSetting();
+
     }
 
-    public void initAudio() {
+    private void configAudioSetting() {
         recBufSize = AudioRecord.getMinBufferSize(FREQUENCY,
                 CHANNELCONGIFIGURATION, AUDIOENCODING);// 录音组件
 
@@ -222,10 +226,17 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
         audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, FREQUENCY,
                 AudioFormat.CHANNEL_OUT_MONO, AUDIOENCODING, recBufSize,
                 AudioTrack.MODE_STREAM);
+    }
 
-        waveCanvas = new WaveCanvas();
-        waveCanvas.baseLine = mWaveSfv.getHeight() / 2;
+
+    public void initAudio() {
+
         String[] items = getResources().getStringArray(R.array.voice_type);
+
+        if (waveCanvas == null) {
+            waveCanvas = new WaveCanvas();
+        }
+        waveCanvas.baseLine = mWaveSfv.getHeight() / 2;
 
         mFileName = items[mRecordType] + System.currentTimeMillis();
         waveCanvas.startRecord(audioRecord, audioTrack, recBufSize, mWaveSfv, mFileName, Constant.DATA_DIRECTORY, new Handler.Callback() {
@@ -321,12 +332,14 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
         return System.currentTimeMillis() - mChronometer.getBase();
     }
 
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//        waveCanvas.stop();
-//        waveCanvas = null;
-//    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (waveCanvas != null) {
+            waveCanvas.stop();
+            waveCanvas = null;
+        }
+    }
 
     private VoiceSaveFragment mVoiceSaveFragment;
 
