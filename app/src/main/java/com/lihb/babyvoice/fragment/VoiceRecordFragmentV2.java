@@ -332,14 +332,6 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
         return System.currentTimeMillis() - mChronometer.getBase();
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (waveCanvas != null) {
-            waveCanvas.stop();
-            waveCanvas = null;
-        }
-    }
 
     private VoiceSaveFragment mVoiceSaveFragment;
 
