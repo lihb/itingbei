@@ -30,6 +30,7 @@ import com.lihb.babyvoice.command.HeadSetPluginChangedCommand;
 import com.lihb.babyvoice.command.PickedCategoryCommand;
 import com.lihb.babyvoice.customview.TitleBar;
 import com.lihb.babyvoice.customview.base.BaseFragment;
+import com.lihb.babyvoice.utils.CommonDialog;
 import com.lihb.babyvoice.utils.CommonToast;
 import com.lihb.babyvoice.utils.FileUtils;
 import com.lihb.babyvoice.utils.PermissionCheckUtil;
@@ -82,10 +83,22 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
 
     @Override
     public boolean onBackPressed() {
-        if (null != waveCanvas) {
-            waveCanvas.stop();
+        Log.d(TAG, "onBackPressed");
+        if (mIsBegin) {
+            CommonDialog.createDialog(getActivity())
+                    .setRightButtonAction(new CommonDialog.OnActionListener() {
+                        @Override
+                        public void onAction(int which) {
+                            if (null != waveCanvas) {
+                                waveCanvas.stop();
+                            }
+                        }
+                    }).show();
+            return true;
+
+        } else {
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -111,9 +124,6 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
 
                             if ((mRecordType == PickedCategoryCommand.TYPE_HEART || mRecordType == PickedCategoryCommand.TYPE_LUNG) && mIsBegin) {
                                 CommonToast.showLongToast(R.string.plugin_headset_first);
-                                if (null != waveCanvas) {
-                                    waveCanvas.stop();
-                                }
                                 getActivity().onBackPressed();
                             }
                         }
@@ -202,9 +212,9 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
         mTitleBar.setLeftOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (null != waveCanvas) {
-                    waveCanvas.stop();
-                }
+//                if (null != waveCanvas) {
+//                    waveCanvas.stop();
+//                }
                 getActivity().onBackPressed();
             }
         });
