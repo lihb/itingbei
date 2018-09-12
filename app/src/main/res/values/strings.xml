@@ -163,5 +163,7 @@
     <string name="disconnect">断开连接</string>
     <string name="enter">进入操作</string>
     <string name="exit_tip">再按一次退出爱听贝</string>
+    <string name="record_tips">可参照图示心型位置放置听贝贝，直到听到清晰的胎心音，然后可点击“录制”进行胎心音录制</string>
+    <string name="look_for_baby_heart_pos">寻找胎心位置</string>
 
 </resources>

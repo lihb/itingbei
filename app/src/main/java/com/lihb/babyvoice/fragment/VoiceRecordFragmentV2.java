@@ -179,6 +179,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
             public void onClick(View view) {
                 if (recordText.getText().toString().equals("录制")) {
                     recordText.setText("完成");
+                    mTitleBar.setLeftText(getString(R.string.voice_recording));
                     if (waveCanvas != null) {
                         if (!mIsBegin) {
                             record();
@@ -192,6 +193,7 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                     recordText.setText("录制");
                     waveCanvas.stop();
                     gotoVoiceSaveFragment();
+                    mTitleBar.setLeftText(getString(R.string.look_for_baby_heart_pos));
                     voicePosImg.setVisibility(View.VISIBLE);
                 }
             }
