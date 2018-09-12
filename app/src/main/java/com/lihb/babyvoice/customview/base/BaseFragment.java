@@ -69,13 +69,18 @@ public abstract class BaseFragment extends RxFragment implements IUiState {
     public void onStart() {
         super.onStart();
         //告诉FragmentActivity，当前Fragment在栈顶
-        mBackHandledInterface.setSelectedFragment(this);
+        if (mBackHandledInterface != null) {
+            mBackHandledInterface.setSelectedFragment(this);
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mUiState = kUiActive;
+        if (mBackHandledInterface != null) {
+            mBackHandledInterface.setSelectedFragment(this);
+        }
     }
 
     @Override

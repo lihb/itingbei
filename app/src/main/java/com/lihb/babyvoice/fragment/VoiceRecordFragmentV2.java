@@ -83,20 +83,33 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
 
     @Override
     public boolean onBackPressed() {
-        Log.d(TAG, "onBackPressed");
+        Log.d(TAG, "onBackPressed, mIsBegin = " + mIsBegin);
         if (mIsBegin) {
             CommonDialog.createDialog(getActivity())
+                    .setTitleText("退出")
+                    .setText("是否保存录音并退出")
+                    .setLeftButtonText("继续录制")
+                    .setRightButtonText("退出")
                     .setRightButtonAction(new CommonDialog.OnActionListener() {
                         @Override
                         public void onAction(int which) {
+                            recordText.setText("录制");
                             if (null != waveCanvas) {
                                 waveCanvas.stop();
                             }
+                            gotoVoiceSaveFragment();
+                            mTitleBar.setLeftText(getString(R.string.look_for_baby_heart_pos));
+                            voicePosImg.setVisibility(View.VISIBLE);
                         }
-                    }).show();
+                    })
+                    .setCancelable(true)
+                    .show();
             return true;
 
         } else {
+            if (null != waveCanvas) {
+                waveCanvas.stop();
+            }
             return false;
         }
     }
@@ -145,6 +158,11 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
         super.onHiddenChanged(hidden);
         if (hidden == false) {
             hideBottomTab();
+            Log.e("VoiceRecordFragmentV2", "onHiddenChanged");
+            //告诉FragmentActivity，当前Fragment在栈顶
+            if (mBackHandledInterface != null) {
+                mBackHandledInterface.setSelectedFragment(this);
+            }
             mChronometer.setBase(System.currentTimeMillis());
             if (mWaveSfv != null) {
                 mWaveSfv.initDraw();
@@ -265,6 +283,8 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
                     String errorMsg = (String) msg.obj;
                     Log.e("lihb data", "error: " + errorMsg);
                 }
+                Log.d(TAG, "handleMessage, mIsBegin = " + mIsBegin + ", msg.what = " + msg.what);
+
                 return true;
             }
         });
@@ -368,6 +388,8 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
 
     public void onResume() {
         super.onResume();
+        Log.d("VoiceRecordFragmentV2", "onResume");
+
         MobclickAgent.onPageStart(TAG);
     }
 

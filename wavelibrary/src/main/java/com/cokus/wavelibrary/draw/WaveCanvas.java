@@ -87,13 +87,14 @@ public class WaveCanvas {
         saveWavPath = path + audioName;
         init();
         new RecordTask(audioRecord, audioTrack, recBufSize, sfv, mPaint, callback).execute();
-        Message msg = Message.obtain();
-        msg.what = MSG_SINGAL_START;
-        callback.handleMessage(msg);
     }
 
     public void startWriteFile() {
         new Thread(new WriteRunnable()).start();//开线程写文件
+
+        Message msg = Message.obtain();
+        msg.what = MSG_SINGAL_START;
+        callback.handleMessage(msg);
     }
 
     public void init() {
