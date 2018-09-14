@@ -239,27 +239,27 @@ public class VoiceRecordFragmentV2 extends BaseFragment {
 
         mWaveSfv = (WaveSurfaceView) getView().findViewById(R.id.wavesfv);
 
-        configAudioSetting();
-
-    }
-
-    private void configAudioSetting() {
-        recBufSize = AudioRecord.getMinBufferSize(FREQUENCY,
-                CHANNELCONGIFIGURATION, AUDIOENCODING);// 录音组件
-
-        audioRecord = new AudioRecord(AUDIO_SOURCE,// 指定音频来源，这里为麦克风
-                FREQUENCY, // 16000HZ采样频率
-                CHANNELCONGIFIGURATION,// 录制通道
-                AUDIO_SOURCE,// 录制编码格式
-                recBufSize);// 录制缓冲区大小 //先修改
-
-        audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, FREQUENCY,
-                AudioFormat.CHANNEL_OUT_MONO, AUDIOENCODING, recBufSize,
-                AudioTrack.MODE_STREAM);
     }
 
 
     public void initAudio() {
+        if (recBufSize == 0) {
+            recBufSize = AudioRecord.getMinBufferSize(FREQUENCY,
+                    CHANNELCONGIFIGURATION, AUDIOENCODING);// 录音组件
+        }
+        if (audioRecord == null) {
+            audioRecord = new AudioRecord(AUDIO_SOURCE,// 指定音频来源，这里为麦克风
+                    FREQUENCY, // 16000HZ采样频率
+                    CHANNELCONGIFIGURATION,// 录制通道
+                    AUDIO_SOURCE,// 录制编码格式
+                    recBufSize);// 录制缓冲区大小 //先修改
+        }
+
+        if (audioTrack == null) {
+            audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, FREQUENCY,
+                    AudioFormat.CHANNEL_OUT_MONO, AUDIOENCODING, recBufSize,
+                    AudioTrack.MODE_STREAM);
+        }
 
         String[] items = getResources().getStringArray(R.array.voice_type);
 
