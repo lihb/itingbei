@@ -24,10 +24,13 @@ import com.clj.fastble.data.BleDevice;
 import com.clj.fastble.exception.BleException;
 import com.clj.fastble.utils.HexUtil;
 import com.lihb.babyvoice.Constant;
+import com.lihb.babyvoice.DataManager;
 import com.lihb.babyvoice.R;
 import com.lihb.babyvoice.activity.OperationActivity;
 import com.lihb.babyvoice.utils.SoftInputUtil;
 import com.lihb.babyvoice.utils.bluetooth.BluetoothParser;
+import com.lihb.babyvoice.utils.bluetooth.CalcHeartRatioUtil;
+import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,7 +55,7 @@ public class CharacteristicOperationFragment extends Fragment {
 
     Subscription subscription = null;
     private List<Byte> commandDataList = new ArrayList<>();
-//    private CalcHeartRatioUtil calcHeartRatioUtil;
+    private CalcHeartRatioUtil calcHeartRatioUtil;
 
 
     @Override
@@ -100,11 +103,7 @@ public class CharacteristicOperationFragment extends Fragment {
                         writeDataToDevice(writeEditText, contentTxt, bleDevice);
                     });
                 } else {
-                    Log.d("write data", "取消定时发送");
-                    if (subscription != null && !subscription.isUnsubscribed()) {
-                        subscription.unsubscribe();
-                        subscription = null;
-                    }
+                    cancelTimerSend();
                 }
             }
         });
@@ -134,6 +133,7 @@ public class CharacteristicOperationFragment extends Fragment {
                                         }
                                     });
                                     ((OperationActivity) getActivity()).startWriteFile();
+                                    DataManager.getInstance().setTransferDataStarted(true);
                                 }
 
                                 @Override
@@ -156,10 +156,10 @@ public class CharacteristicOperationFragment extends Fragment {
                                         if (data[i] == (byte) 0x55) {
                                             if (commandDataList.get(0) == (byte) 0xAA) {
                                                 BluetoothParser.getInstance().parserBytes(commandDataList.toArray(new Byte[commandDataList.size()]));
-//                                                if (calcHeartRatioUtil == null) {
-//                                                    calcHeartRatioUtil = new CalcHeartRatioUtil((RxFragmentActivity) getActivity());
-//                                                    calcHeartRatioUtil.initRxBus();
-//                                                }
+                                                if (calcHeartRatioUtil == null) {
+                                                    calcHeartRatioUtil = new CalcHeartRatioUtil((RxFragmentActivity) getActivity());
+                                                    calcHeartRatioUtil.initRxBus();
+                                                }
                                             }
                                             commandDataList.clear();
                                         }
@@ -177,14 +177,17 @@ public class CharacteristicOperationFragment extends Fragment {
                             });
                 } else {
                     readBtn.setText("开始读数据");
-                    BleManager.getInstance().stopNotify(
+                    boolean isSuccess = BleManager.getInstance().stopNotify(
                             bleDevice,
                             Constant.BlUETOOTH_SERVICE_UUID,
                             Constant.BlUETOOTH_NOTIFY_UUID);
-                    ((OperationActivity) getActivity()).setWriting(false);
-//                    if (calcHeartRatioUtil != null) {
-//                        calcHeartRatioUtil.release();
-//                    }
+                    if (isSuccess) {
+                        DataManager.getInstance().setTransferDataStarted(false);
+                        ((OperationActivity) getActivity()).setWriting(false);
+                        if (calcHeartRatioUtil != null) {
+                            calcHeartRatioUtil.release();
+                        }
+                    }
                 }
             }
         });
@@ -244,5 +247,21 @@ public class CharacteristicOperationFragment extends Fragment {
                 });
     }
 
+    /**
+     * 取消定时发送握手包
+     */
+    private void cancelTimerSend() {
+        Log.d("write data", "取消定时发送");
+        if (subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+            subscription = null;
+        }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        cancelTimerSend();
+        DataManager.getInstance().setTransferDataStarted(false);
+    }
 }

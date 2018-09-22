@@ -2,10 +2,13 @@ package com.lihb.babyvoice.utils.bluetooth;
 
 import android.util.Log;
 
+import com.cokus.wavelibrary.utils.BabyJni;
+import com.lihb.babyvoice.DataManager;
 import com.lihb.babyvoice.command.BluetoothCommand;
 import com.lihb.babyvoice.utils.RxBus;
 import com.trello.rxlifecycle.components.support.RxFragmentActivity;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -36,6 +39,7 @@ public class CalcHeartRatioUtil {
     private Map<Integer, double[]> dataMap = new TreeMap<>();
     private long beginTime;
     private CopyOnWriteArrayList<Integer> indexList = new CopyOnWriteArrayList<>();
+    private DisposableObserver<Long> pollingDisposableObserver;
 
     public CalcHeartRatioUtil(RxFragmentActivity activity) {
         mActivity = activity;
@@ -70,6 +74,10 @@ public class CalcHeartRatioUtil {
                 .subscribe(new Action1<double[]>() {
                     @Override
                     public void call(double[] doubles) {
+                        Log.i(TAG, "call :" + Arrays.toString(doubles));
+                        if (DataManager.getInstance().isTransferDataStarted() == false) {
+                            return;
+                        }
 
                         int readSize = doubles.length;
 
@@ -116,9 +124,11 @@ public class CalcHeartRatioUtil {
 
     private void startWork() {
         Log.i(TAG, "startWork");
+        indexList.clear();
+        dataMap.clear();
 
         Observable<Long> pollingObservable = Observable.interval(5000, 1000, TimeUnit.MILLISECONDS);
-        DisposableObserver<Long> pollingDisposableObserver = getPollingDisposableObserver();
+        pollingDisposableObserver = getPollingDisposableObserver();
 
         beginTime = System.currentTimeMillis();
         pollingObservable.subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(pollingDisposableObserver);
@@ -131,7 +141,7 @@ public class CalcHeartRatioUtil {
 
             @Override
             public synchronized void onNext(Long aLong) {
-                Log.i("[lihb ratio]", "indexList =" + indexList);
+                Log.i(TAG, "indexList =" + indexList);
                 double[] sendDataArr = null;
                 for (Map.Entry<Integer, double[]> e : dataMap.entrySet()) {
                     double[] saveDataArr = e.getValue();
@@ -151,8 +161,10 @@ public class CalcHeartRatioUtil {
                     Log.i("[lihb ratio]", "finally sendDataArr  size = " + sendDataArr.length);
                 }
 
-//                double[] replyArray = BabyJni.FHRCal(1, -0.993522329411315, 0.003238835294343, 0.003238835294343, sendDataArr);
-//                Log.i("[lihb ratio]", "replyData " + Arrays.toString(replyArray));
+                double[] replyArray = BabyJni.FHRCal(1, -0.993522329411315, 0.003238835294343, 0.003238835294343, sendDataArr);
+                Log.i("[lihb ratio]", "replyData " + Arrays.toString(replyArray));
+                Log.i("[lihb ratio]", "replyData median =  " + getMedian(replyArray));
+
             }
 
             @Override
@@ -168,6 +180,12 @@ public class CalcHeartRatioUtil {
     }
 
 
+    /**
+     * 得到每个数组索引
+     *
+     * @param yu
+     * @param sequence
+     */
     private void setIndexList(int yu, int sequence) {
         if (indexList.size() < yu + 1) {
             indexList.add(yu, sequence);
@@ -181,8 +199,37 @@ public class CalcHeartRatioUtil {
         }
     }
 
-    public void release() {
+    /**
+     * 获取中位数
+     *
+     * @return
+     */
+    private int getMedian(double[] replyData) {
+        int len = replyData.length;
+        if (len == 0) {
+            return 0;
+        }
+        if (len == 1) {
+            return (int) replyData[0];
+        }
+        Arrays.sort(replyData);
+        Log.i("[lihb ratio]", "replyData sort =  " + Arrays.toString(replyData));
+
+        int median = (int) replyData[len / 2];
+        if (len % 2 == 0) { // 数组长度为偶数
+            median = (int) ((replyData[(len - 1) / 2] + replyData[(len + 1) / 2]) / 2);
+        }
+        return median;
+    }
+
+    public boolean release() {
+        Log.i(TAG, "release()");
+        if (pollingDisposableObserver != null && !pollingDisposableObserver.isDisposed()) {
+            pollingDisposableObserver.dispose();
+            pollingDisposableObserver = null;
+        }
         mCompositeDisposable.clear();
         beginTime = 0;
+        return true;
     }
 }
