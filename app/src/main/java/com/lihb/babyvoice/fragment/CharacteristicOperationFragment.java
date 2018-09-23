@@ -99,7 +99,7 @@ public class CharacteristicOperationFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     subscription = observable.subscribe(aLong -> {
-                        Log.d("write data", "开始定时发送");
+                        Log.d("write data", "定时发送");
                         writeDataToDevice(writeEditText, contentTxt, bleDevice);
                     });
                 } else {
@@ -159,6 +159,18 @@ public class CharacteristicOperationFragment extends Fragment {
                                                 if (calcHeartRatioUtil == null) {
                                                     calcHeartRatioUtil = new CalcHeartRatioUtil((RxFragmentActivity) getActivity());
                                                     calcHeartRatioUtil.initRxBus();
+                                                    calcHeartRatioUtil.setCallback(new CalcHeartRatioUtil.HeartRatioCallback() {
+                                                        @Override
+                                                        public void updateHeartRatio(int heartRatio) {
+                                                            runOnUiThread(new Runnable() {
+                                                                @Override
+                                                                public void run() {
+                                                                    addText(contentTxt, "胎心率：" + heartRatio);
+                                                                }
+                                                            });
+
+                                                        }
+                                                    });
                                                 }
                                             }
                                             commandDataList.clear();
@@ -166,13 +178,13 @@ public class CharacteristicOperationFragment extends Fragment {
                                     }
 
 
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            addText(contentTxt, HexUtil.formatHexString(data, true));
-
-                                        }
-                                    });
+//                                    runOnUiThread(new Runnable() {
+//                                        @Override
+//                                        public void run() {
+//                                            addText(contentTxt, HexUtil.formatHexString(data, true));
+//
+//                                        }
+//                                    });
                                 }
                             });
                 } else {
@@ -202,7 +214,7 @@ public class CharacteristicOperationFragment extends Fragment {
 
     private void addText(TextView textView, String content) {
         textView.append(content);
-        textView.append("\n\n");
+        textView.append("\n");
         int offset = textView.getLineCount() * textView.getLineHeight();
         if (offset > textView.getHeight()) {
             textView.scrollTo(0, offset - textView.getHeight());
@@ -225,24 +237,24 @@ public class CharacteristicOperationFragment extends Fragment {
 
                     @Override
                     public void onWriteSuccess(final int current, final int total, final byte[] justWrite) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                addText(contentText, "write success, current: " + current
-                                        + " total: " + total
-                                        + " justWrite: " + HexUtil.formatHexString(justWrite, true));
-                            }
-                        });
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                addText(contentText, "write success, current: " + current
+//                                        + " total: " + total
+//                                        + " justWrite: " + HexUtil.formatHexString(justWrite, true));
+//                            }
+//                        });
                     }
 
                     @Override
                     public void onWriteFailure(final BleException exception) {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                addText(contentText, exception.toString());
-                            }
-                        });
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                addText(contentText, exception.toString());
+//                            }
+//                        });
                     }
                 });
     }

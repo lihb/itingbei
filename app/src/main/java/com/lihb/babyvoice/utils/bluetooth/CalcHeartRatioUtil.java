@@ -41,9 +41,15 @@ public class CalcHeartRatioUtil {
     private CopyOnWriteArrayList<Integer> indexList = new CopyOnWriteArrayList<>();
     private DisposableObserver<Long> pollingDisposableObserver;
 
+    private HeartRatioCallback callback;
+
     public CalcHeartRatioUtil(RxFragmentActivity activity) {
         mActivity = activity;
         this.mCompositeDisposable = new CompositeDisposable();
+    }
+
+    public void setCallback(HeartRatioCallback callback) {
+        this.callback = callback;
     }
 
     public void initRxBus() {
@@ -162,8 +168,12 @@ public class CalcHeartRatioUtil {
                 }
 
                 double[] replyArray = BabyJni.FHRCal(1, -0.993522329411315, 0.003238835294343, 0.003238835294343, sendDataArr);
-                Log.i("[lihb ratio]", "replyData " + Arrays.toString(replyArray));
-                Log.i("[lihb ratio]", "replyData median =  " + getMedian(replyArray));
+//                Log.i("[lihb ratio]", "replyData " + Arrays.toString(replyArray));
+                final int median = getMedian(replyArray);
+                Log.i("[lihb ratio]", "replyData median =  " + median);
+                if (callback != null) {
+                    callback.updateHeartRatio(median);
+                }
 
             }
 
@@ -231,5 +241,9 @@ public class CalcHeartRatioUtil {
         mCompositeDisposable.clear();
         beginTime = 0;
         return true;
+    }
+
+    public interface HeartRatioCallback {
+        void updateHeartRatio(int heartRatio);
     }
 }
